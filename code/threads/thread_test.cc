@@ -11,6 +11,7 @@
 /// limitation of liability and disclaimer of warranty provisions.
 
 
+#include "thread_test_garden_semaphore.hh"
 #include "thread_test_garden.hh"
 #include "thread_test_prod_cons.hh"
 #include "thread_test_simple.hh"
@@ -30,6 +31,7 @@ typedef struct {
 static const Test TESTS[] = {
     { &ThreadTestSimple,   "simple",   "Simple thread interleaving" },
     { &ThreadTestGarden,   "garden",   "Ornamental garden" },
+    { &ThreadTestGardenSemaphore,   "gardenSemaphore",   "Ornamental garden with semaphore" },
     { &ThreadTestProdCons, "prodcons", "Producer/Consumer" }
 };
 static const unsigned NUM_TESTS = sizeof TESTS / sizeof TESTS[0];

@@ -5,8 +5,9 @@
 /// limitation of liability and disclaimer of warranty provisions.
 
 
-#include "thread_test_garden.hh"
+#include "thread_test_garden_semaphore.hh"
 #include "system.hh"
+#include "semaphore.hh"
 
 #include <stdio.h>
 
@@ -15,16 +16,19 @@ static const unsigned NUM_TURNSTILES = 2;
 static const unsigned ITERATIONS_PER_TURNSTILE = 50;
 static bool done[NUM_TURNSTILES];
 static int count;
+static Semaphore *semaphore = nullptr;
 
 static void
-Turnstile(void *n_)
+TurnstileWithSemaphore(void *n_)
 {
     unsigned *n = (unsigned *) n_;
 
     for (unsigned i = 0; i < ITERATIONS_PER_TURNSTILE; i++) {
-        int temp = count;
-        count = temp + 1;
+        semaphore->P();
+        int temp = count;   
         currentThread->Yield();
+        count = temp + 1;
+        semaphore->V();
     }
     printf("Turnstile %u finished. Count is now %u.\n", *n, count);
     done[*n] = true;
@@ -32,8 +36,9 @@ Turnstile(void *n_)
 }
 
 void
-ThreadTestGarden()
+ThreadTestGardenSemaphore()
 {
+    semaphore = new Semaphore("semaphoreTestGarden", 1);
     // Launch a new thread for each turnstile.
     for (unsigned i = 0; i < NUM_TURNSTILES; i++) {
         printf("Launching turnstile %u.\n", i);
@@ -42,7 +47,7 @@ ThreadTestGarden()
         unsigned *n = new unsigned;
         *n = i;
         Thread *t = new Thread(name);
-        t->Fork(Turnstile, (void *) n);
+        t->Fork(TurnstileWithSemaphore, (void *) n);
     }
 
     // Wait until all turnstile threads finish their work.  `Thread::Join` is
@@ -55,4 +60,6 @@ ThreadTestGarden()
     }
     printf("All turnstiles finished. Final count is %u (should be %u).\n",
            count, ITERATIONS_PER_TURNSTILE * NUM_TURNSTILES);
+    
+    delete semaphore;
 }
