@@ -59,13 +59,15 @@ Condition::Wait()
 void
 Condition::Signal()
 {
-    Semaphore *semaphore;
+    Semaphore *semaphore = nullptr;
 
     lock->Acquire();
     semaphore = queue->Pop();
     lock->Release();
 
-    semaphore->P();
+    if(semaphore) {
+        semaphore->P();
+    }
 }
 
 void
