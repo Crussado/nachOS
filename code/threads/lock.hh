@@ -29,6 +29,9 @@
 ///
 /// For convenience, nobody but the thread that holds the lock can free it.
 /// There is no operation for reading the state of the lock.
+
+#include "semaphore.hh"
+
 class Lock {
 public:
 
@@ -56,6 +59,8 @@ private:
 
     /// For debugging.
     const char *name;
+    Semaphore *semaphore;
+    Thread *thread;
 
     // Add other needed fields here.
 };

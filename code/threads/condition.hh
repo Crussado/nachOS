@@ -19,7 +19,7 @@
 
 
 #include "lock.hh"
-
+#include <queue>
 
 /// This class defines a “condition variable”.
 ///
@@ -75,8 +75,8 @@ public:
 private:
 
     const char *name;
-
-    // Other needed fields are to be added here.
+    List<Semaphore *> *queue;
+    Lock *lock;
 };
 
 
