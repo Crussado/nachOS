@@ -33,7 +33,7 @@ private:
     Lock *listenerLock;
     Lock *writerLock;
     Lock *messagesLock;
-    
+
 };
 
 

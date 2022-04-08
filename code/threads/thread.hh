@@ -40,6 +40,7 @@
 
 
 #include "lib/utility.hh"
+#include "semaphore.hh"
 
 #ifdef USER_PROGRAM
 #include "machine/machine.hh"
@@ -97,7 +98,7 @@ private:
 public:
 
     /// Initialize a `Thread`.
-    Thread(const char *debugName);
+    Thread(const char *debugName, bool joineable = false);
 
     /// Deallocate a Thread.
     ///
@@ -119,6 +120,7 @@ public:
     /// The thread is done executing.
     void Finish();
 
+    void Join();
     /// Check if thread has overflowed its stack.
     void CheckOverflow() const;
 
@@ -140,6 +142,8 @@ private:
     ThreadStatus status;
 
     const char *name;
+
+    Semaphore *join;
 
     /// Allocate a stack for thread.  Used internally by `Fork`.
     void StackAllocate(VoidFunctionPtr func, void *arg);
