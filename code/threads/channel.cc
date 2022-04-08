@@ -1,6 +1,7 @@
 #include "channel.hh"
 #include "condition.hh"
 #include "lock.hh"
+#include <queue>
 
 Channel::Channel(const char *debugName)
 {
@@ -8,21 +9,24 @@ Channel::Channel(const char *debugName)
 
     Lock *listenerLock = new Lock("listenerLock");
     Lock *writerLock = new Lock("writerLock");
-    Lock *messageLock = new Lock("messageLock");
+    Lock *messagesLock = new Lock("messageLock");
 
     Lock *lock1 = new Lock("Lock1");
     Lock *lock2 = new Lock("Lock2");
     conditionListener = new Condition("CondicionalListener", lock1);
     conditionWriter = new Condition("CondicionalWriter", lock2);
     
-    listener = false;
-    writer = false;
+    listener = 0;
+    writer = 0;
+
+    messages = new List<int>;
 }
 
 Channel::~Channel()
 {
     delete conditionListener;
     delete conditionWriter;
+    delete messages;
     return;
 }
 
@@ -35,26 +39,53 @@ Channel::GetName() const
 void
 Channel::Send(int message)
 {
-    writer = true;
+    writerLock->Acquire();
+    writer ++;
+    writerLock->Release();
+
+    listenerLock->Acquire();
     if(!listener) {
+        listenerLock->Release();
         conditionWriter->Wait();
     }
+    else {
+        listenerLock->Release();
+    }
 
-    this->message = message;
-    writer = false;
-    conditionListener->Broadcast();
-    // se envia el mensaje
+    messagesLock->Acquire();
+    messages->Append(message);
+    messagesLock->Release();
+
+    writerLock->Acquire();
+    writer --;
+    writerLock->Release();
+
+    conditionListener->Signal();
 }
 
 void
 Channel::Receive(int *message)
-{
-    listener = true;
+{   
+    listenerLock->Acquire();
+    listener ++;
+    listenerLock->Release();
+
+    writerLock->Acquire();
     if(writer) {
+        writerLock->Release();
         conditionWriter->Signal();
     }
-    conditionListener->Wait();
+    else {
+        writerLock->Release();
+    }
 
-    *message = this->message;
-    listener = false;
+    conditionListener->Wait();
+    
+    messagesLock->Acquire();
+    *message = messages->Pop();
+    messagesLock->Release();
+
+    listenerLock->Acquire();
+    listener --;
+    listenerLock->Release();
 }

@@ -3,6 +3,7 @@
 
 #include "condition.hh"
 #include "lock.hh"
+#include <queue>
 
 class Channel {
 public:
@@ -21,17 +22,17 @@ private:
 
     const char *name;
 
-    bool listener;
-    bool writer;
+    int listener;
+    int writer;
 
-    int message;
+    List<int> *messages;
 
     Condition *conditionListener;
     Condition *conditionWriter;
 
     Lock *listenerLock;
     Lock *writerLock;
-    Lock *messageLock;
+    Lock *messagesLock;
     
 };
 
