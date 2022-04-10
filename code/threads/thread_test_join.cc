@@ -23,12 +23,12 @@ ThreadTestJoin()
 {
     Thread *t[CANT_HIJOS];
     for (unsigned i = 0; i < CANT_HIJOS; i++) {
-        printf("Launching padre %u.\n", i);
+        printf("Launching hijo %u.\n", i);
         char *name = new char [16];
-        sprintf(name, "padre %u", i);
+        sprintf(name, "hijo %u", i);
         unsigned *n = new unsigned;
         *n = i;
-        t[i] = new Thread(name);
+        t[i] = new Thread(name, true);
         t[i]->Fork(Hijo, (void *) n);
     }
 
