@@ -20,6 +20,7 @@
 #include "thread.hh"
 #include "switch.h"
 #include "system.hh"
+#include "semaphore.hh"
 
 #include <inttypes.h>
 #include <stdio.h>
@@ -47,10 +48,12 @@ Thread::Thread(const char *threadName, bool joineable)
     stack    = nullptr;
     status   = JUST_CREATED;
     if (joineable) {
-        join = new Semaphore("join", 0);
+        join1 = new Semaphore("join1",0);
+        join2 = new Semaphore("join2",0);
     }
     else {
-        join = nullptr;
+        join1 = nullptr;
+        join2 = nullptr;
     }
 #ifdef USER_PROGRAM
     space    = nullptr;
@@ -161,13 +164,16 @@ Thread::Print() const
 void
 Thread::Finish()
 {
+    if(join1 && join2){
+        join1->V();
+        join2->P();
+    }
     interrupt->SetLevel(INT_OFF);
     ASSERT(this == currentThread);
 
     DEBUG('t', "Finishing thread \"%s\"\n", GetName());
 
     threadToBeDestroyed = currentThread;
-    join->V();
     Sleep();  // Invokes `SWITCH`.
     // Not reached.
 }
@@ -175,8 +181,9 @@ Thread::Finish()
 void
 Thread::Join()
 {
-    ASSERT(join != nullptr);
-    join->P();
+    ASSERT(join1 != nullptr && join2 != nullptr);
+    join1->P();
+    join2->V();
 }
 
 /// Relinquish the CPU if any other thread is ready to run.

@@ -40,7 +40,6 @@
 
 
 #include "lib/utility.hh"
-#include "semaphore.hh"
 
 #ifdef USER_PROGRAM
 #include "machine/machine.hh"
@@ -83,6 +82,7 @@ enum ThreadStatus {
 ///
 ///  Some threads also belong to a user address space; threads that only run
 ///  in the kernel have a null address space.
+class Semaphore;
 class Thread {
 private:
 
@@ -143,7 +143,8 @@ private:
 
     const char *name;
 
-    Semaphore *join;
+    Semaphore *join1;
+    Semaphore *join2;
 
     /// Allocate a stack for thread.  Used internally by `Fork`.
     void StackAllocate(VoidFunctionPtr func, void *arg);
@@ -182,6 +183,5 @@ extern "C" {
     // Stop running `oldThread` and start running `newThread`.
     void SWITCH(Thread *oldThread, Thread *newThread);
 }
-
 
 #endif
