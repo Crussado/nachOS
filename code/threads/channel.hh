@@ -3,7 +3,7 @@
 
 #include "condition.hh"
 #include "lock.hh"
-#include <queue>
+#include "synch_list.hh"
 
 class Channel {
 public:

@@ -48,6 +48,7 @@ Cliente(void *n_) {
     }
     printf("Clientes %u finished.\n", *n);
     doneClientes[*n] = true;
+    delete n;
 }
 
 static void
@@ -74,6 +75,7 @@ Panadero(void *n_) {
     }
     printf("Panadero %u finished.\n", *n);
     donePanaderos[*n] = true;
+    delete n;
 }
 
 

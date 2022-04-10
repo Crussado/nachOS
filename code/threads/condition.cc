@@ -50,8 +50,8 @@ Condition::Wait()
 
     lock->Acquire();
     queue->Append(semaphore);
-    semaphore->V();
     lock->Release();
+    semaphore->P();
 
     delete semaphore;
 }
@@ -59,15 +59,19 @@ Condition::Wait()
 void
 Condition::Signal()
 {
+    // DEBUG('t', "Entra signal.\n");
     Semaphore *semaphore = nullptr;
 
     lock->Acquire();
     semaphore = queue->Pop();
     lock->Release();
+    // DEBUG('t', "Se toma semaforo.\n");
 
     if(semaphore) {
-        semaphore->P();
+        // DEBUG('t', "Se suma al semaforo.\n");
+        semaphore->V();
     }
+    // DEBUG('t', "Sale signal.\n");
 }
 
 void

@@ -32,6 +32,7 @@ ThreadTestJoin()
         t[i]->Fork(Hijo, (void *) n);
     }
 
+    DEBUG('t', "Padre espera.\n");
     for (unsigned i = 0; i < CANT_HIJOS; i++) {
         t[i]->Join();
     }
