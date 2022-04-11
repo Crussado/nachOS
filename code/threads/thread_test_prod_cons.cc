@@ -13,15 +13,13 @@
 #include "../lib/assert.hh"
 #include <stdio.h>
 
-static const int MAX_PANES = 10;
+static const int MAX_PANES = 2;
 static const unsigned CANT_PERS = 2;
-static const unsigned CANT_ACCIONES = 50;
+static const unsigned CANT_ACCIONES = 3;
 static int cant_panes = 0;
 static Lock *lock = nullptr;
 static Condition *conditionPanadero = nullptr;
 static Condition *conditionCliente = nullptr;
-static bool donePanaderos[CANT_PERS];
-static bool doneClientes[CANT_PERS];
 
 static void
 Cliente(void *n_) {
@@ -33,6 +31,7 @@ Cliente(void *n_) {
             lock->Acquire();
             if(cant_panes == 0) {
                 lock->Release();
+                DEBUG('t',"Cliente %u DUERME NO HAY PANES\n", *n);
                 conditionCliente->Wait();
             }
             else {
@@ -47,7 +46,6 @@ Cliente(void *n_) {
         }
     }
     printf("Clientes %u finished.\n", *n);
-    doneClientes[*n] = true;
     delete n;
 }
 
@@ -61,12 +59,14 @@ Panadero(void *n_) {
             lock->Acquire();
             if(cant_panes == MAX_PANES) {
                 lock->Release();
+                DEBUG('t', "Panadero %u mimiendo porque quedan %i panes\n", *n, cant_panes);
                 conditionPanadero->Wait();
             }
             else {
                 cant_panes ++;
                 ASSERT(cant_panes >= 0 && cant_panes <= MAX_PANES);
                 DEBUG('t', "Panadero %u produciendo. Quedan %i panes\n", *n, cant_panes);
+                conditionCliente->Signal();
                 lock->Release();
                 producido = true;
                 currentThread->Yield();
@@ -74,7 +74,6 @@ Panadero(void *n_) {
         }
     }
     printf("Panadero %u finished.\n", *n);
-    donePanaderos[*n] = true;
     delete n;
 }
 
@@ -87,15 +86,16 @@ ThreadTestProdCons()
     Lock *lock2 = new Lock("LockPanaderia2");
     conditionCliente = new Condition("CondicionalCliente", lock1);
     conditionPanadero = new Condition("CondicionalPanadero", lock2);
-
+    Thread *panaderos[CANT_PERS];
+    Thread *clientes[CANT_PERS];
     for (unsigned i = 0; i < CANT_PERS; i++) {
         printf("Launching panadero %u.\n", i);
         char *name = new char [16];
         sprintf(name, "panadero %u", i);
         unsigned *n = new unsigned;
         *n = i;
-        Thread *t = new Thread(name);
-        t->Fork(Panadero, (void *) n);
+        panaderos[i] = new Thread(name, true);
+        panaderos[i]->Fork(Panadero, (void *) n);
     }
 
     for (unsigned i = 0; i < CANT_PERS; i++) {
@@ -104,20 +104,15 @@ ThreadTestProdCons()
         sprintf(name, "cliente %u", i);
         unsigned *n = new unsigned;
         *n = i;
-        Thread *t = new Thread(name);
-        t->Fork(Cliente, (void *) n);
+        clientes[i] = new Thread(name, true);
+        clientes[i]->Fork(Cliente, (void *) n);
     }
 
     for (unsigned i = 0; i < CANT_PERS; i++) {
-        while (!donePanaderos[i]) {
-            currentThread->Yield();
-        }
+            panaderos[i]->Join();
+            clientes[i]->Join();
     }
-    for (unsigned i = 0; i < CANT_PERS; i++) {
-        while (!doneClientes[i]) {
-            currentThread->Yield();
-        }
-    }
+
     delete conditionCliente;
     delete conditionPanadero;
     delete lock;

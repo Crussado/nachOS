@@ -25,6 +25,9 @@ Channel::Channel(const char *debugName)
 
 Channel::~Channel()
 {
+    delete listenerLock;
+    delete writerLock;
+    delete messagesLock;
     delete conditionListener;
     delete conditionWriter;
     delete messages;
@@ -40,20 +43,16 @@ Channel::GetName() const
 void
 Channel::Send(int message)
 {
-    writerLock->Acquire();
-    writer ++;
-    DEBUG('t', "Hay %i writers.\n", writer);
-    writerLock->Release();
-
     listenerLock->Acquire();
     DEBUG('t', "Hay %i listeners.\n", listener);
-    if(!listener) {
+    if(listener <=0) {
+        writerLock->Acquire();
+        writer ++;
+        DEBUG('t', "Hay %i writers.\n", writer);
+        writerLock->Release();
         listenerLock->Release();
         DEBUG('t', "Se espera condition writer.\n");
         conditionWriter->Wait();
-        listenerLock->Acquire();
-        listener --;
-        listenerLock->Release();
     }
     else {
         listener--;
@@ -72,26 +71,23 @@ Channel::Send(int message)
 void
 Channel::Receive(int *message)
 {    
-    listenerLock->Acquire();
-    listener ++;
-    listenerLock->Release();
-
     writerLock->Acquire();
     DEBUG('t', "Hay %i writers.\n", writer);
-    if(writer) {
-        writerLock->Release();
+    if(writer > 0) {
+        writer --;
         DEBUG('t', "Se despierta un writer.\n");
         conditionWriter->Signal();
+        writerLock->Release();
     }
     else {
+        listenerLock->Acquire();
+        listener ++;
+        listenerLock->Release();
         writerLock->Release();
     }
 
     DEBUG('t', "Se espera listener.\n");
     conditionListener->Wait();
-    writerLock->Acquire();
-    writer --;
-    writerLock->Release();
 
     DEBUG('t', "Se obtiene mensaje.\n");
     messagesLock->Acquire();

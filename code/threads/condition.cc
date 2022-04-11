@@ -59,19 +59,15 @@ Condition::Wait()
 void
 Condition::Signal()
 {
-    // DEBUG('t', "Entra signal.\n");
     Semaphore *semaphore = nullptr;
 
     lock->Acquire();
     semaphore = queue->Pop();
     lock->Release();
-    // DEBUG('t', "Se toma semaforo.\n");
 
     if(semaphore) {
-        // DEBUG('t', "Se suma al semaforo.\n");
         semaphore->V();
     }
-    // DEBUG('t', "Sale signal.\n");
 }
 
 void
@@ -79,7 +75,7 @@ Condition::Broadcast()
 {
     Semaphore *semaphore;
     lock->Acquire();
-    while(queue->IsEmpty()) {
+    while(!queue->IsEmpty()) {
         semaphore = queue->Pop();
         semaphore->P();
     }

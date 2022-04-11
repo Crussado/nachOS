@@ -21,7 +21,8 @@
 #include "switch.h"
 #include "system.hh"
 #include "semaphore.hh"
-
+#include "../lib/assert.hh"
+#include "scheduler.hh"
 #include <inttypes.h>
 #include <stdio.h>
 
@@ -41,8 +42,10 @@ IsThreadStatus(ThreadStatus s)
 /// `Thread::Fork`.
 ///
 /// * `threadName` is an arbitrary string, useful for debugging.
-Thread::Thread(const char *threadName, bool joineable)
-{
+Thread::Thread(const char *threadName, bool joineable, int priorityArg)
+{   
+    ASSERT(priorityArg <= (CANT_COLAS - 1) && priorityArg >= 0);
+    priority = priorityArg;
     name     = threadName;
     stackTop = nullptr;
     stack    = nullptr;
@@ -142,6 +145,12 @@ const char *
 Thread::GetName() const
 {
     return name;
+}
+
+int
+Thread::GetPriority() const
+{
+    return priority;
 }
 
 void

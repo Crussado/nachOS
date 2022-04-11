@@ -12,8 +12,8 @@
 #include "../lib/assert.hh"
 #include <stdio.h>
 
-static const int CANT_PERS = 4;
-static const int CANT_MSG = 50;
+static const int CANT_PERS = 2;
+static const int CANT_MSG = 3;
 Channel *channel;
 
 static void
@@ -57,10 +57,17 @@ ThreadTestChannel()
         sprintf(name, "writer %u", i);
         unsigned *n = new unsigned;
         *n = i;
-        receivers[i] = new Thread(name, true);
-        receivers[i]->Fork(Receiver, (void *) n);
         writerers[i] = new Thread(name, true);
         writerers[i]->Fork(Writer, (void *) n);
+    }
+    for (unsigned i = 0; i < CANT_PERS; i++) {
+        printf("Launching listener %u.\n", i);
+        char *name = new char [16];
+        sprintf(name, "listener %u", i);
+        unsigned *n = new unsigned;
+        *n = i;
+        receivers[i] = new Thread(name, true);
+        receivers[i]->Fork(Receiver, (void *) n);
     }
 
     for (unsigned i = 0; i < CANT_PERS; i++) {
