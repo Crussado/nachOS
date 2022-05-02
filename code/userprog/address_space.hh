@@ -16,7 +16,10 @@
 
 #include "filesys/file_system.hh"
 #include "machine/translation_entry.hh"
-
+#include "lib/bitmap.hh"
+#include "machine/mmu.hh"
+#include "machine/machine.hh"
+#include "threads/system.hh"
 
 const unsigned USER_STACK_SIZE = 1024;  ///< Increase this as necessary!
 
@@ -34,7 +37,7 @@ public:
     /// Parameters:
     /// * `executable_file` is the open file that corresponds to the
     ///   program; it contains the object code to load into memory.
-    AddressSpace(OpenFile *executable_file);
+    AddressSpace(OpenFile *executable_file, Thread *hilo=nullptr);
 
     /// De-allocate an address space.
     ~AddressSpace();
@@ -47,11 +50,12 @@ public:
     void SaveState();
     void RestoreState();
 
+    Thread *GetThread();
 private:
 
     /// Assume linear page table translation for now!
     TranslationEntry *pageTable;
-
+    Thread *thread;
     /// Number of pages in the virtual address space.
     unsigned numPages;
 

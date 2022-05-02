@@ -117,6 +117,7 @@ public:
   private:
     FileHeader *hdr;  ///< Header for this file.
     unsigned seekPosition;  ///< Current position within the file.
+    int id;
 };
 
 #endif

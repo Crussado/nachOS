@@ -22,7 +22,9 @@
 #include "system.hh"
 #include "semaphore.hh"
 #include "../lib/assert.hh"
+#include "../lib/list.hh"
 #include "scheduler.hh"
+
 #include <inttypes.h>
 #include <stdio.h>
 
@@ -50,6 +52,7 @@ Thread::Thread(const char *threadName, bool joineable, int priorityArg)
     stackTop = nullptr;
     stack    = nullptr;
     status   = JUST_CREATED;
+    priorityStack = new List<int>;
     if (joineable) {
         join1 = new Semaphore("join1",0);
         join2 = new Semaphore("join2",0);
@@ -60,6 +63,7 @@ Thread::Thread(const char *threadName, bool joineable, int priorityArg)
     }
 #ifdef USER_PROGRAM
     space    = nullptr;
+    openedFiles = new List<OpenFile>;
 #endif
 }
 
@@ -150,7 +154,30 @@ Thread::GetName() const
 int
 Thread::GetPriority() const
 {
-    return priority;
+    int max;
+    if(!priorityStack->IsEmpty()) {
+        max = priorityStack->Head();
+    }
+    else {
+        max = priority;
+    }
+    return max;
+}
+
+bool
+Thread::ImBuffed()
+{
+    return !priorityStack->IsEmpty();
+}
+
+void
+Thread::GetBuff(int newPriority) {
+    priorityStack->Prepend(newPriority);
+}
+
+void Thread::Nerf() {
+    ASSERT(!priorityStack->IsEmpty());
+    priorityStack->Pop();
 }
 
 void
@@ -171,7 +198,7 @@ Thread::Print() const
 /// NOTE: we disable interrupts, so that we do not get a time slice between
 /// setting `threadToBeDestroyed`, and going to sleep.
 void
-Thread::Finish()
+Thread::Finish(int status)
 {
     if(join1 && join2){
         join1->V();
@@ -187,12 +214,13 @@ Thread::Finish()
     // Not reached.
 }
 
-void
+int
 Thread::Join()
 {
     ASSERT(join1 != nullptr && join2 != nullptr);
     join1->P();
     join2->V();
+    return 1;
 }
 
 /// Relinquish the CPU if any other thread is ready to run.
@@ -338,6 +366,16 @@ Thread::RestoreUserState()
     for (unsigned i = 0; i < NUM_TOTAL_REGS; i++) {
         machine->WriteRegister(i, userRegisters[i]);
     }
+}
+
+void
+Thread::Open(OpenFile *fid) {
+    openedFiles->Append(fid);
+}
+
+void
+Thread::Close(OpenFile *fid) {
+    openedFiles->Remove(fid);
 }
 
 #endif

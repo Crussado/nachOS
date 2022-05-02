@@ -61,7 +61,7 @@ void
 Semaphore::P()
 {
     IntStatus oldLevel = interrupt->SetLevel(INT_OFF);
-      // Disable interrupts.
+    // Disable interrupts.
 
     while (value == 0) {  // Semaphore not available.
         queue->Append(currentThread);  // So go to sleep.

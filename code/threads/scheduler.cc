@@ -76,6 +76,16 @@ Scheduler::FindNextToRun()
     return hilo;
 }
 
+void
+Scheduler::PowerUp(int priorityBlock, Thread *blockeador) {
+    if(priorityBlock > blockeador->GetPriority()) {
+        int oldPriority = blockeador->GetPriority();
+        blockeador->GetBuff(priorityBlock);
+        readyList[oldPriority]->Remove(blockeador);
+        ReadyToRun(blockeador);
+    }
+}
+
 /// Dispatch the CPU to `nextThread`.
 ///
 /// Save the state of the old thread, and load the state of the new thread,

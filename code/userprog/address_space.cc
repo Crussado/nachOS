@@ -16,7 +16,7 @@
 /// First, set up the translation from program memory to physical memory.
 /// For now, this is really simple (1:1), since we are only uniprogramming,
 /// and we have a single unsegmented page table.
-AddressSpace::AddressSpace(OpenFile *executable_file)
+AddressSpace::AddressSpace(OpenFile *executable_file, Thread *hilo)
 {
     ASSERT(executable_file != nullptr);
 
@@ -38,12 +38,17 @@ AddressSpace::AddressSpace(OpenFile *executable_file)
           numPages, size);
 
     // First, set up the translation.
-
+    int fpIndex;
     pageTable = new TranslationEntry[numPages];
+    if(usedPages->CountClear() < numPages){
+      DEBUG('a', "No hay suficientes paginas fisicas disponibles.\n");
+    }
+    
     for (unsigned i = 0; i < numPages; i++) {
         pageTable[i].virtualPage  = i;
           // For now, virtual page number = physical page number.
-        pageTable[i].physicalPage = i;
+        fpIndex = usedPages->Find();
+        pageTable[i].physicalPage = fpIndex;
         pageTable[i].valid        = true;
         pageTable[i].use          = false;
         pageTable[i].dirty        = false;
@@ -51,7 +56,6 @@ AddressSpace::AddressSpace(OpenFile *executable_file)
           // If the code segment was entirely on a separate page, we could
           // set its pages to be read-only.
     }
-
     char *mainMemory = machine->GetMMU()->mainMemory;
 
     // Zero out the entire address space, to zero the unitialized data
@@ -73,6 +77,7 @@ AddressSpace::AddressSpace(OpenFile *executable_file)
               virtualAddr, initDataSize);
         exe.ReadDataBlock(&mainMemory[virtualAddr], initDataSize, 0);
     }
+    thread = hilo;
 
 }
 
@@ -81,6 +86,9 @@ AddressSpace::AddressSpace(OpenFile *executable_file)
 /// Nothing for now!
 AddressSpace::~AddressSpace()
 {
+    for (unsigned i = 0; i < numPages; i++) {
+        usedPages->Clear(pageTable[i].physicalPage);
+    }
     delete [] pageTable;
 }
 
@@ -129,4 +137,9 @@ AddressSpace::RestoreState()
 {
     machine->GetMMU()->pageTable     = pageTable;
     machine->GetMMU()->pageTableSize = numPages;
+}
+
+Thread *
+AddressSpace::GetThread() {
+  return thread;
 }

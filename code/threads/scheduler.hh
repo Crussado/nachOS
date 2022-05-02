@@ -40,6 +40,8 @@ public:
     // Print contents of ready list.
     void Print();
 
+    void PowerUp(int priorityBlock, Thread *blockeador);
+
 private:
 
     // Queue of threads that are ready to run, but not running.

@@ -40,6 +40,7 @@
 
 
 #include "lib/utility.hh"
+#include "lib/list.hh"
 
 #ifdef USER_PROGRAM
 #include "machine/machine.hh"
@@ -118,9 +119,9 @@ public:
     void Sleep();
 
     /// The thread is done executing.
-    void Finish();
+    void Finish(int status = 0);
 
-    void Join();
+    int Join();
     /// Check if thread has overflowed its stack.
     void CheckOverflow() const;
 
@@ -131,6 +132,12 @@ public:
     void Print() const;
 
     int GetPriority() const;
+
+    bool ImBuffed();
+
+    void GetBuff(int newPriority);
+
+    void Nerf();
 
 private:
     // Some of the private data for this class is listed above.
@@ -150,6 +157,8 @@ private:
 
     int priority;
 
+    List<int> *priorityStack;
+
     /// Allocate a stack for thread.  Used internally by `Fork`.
     void StackAllocate(VoidFunctionPtr func, void *arg);
 
@@ -159,10 +168,13 @@ private:
     /// A thread running a user program actually has *two* sets of CPU
     /// registers -- one for its state while executing user code, one for its
     /// state while executing kernel code.
+    List<OpenFile *> *openedFiles;
     int userRegisters[NUM_TOTAL_REGS];
 
 public:
+    void Open(OpenFile *fid);
 
+    void Close(OpenFile *fid);
     // Save user-level register state.
     void SaveUserState();
 

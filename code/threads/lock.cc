@@ -44,6 +44,9 @@ void
 Lock::Acquire()
 {
     ASSERT(!IsHeldByCurrentThread());
+    if(thread != nullptr) {
+      scheduler->PowerUp(currentThread->GetPriority(), thread);
+    }
     semaphore->P();
     thread = currentThread;
 }
@@ -54,6 +57,10 @@ Lock::Release()
     ASSERT(IsHeldByCurrentThread());
     thread = nullptr;
     semaphore->V();
+    if(currentThread->ImBuffed()) {
+      currentThread->Nerf();
+      currentThread->Yield();
+    }
 }
 
 bool

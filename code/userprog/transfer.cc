@@ -6,12 +6,24 @@
 #include "transfer.hh"
 #include "lib/utility.hh"
 #include "threads/system.hh"
+#include "lib/assert.hh"
 
 
 void ReadBufferFromUser(int userAddress, char *outBuffer,
                         unsigned byteCount)
 {
-    // TODO: implement.
+    ASSERT(userAddress != 0);
+    ASSERT(outBuffer != nullptr);
+    ASSERT(byteCount != 0);
+
+    unsigned count = 0;
+    do {
+        int temp;
+        count++;
+        ASSERT(machine->ReadMem(userAddress++, 1, &temp));
+        *outBuffer = (unsigned char) temp;
+        outBuffer++;
+    } while (count < byteCount);
 }
 
 bool ReadStringFromUser(int userAddress, char *outString,
@@ -35,10 +47,29 @@ bool ReadStringFromUser(int userAddress, char *outString,
 void WriteBufferToUser(const char *buffer, int userAddress,
                        unsigned byteCount)
 {
-    // TODO: implement.
+    ASSERT(userAddress != 0);
+    ASSERT(buffer != nullptr);
+    ASSERT(byteCount != 0);
+
+    unsigned count = 0;
+    do {
+        int temp;
+        count++;
+        ASSERT(machine->WriteMem(userAddress++, 4, (int) *buffer));
+        buffer ++;
+    } while (count < byteCount);
 }
 
 void WriteStringToUser(const char *string, int userAddress)
 {
-    // TODO: implement.
+    ASSERT(userAddress != 0);
+    ASSERT(string != nullptr);
+
+    unsigned count = 0;
+    do {
+        int temp;
+        count++;
+        ASSERT(machine->WriteMem(userAddress++, 1, (int) *string));
+        string ++;
+    } while (*(string - 1) != '\0');
 }
