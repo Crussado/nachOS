@@ -47,8 +47,9 @@ thread.o: ../threads/thread.cc ../threads/thread.hh ../lib/utility.hh \
  ../machine/system_dep.hh ../lib/list.hh ../lib/utility.hh \
  ../threads/switch.h ../threads/switch_x86-64.h ../threads/system.hh \
  ../threads/scheduler.hh ../machine/interrupt.hh ../machine/statistics.hh \
- ../machine/timer.hh ../threads/semaphore.hh ../threads/../lib/assert.hh \
- ../threads/../lib/list.hh
+ ../machine/timer.hh ../threads/channel.hh ../threads/condition.hh \
+ ../threads/lock.hh ../threads/semaphore.hh ../threads/synch_list.hh \
+ ../threads/../lib/assert.hh ../threads/../lib/list.hh
 thread_test.o: ../threads/thread_test.cc \
  ../threads/thread_test_garden_semaphore.hh \
  ../threads/thread_test_garden.hh ../threads/thread_test_prod_cons.hh \

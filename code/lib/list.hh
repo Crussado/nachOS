@@ -78,7 +78,9 @@ public:
     /// Remove first item from list.
     Item SortedPop(int *keyPtr);
 
-    void removeKey(int key);
+    void RemoveKey(int key);
+
+    Item GetKey(int key);
 
 private:
 
@@ -151,8 +153,23 @@ List<Item>::Append(Item item)
 }
 
 template <class Item>
+Item
+List<Item>::GetKey(int key) {
+    if (IsEmpty()) {
+        return nullptr;
+    }
+    ListNode *node = first;
+    for(; node != nullptr; node = node->next) {
+        if (node->key == key) {
+            return node->item;
+        }
+    }
+    return nullptr;
+}
+
+template <class Item>
 void
-List<Item>::removeKey(int key)
+List<Item>::RemoveKey(int key)
 {
     if (IsEmpty()) {
         return;

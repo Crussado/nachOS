@@ -30,6 +30,7 @@
 #include "network.hh"
 #include "threads/semaphore.hh"
 #include "threads/synch_list.hh"
+#include "threads/thread.hh"
 
 
 /// Mailbox address -- uniquely identifies a mailbox on a given machine.

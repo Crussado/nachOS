@@ -218,8 +218,8 @@ SyscallHandler(ExceptionType _et)
                 synchConsole->Write(buffWrite);
             }
             else {
-
-                OpenFile *openFile = (OpenFile *) fid;
+                
+                OpenFile *openFile = currentThread->GetFile(fid);
                 int result = openFile->Write(buffWrite, size);
                 if(result == size) {
                     DEBUG('e', "`Write` Success.\n");
@@ -244,7 +244,7 @@ SyscallHandler(ExceptionType _et)
                 synchConsole->Read(buffRead, size);
             }
             else {
-                OpenFile *openFile = (OpenFile *) fid;
+                OpenFile *openFile = currentThread->GetFile(fid);
                 int result = openFile->Read(buffRead, size);
                 if(result == size) {
                     DEBUG('e', "`Read` Success.\n");
@@ -296,11 +296,11 @@ SyscallHandler(ExceptionType _et)
 
         case SC_JOIN: {
             int spaceInt = machine->ReadRegister(4);
-            AddressSpace *space = (AddressSpace *) spaceInt;
-            if(space == nullptr) {
+            Thread *son = currentThread->GetSon(spaceInt);
+            if(son == nullptr) {
                 DEBUG('e', "Join error: invalid space.\n");
             }
-            int result = space->GetThread()->Join();
+            int result = son->Join();
             machine->WriteRegister(2, result);
             DEBUG('e', "Join success.\n");
             break;

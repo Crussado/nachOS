@@ -83,7 +83,7 @@ enum ThreadStatus {
 ///
 ///  Some threads also belong to a user address space; threads that only run
 ///  in the kernel have a null address space.
-class Semaphore;
+class Channel;
 class AddressSpace;
 class Thread {
 private:
@@ -153,8 +153,7 @@ private:
 
     const char *name;
 
-    Semaphore *join1;
-    Semaphore *join2;
+    Channel *channel;
 
     int priority;
 
@@ -176,9 +175,15 @@ private:
 public:
     int Open(OpenFile *fid);
 
+    void Close(int key);
+
+    OpenFile *GetFile(int fid);
+
     int AddSon(Thread *son);
 
-    void Close(int key);
+    Thread *GetSon(int tid);
+
+    void DeleteSon(Thread *son);
     // Save user-level register state.
     void SaveUserState();
 

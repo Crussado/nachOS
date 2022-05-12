@@ -20,7 +20,7 @@
 #include "thread.hh"
 #include "switch.h"
 #include "system.hh"
-#include "semaphore.hh"
+#include "channel.hh"
 #include "../lib/assert.hh"
 #include "../lib/list.hh"
 #include "scheduler.hh"
@@ -54,13 +54,10 @@ Thread::Thread(const char *threadName, bool joineable, int priorityArg)
     status   = JUST_CREATED;
     priorityStack = new List<int>;
     if (joineable) {
-        join1 = new Semaphore("join1",0);
-        join2 = new Semaphore("join2",0);
-
+        channel = new Channel("join");
     }
     else {
-        join1 = nullptr;
-        join2 = nullptr;
+        channel = nullptr;
     }
 #ifdef USER_PROGRAM
     space    = nullptr;
@@ -202,9 +199,10 @@ Thread::Print() const
 void
 Thread::Finish(int status)
 {
-    if(join1 && join2){
-        join1->V();
-        join2->P();
+    int fin;
+    if(channel){
+        channel->Send(status);
+        channel->Receive(&fin);
     }
     interrupt->SetLevel(INT_OFF);
     ASSERT(this == currentThread);
@@ -219,10 +217,14 @@ Thread::Finish(int status)
 int
 Thread::Join()
 {
-    ASSERT(join1 != nullptr && join2 != nullptr);
-    join1->P();
-    join2->V();
-    return 1;
+    ASSERT(channel != nullptr);
+    int status;
+    channel->Receive(&status);
+    #ifdef USER_PROGRAM
+    currentThread->DeleteSon(this);
+    #endif
+    channel->Send(1);
+    return status;
 }
 
 /// Relinquish the CPU if any other thread is ready to run.
@@ -382,7 +384,22 @@ Thread::AddSon(Thread *son) {
 
 void
 Thread::Close(int key) {
-    openedFiles->removeKey(key);
+    openedFiles->RemoveKey(key);
+}
+
+OpenFile *
+Thread::GetFile(int fid) {
+    openedFiles->GetKey(fid);
+}
+
+Thread *
+Thread::GetSon(int tid) {
+    sons->GetKey(tid);
+}
+
+void
+Thread::DeleteSon(Thread *son) {
+    sons->Remove(son);
 }
 
 #endif

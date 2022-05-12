@@ -11,17 +11,17 @@
 
 # If you are cross-compiling, you need to point to the right executables and
 # change the flags to ld and the build procedure for as:
-#GCC_PREFIX = /home/mariano/usr/bin/mips-suse-linux-
+#GCC_PREFIX = /home/julio/usr/bin/mips-suse-linux-
 GCC_PREFIX = mipsel-linux-gnu-
 LDFLAGS    = -T arrangement.ld -N -s
 ASFLAGS    = -mips1
 CPPFLAGS   = $(INCLUDE_DIRS)
 
 # If you are not cross-compiling:
-#GCC_DIR  =
-#LDFLAGS  = -N -T 0
-#ASFLAGS  =
-#CPPFLAGS = -P $(INCLUDE_DIRS)
+# GCC_DIR  =
+# LDFLAGS  = -N -T 0
+# ASFLAGS  =
+# CPPFLAGS = -P $(INCLUDE_DIRS)
 
 
 CC  = $(GCC_PREFIX)gcc
@@ -60,7 +60,7 @@ start.o: start.s ../userprog/syscall.h
 	@$(CC) $(CFLAGS) -c $^
 
 lib.o: lib.c lib.h
-	gcc -std -c lib.c
+	l: gcc -std=c99 -c lib.c
 
 $(PROGRAMS): %: %.o start.o lib.o
 	@echo ":: Linking and converting $$(tput bold)$@$$(tput sgr0)"

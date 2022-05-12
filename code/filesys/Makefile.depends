@@ -101,7 +101,8 @@ thread.o: ../threads/thread.cc ../threads/thread.hh ../lib/utility.hh \
  ../machine/interrupt.hh ../machine/statistics.hh ../machine/timer.hh \
  ../threads/lock.hh ../threads/semaphore.hh ../threads/synch_console.hh \
  ../machine/console.hh ../filesys/synch_disk.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../threads/../lib/assert.hh \
+ ../threads/semaphore.hh ../threads/channel.hh ../threads/condition.hh \
+ ../threads/synch_list.hh ../threads/../lib/assert.hh \
  ../threads/../lib/list.hh
 thread_test.o: ../threads/thread_test.cc \
  ../threads/thread_test_garden_semaphore.hh \
