@@ -16,7 +16,7 @@
 /// First, set up the translation from program memory to physical memory.
 /// For now, this is really simple (1:1), since we are only uniprogramming,
 /// and we have a single unsegmented page table.
-AddressSpace::AddressSpace(OpenFile *executable_file, Thread *hilo)
+AddressSpace::AddressSpace(OpenFile *executable_file, Thread *hilo, char **args)
 {
     ASSERT(executable_file != nullptr);
 
@@ -78,7 +78,7 @@ AddressSpace::AddressSpace(OpenFile *executable_file, Thread *hilo)
         exe.ReadDataBlock(&mainMemory[virtualAddr], initDataSize, 0);
     }
     thread = hilo;
-
+    initsArgs = args;
 }
 
 /// Deallocate an address space.
@@ -89,6 +89,7 @@ AddressSpace::~AddressSpace()
     for (unsigned i = 0; i < numPages; i++) {
         usedPages->Clear(pageTable[i].physicalPage);
     }
+    delete initsArgs;
     delete [] pageTable;
 }
 
@@ -142,4 +143,9 @@ AddressSpace::RestoreState()
 Thread *
 AddressSpace::GetThread() {
   return thread;
+}
+
+char **
+AddressSpace::GetInitsArgs() {
+  return initsArgs;
 }

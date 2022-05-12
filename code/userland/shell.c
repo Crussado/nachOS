@@ -1,4 +1,4 @@
-#include "syscall.h"
+#include "userprog/syscall.h"
 
 
 #define MAX_LINE_SIZE  60
@@ -104,28 +104,37 @@ main(void)
     const OpenFileId OUTPUT = CONSOLE_OUTPUT;
     char             line[MAX_LINE_SIZE];
     char            *argv[MAX_ARG_COUNT];
-
+    int              backGround;
+    char             *realLine;
     for (;;) {
         WritePrompt(OUTPUT);
         const unsigned lineSize = ReadLine(line, MAX_LINE_SIZE, INPUT);
         if (lineSize == 0) {
             continue;
         }
-
-        if (PrepareArguments(line, argv, MAX_ARG_COUNT) == 0) {
+        if(line[0] == '&') {
+            realLine = &line[2];
+            backGround = 1;
+        }
+        else {
+            realLine = line;
+            backGround = 0;
+        }
+        if (PrepareArguments(realLine, argv, MAX_ARG_COUNT) == 0) {
             WriteError("too many arguments.", OUTPUT);
             continue;
         }
 
         // Comment and uncomment according to whether command line arguments
         // are given in the system call or not.
-        const SpaceId newProc = Exec(line);
-        //const SpaceId newProc = Exec(line, argv);
+        // const SpaceId newProc = Exec(realLine);
+        const SpaceId newProc = Exec(realLine, argv);
 
         // TODO: check for errors when calling `Exec`; this depends on how
         //       errors are reported.
-
-        Join(newProc);
+        if(backGround) {
+            Join(newProc);
+        }
         // TODO: is it necessary to check for errors after `Join` too, or
         //       can you be sure that, with the implementation of the system
         //       call handler you made, it will never give an error?; what

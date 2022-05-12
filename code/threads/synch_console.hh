@@ -10,10 +10,11 @@
 
 
 #include "machine/console.hh"
-#include "threads/lock.hh"
-#include "threads/semaphore.hh"
+#include "lock.hh"
+#include "semaphore.hh"
 
-
+class Semaphore;
+class Lock;
 class SynchConsole {
 public:
 
@@ -24,14 +25,14 @@ public:
     void Read(char* buffer, int size);
     void Write(char* buffer);
 
+    void fReadAvail();
+    void fWriteDone();
 private:
     Console *console;  
     Semaphore *readAvail;
     Semaphore *writeDone;
     Lock *lockRead;  
-    Lock *lockWrite;  
-    void ReadAvail(void *arg);
-    void WriteDone(void *arg);
+    Lock *lockWrite;
     const char *name;
 };
 

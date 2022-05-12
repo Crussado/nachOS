@@ -20,9 +20,9 @@
 #include "machine/mmu.hh"
 #include "machine/machine.hh"
 #include "threads/system.hh"
+#include "threads/thread.hh"
 
 const unsigned USER_STACK_SIZE = 1024;  ///< Increase this as necessary!
-
 
 class AddressSpace {
 public:
@@ -37,7 +37,7 @@ public:
     /// Parameters:
     /// * `executable_file` is the open file that corresponds to the
     ///   program; it contains the object code to load into memory.
-    AddressSpace(OpenFile *executable_file, Thread *hilo=nullptr);
+    AddressSpace(OpenFile *executable_file, Thread *hilo=nullptr, char **args = nullptr);
 
     /// De-allocate an address space.
     ~AddressSpace();
@@ -51,6 +51,7 @@ public:
     void RestoreState();
 
     Thread *GetThread();
+    char **GetInitsArgs();
 private:
 
     /// Assume linear page table translation for now!
@@ -58,6 +59,7 @@ private:
     Thread *thread;
     /// Number of pages in the virtual address space.
     unsigned numPages;
+    char **initsArgs;
 
 };
 

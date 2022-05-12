@@ -105,6 +105,7 @@ USERPROG_HDR = userprog/address_space.hh            \
                machine/instruction.hh               \
                machine/machine.hh                   \
                machine/mmu.hh                       \
+               threads/synch_console.hh \
                machine/translation_entry.hh
 USERPROG_SRC = userprog/address_space.cc            \
                userprog/args.cc                     \
@@ -121,6 +122,7 @@ USERPROG_SRC = userprog/address_space.cc            \
                machine/exception_type.cc            \
                machine/instruction.cc               \
                machine/machine.cc                   \
+               threads/synch_console.cc \
                machine/mips_sim.cc                  \
                machine/mmu.cc
 

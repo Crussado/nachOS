@@ -3,13 +3,25 @@
 #include <stdio.h>
 
 void
-SynchConsole::ReadAvail(void *arg) {
+SynchConsole::fReadAvail() {
     readAvail->V();
 }
 
 void
-SynchConsole::WriteDone(void *arg) {
+ReadAvail(void *arg) {
+    SynchConsole *synchConsole = (SynchConsole *) arg;
+    synchConsole->fReadAvail();
+}
+
+
+void
+SynchConsole::fWriteDone() {
     writeDone->V();
+}
+void
+WriteDone(void *arg) {
+    SynchConsole *synchConsole = (SynchConsole *) arg;
+    synchConsole->fWriteDone();
 }
 
 SynchConsole::SynchConsole(const char *debugName)
@@ -17,9 +29,9 @@ SynchConsole::SynchConsole(const char *debugName)
     name=debugName;
     lockRead = new Lock("synch console lock read");
     lockWrite = new Lock("synch console lock write");
-    readAvail = new Semaphore("read avail", 0);
-    writeDone = new Semaphore("write done", 0);
-    console = new Console(stdin, stdout, ReadAvail, WriteDone, 0);
+    readAvail = new Semaphore("console read avail", 0);
+    writeDone = new Semaphore("console write done", 0);
+    console = new Console(nullptr, nullptr, ReadAvail, WriteDone, this);
 }
 
 SynchConsole::~SynchConsole()

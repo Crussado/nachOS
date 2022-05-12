@@ -75,6 +75,12 @@ StartProcess(void *addressSpace)
     space->InitRegisters();  // Set the initial register values.
     space->RestoreState();   // Load page table register.
 
+    if(space->GetInitsArgs()) {
+        unsigned argv = WriteArgs(space->GetInitsArgs());
+        machine->WriteRegister(4, (int) argv);
+        machine->WriteRegister(5, machine->ReadRegister(STACK_REG));
+    }
+
     machine->Run();  // Jump to the user progam.
     ASSERT(false);   // `machine->Run` never returns; the address space
                      // exits by doing the system call `Exit`.
@@ -148,7 +154,7 @@ SyscallHandler(ExceptionType _et)
             }
 
             DEBUG('e', "`Remove` requested for file `%s`.\n", filename);
-            if(fileSystem->Remove(filename, FILE_NAME_MAX_LEN)) {
+            if(fileSystem->Remove(filename)) {
                 machine->WriteRegister(2, (int) 0);
                 DEBUG('e', "Remove success.\n");
             }
@@ -259,7 +265,6 @@ SyscallHandler(ExceptionType _et)
                 DEBUG('e', "Error: address to filename string is null.\n");
             }
 
-            // ------------------------------PREGUNTAR---------------------------------
             int addressArgs = machine->ReadRegister(5);
             char **args;
             if (addressArgs == 0) {
@@ -268,10 +273,6 @@ SyscallHandler(ExceptionType _et)
             else {
                 args = SaveArgs(addressArgs);
             }
-            unsigned argv = WriteArgs(args);
-            machine->WriteRegister(4, (int) argv);
-            machine->WriteRegister(5, machine->ReadRegister(STACK_REG));
-            /// -------------------------------------------------------------------------
 
             char filename[FILE_NAME_MAX_LEN + 1];
             if (!ReadStringFromUser(filenameAddr,
@@ -283,9 +284,9 @@ SyscallHandler(ExceptionType _et)
             DEBUG('e', "`Exec` requested for file `%s`.\n", filename);
             OpenFile *fileAddr = fileSystem->Open(filename);
             Thread *son = new Thread(filename);
-            AddressSpace *addressSpace = new AddressSpace(fileAddr, son);
-            son->Fork(StartProcess, (void *) addressSpace);
+            AddressSpace *addressSpace = new AddressSpace(fileAddr, son, args);
             delete fileAddr;
+            son->Fork(StartProcess, (void *) addressSpace);
 
             machine->WriteRegister(2, (int) addressSpace);
             DEBUG('e', "Exec success.\n");
@@ -302,6 +303,7 @@ SyscallHandler(ExceptionType _et)
             int result = space->GetThread()->Join();
             machine->WriteRegister(2, result);
             DEBUG('e', "Join success.\n");
+            break;
         }
 
         default:
