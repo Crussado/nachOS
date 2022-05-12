@@ -51,7 +51,7 @@ public:
     void Prepend(Item item);
 
     /// Put item at the end of the list.
-    void Append(Item item);
+    int Append(Item item);
 
     /// Get a copy of the item on the front of the list.
     Item Head();
@@ -77,6 +77,8 @@ public:
 
     /// Remove first item from list.
     Item SortedPop(int *keyPtr);
+
+    void removeKey(int key);
 
 private:
 
@@ -130,18 +132,54 @@ List<Item>::~List()
 //
 // * `item` is the thing to put on the list, it can be a pointer to anything.
 template <class Item>
-void
+int
 List<Item>::Append(Item item)
 {
-    ListNode *element = new ListNode(item, 0);
-
+    int key;
     if (IsEmpty()) {
+        key = 0;
+        ListNode *element = new ListNode(item, 0);
         first = element;
         last = element;
     } else {  // Put it after last.
+        key = last->key + 1;
+        ListNode *element = new ListNode(item, key);
         last->next = element;
         last = element;
     }
+    return key;
+}
+
+template <class Item>
+void
+List<Item>::removeKey(int key)
+{
+    if (IsEmpty()) {
+        return;
+    }
+    ListNode *elimNode;
+    if(first->key == key) {
+        elimNode = first;
+        first = first->next;
+        delete elimNode;
+    }
+    ListNode* next = first;
+    bool b = false;
+    for(; next->next != last; next = next->next) {
+        if(next->next->key == key) {
+            elimNode = next->next;
+            next->next = elimNode->next;
+            delete elimNode;
+            b = true;
+            break;
+        }
+    }
+    if(!b && last->key == key) {
+        elimNode = last;
+        last = next;
+        delete elimNode;
+    }
+
 }
 
 /// Put an "item" on the front of the list.

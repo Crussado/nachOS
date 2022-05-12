@@ -45,7 +45,7 @@ IsThreadStatus(ThreadStatus s)
 ///
 /// * `threadName` is an arbitrary string, useful for debugging.
 Thread::Thread(const char *threadName, bool joineable, int priorityArg)
-{   
+{
     ASSERT(priorityArg <= (CANT_COLAS - 1) && priorityArg >= 0);
     priority = priorityArg;
     name     = threadName;
@@ -56,6 +56,7 @@ Thread::Thread(const char *threadName, bool joineable, int priorityArg)
     if (joineable) {
         join1 = new Semaphore("join1",0);
         join2 = new Semaphore("join2",0);
+
     }
     else {
         join1 = nullptr;
@@ -63,7 +64,8 @@ Thread::Thread(const char *threadName, bool joineable, int priorityArg)
     }
 #ifdef USER_PROGRAM
     space    = nullptr;
-    openedFiles = new List<OpenFile>;
+    openedFiles = new List<OpenFile *>;
+    sons = new List<Thread *>;
 #endif
 }
 
@@ -368,14 +370,19 @@ Thread::RestoreUserState()
     }
 }
 
-void
+int
 Thread::Open(OpenFile *fid) {
-    openedFiles->Append(fid);
+    return openedFiles->Append(fid);
+}
+
+int
+Thread::AddSon(Thread *son) {
+    return sons->Append(son);
 }
 
 void
-Thread::Close(OpenFile *fid) {
-    openedFiles->Remove(fid);
+Thread::Close(int key) {
+    openedFiles->removeKey(key);
 }
 
 #endif

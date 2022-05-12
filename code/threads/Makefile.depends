@@ -5,28 +5,27 @@ main.o: ../threads/main.cc ../threads/copyright.h ../threads/sys_info.hh \
  ../threads/scheduler.hh ../machine/interrupt.hh ../machine/statistics.hh \
  ../machine/timer.hh ../threads/thread_test.hh
 condition.o: ../threads/condition.cc ../threads/condition.hh \
- ../threads/lock.hh ../threads/semaphore.hh ../threads/thread.hh \
+ ../threads/lock.hh ../threads/semaphore.hh ../lib/list.hh \
  ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
- ../machine/system_dep.hh ../lib/list.hh ../lib/utility.hh
+ ../machine/system_dep.hh
 lock.o: ../threads/lock.cc ../threads/lock.hh ../threads/semaphore.hh \
- ../threads/thread.hh ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh \
- ../lib/debug_opts.hh ../machine/system_dep.hh ../lib/list.hh \
- ../lib/utility.hh ../threads/system.hh ../threads/scheduler.hh \
+ ../lib/list.hh ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh \
+ ../lib/debug_opts.hh ../machine/system_dep.hh ../threads/system.hh \
+ ../threads/thread.hh ../lib/utility.hh ../threads/scheduler.hh \
  ../machine/interrupt.hh ../machine/statistics.hh ../machine/timer.hh
 channel.o: ../threads/channel.cc ../threads/channel.hh \
  ../threads/condition.hh ../threads/lock.hh ../threads/semaphore.hh \
- ../threads/thread.hh ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh \
- ../lib/debug_opts.hh ../machine/system_dep.hh ../lib/list.hh \
- ../lib/utility.hh ../threads/synch_list.hh
+ ../lib/list.hh ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh \
+ ../lib/debug_opts.hh ../machine/system_dep.hh ../threads/synch_list.hh
 scheduler.o: ../threads/scheduler.cc ../threads/scheduler.hh \
  ../threads/thread.hh ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh \
  ../lib/debug_opts.hh ../machine/system_dep.hh ../lib/list.hh \
  ../lib/utility.hh ../threads/system.hh ../machine/interrupt.hh \
  ../machine/statistics.hh ../machine/timer.hh
 semaphore.o: ../threads/semaphore.cc ../threads/semaphore.hh \
- ../threads/thread.hh ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh \
- ../lib/debug_opts.hh ../machine/system_dep.hh ../lib/list.hh \
- ../lib/utility.hh ../threads/system.hh ../threads/scheduler.hh \
+ ../lib/list.hh ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh \
+ ../lib/debug_opts.hh ../machine/system_dep.hh ../threads/system.hh \
+ ../threads/thread.hh ../lib/utility.hh ../threads/scheduler.hh \
  ../machine/interrupt.hh ../machine/statistics.hh ../machine/timer.hh
 sys_info.o: ../threads/sys_info.cc ../threads/sys_info.hh \
  ../threads/copyright.h ../filesys/directory_entry.hh \
@@ -56,10 +55,9 @@ thread_test.o: ../threads/thread_test.cc \
  ../threads/thread_test_simple.hh ../threads/thread_test_join.hh \
  ../threads/thread_test_lock_garden.hh ../threads/thread_test_channel.hh \
  ../threads/channel.hh ../threads/condition.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../threads/thread.hh ../lib/utility.hh \
+ ../threads/semaphore.hh ../lib/list.hh ../lib/utility.hh \
  ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
- ../machine/system_dep.hh ../lib/list.hh ../lib/utility.hh \
- ../threads/synch_list.hh
+ ../machine/system_dep.hh ../threads/synch_list.hh ../lib/utility.hh
 thread_test_garden.o: ../threads/thread_test_garden.cc \
  ../threads/thread_test_garden.hh ../threads/system.hh \
  ../threads/thread.hh ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh \
@@ -75,10 +73,10 @@ thread_test_garden_semaphore.o: \
  ../machine/statistics.hh ../machine/timer.hh ../threads/semaphore.hh
 thread_test_prod_cons.o: ../threads/thread_test_prod_cons.cc \
  ../threads/thread_test_prod_cons.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../threads/thread.hh ../lib/utility.hh \
+ ../threads/semaphore.hh ../lib/list.hh ../lib/utility.hh \
  ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
- ../machine/system_dep.hh ../lib/list.hh ../lib/utility.hh \
- ../threads/condition.hh ../threads/system.hh ../threads/scheduler.hh \
+ ../machine/system_dep.hh ../threads/condition.hh ../threads/system.hh \
+ ../threads/thread.hh ../lib/utility.hh ../threads/scheduler.hh \
  ../machine/interrupt.hh ../machine/statistics.hh ../machine/timer.hh \
  ../threads/../lib/debug.hh ../threads/../lib/assert.hh
 thread_test_simple.o: ../threads/thread_test_simple.cc \
@@ -96,17 +94,17 @@ thread_test_join.o: ../threads/thread_test_join.cc \
  ../threads/../lib/assert.hh
 thread_test_lock_garden.o: ../threads/thread_test_lock_garden.cc \
  ../threads/thread_test_lock_garden.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../threads/thread.hh ../lib/utility.hh \
+ ../threads/semaphore.hh ../lib/list.hh ../lib/utility.hh \
  ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
- ../machine/system_dep.hh ../lib/list.hh ../lib/utility.hh \
- ../threads/system.hh ../threads/scheduler.hh ../machine/interrupt.hh \
+ ../machine/system_dep.hh ../threads/system.hh ../threads/thread.hh \
+ ../lib/utility.hh ../threads/scheduler.hh ../machine/interrupt.hh \
  ../machine/statistics.hh ../machine/timer.hh
 thread_test_channel.o: ../threads/thread_test_channel.cc \
  ../threads/thread_test_channel.hh ../threads/channel.hh \
  ../threads/condition.hh ../threads/lock.hh ../threads/semaphore.hh \
- ../threads/thread.hh ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh \
- ../lib/debug_opts.hh ../machine/system_dep.hh ../lib/list.hh \
- ../lib/utility.hh ../threads/synch_list.hh ../threads/system.hh \
+ ../lib/list.hh ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh \
+ ../lib/debug_opts.hh ../machine/system_dep.hh ../threads/synch_list.hh \
+ ../threads/system.hh ../threads/thread.hh ../lib/utility.hh \
  ../threads/scheduler.hh ../machine/interrupt.hh ../machine/statistics.hh \
  ../machine/timer.hh ../threads/../lib/debug.hh \
  ../threads/../lib/assert.hh
@@ -140,28 +138,27 @@ preemptive.o: ../threads/preemptive.cc ../threads/preemptive.hh \
  ../threads/scheduler.hh ../machine/interrupt.hh ../machine/statistics.hh \
  ../machine/timer.hh
 condition.o: ../threads/condition.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../threads/thread.hh ../lib/utility.hh \
+ ../threads/semaphore.hh ../lib/list.hh ../lib/utility.hh \
  ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
- ../machine/system_dep.hh ../lib/list.hh ../lib/utility.hh
+ ../machine/system_dep.hh
 copyright.o: ../threads/copyright.h
-lock.o: ../threads/lock.hh ../threads/semaphore.hh ../threads/thread.hh \
+lock.o: ../threads/lock.hh ../threads/semaphore.hh ../lib/list.hh \
  ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
- ../machine/system_dep.hh ../lib/list.hh ../lib/utility.hh
+ ../machine/system_dep.hh
 channel.o: ../threads/channel.hh ../threads/condition.hh \
- ../threads/lock.hh ../threads/semaphore.hh ../threads/thread.hh \
+ ../threads/lock.hh ../threads/semaphore.hh ../lib/list.hh \
  ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
- ../machine/system_dep.hh ../lib/list.hh ../lib/utility.hh \
- ../threads/synch_list.hh
+ ../machine/system_dep.hh ../threads/synch_list.hh
 scheduler.o: ../threads/scheduler.hh ../threads/thread.hh \
  ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
  ../machine/system_dep.hh ../lib/list.hh ../lib/utility.hh
-semaphore.o: ../threads/semaphore.hh ../threads/thread.hh \
- ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
- ../machine/system_dep.hh ../lib/list.hh ../lib/utility.hh
+semaphore.o: ../threads/semaphore.hh ../lib/list.hh ../lib/utility.hh \
+ ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
+ ../machine/system_dep.hh
 synch_list.o: ../threads/synch_list.hh ../threads/condition.hh \
- ../threads/lock.hh ../threads/semaphore.hh ../threads/thread.hh \
+ ../threads/lock.hh ../threads/semaphore.hh ../lib/list.hh \
  ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
- ../machine/system_dep.hh ../lib/list.hh ../lib/utility.hh
+ ../machine/system_dep.hh
 sys_info.o: ../threads/sys_info.hh
 system.o: ../threads/system.hh ../threads/thread.hh ../lib/utility.hh \
  ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
@@ -181,10 +178,9 @@ thread_test_join.o: ../threads/thread_test_join.hh
 thread_test_lock_garden.o: ../threads/thread_test_lock_garden.hh
 thread_test_channel.o: ../threads/thread_test_channel.hh \
  ../threads/channel.hh ../threads/condition.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../threads/thread.hh ../lib/utility.hh \
+ ../threads/semaphore.hh ../lib/list.hh ../lib/utility.hh \
  ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
- ../machine/system_dep.hh ../lib/list.hh ../lib/utility.hh \
- ../threads/synch_list.hh
+ ../machine/system_dep.hh ../threads/synch_list.hh
 assert.o: ../lib/assert.hh
 debug.o: ../lib/debug.hh ../lib/debug_opts.hh
 debug_opts.o: ../lib/debug_opts.hh

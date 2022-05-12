@@ -19,11 +19,11 @@
 #include "lib/bitmap.hh"
 #include "machine/mmu.hh"
 #include "machine/machine.hh"
-#include "threads/system.hh"
 #include "threads/thread.hh"
 
 const unsigned USER_STACK_SIZE = 1024;  ///< Increase this as necessary!
 
+class Thread;
 class AddressSpace {
 public:
 

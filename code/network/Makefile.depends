@@ -1,74 +1,73 @@
 main.o: ../threads/main.cc ../threads/copyright.h ../threads/sys_info.hh \
  ../threads/system.hh ../threads/thread.hh ../lib/utility.hh \
  ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
- ../machine/system_dep.hh ../machine/machine.hh \
- ../machine/exception_type.hh ../machine/mmu.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../machine/single_stepper.hh \
- ../userprog/address_space.hh ../filesys/file_system.hh \
- ../filesys/open_file.hh ../filesys/directory_entry.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../threads/scheduler.hh ../lib/list.hh \
- ../lib/utility.hh ../machine/interrupt.hh ../machine/statistics.hh \
- ../machine/timer.hh ../filesys/synch_disk.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../threads/semaphore.hh ../network/post.hh \
- ../machine/network.hh ../threads/synch_list.hh ../threads/condition.hh \
- ../threads/lock.hh ../threads/thread_test.hh
+ ../machine/system_dep.hh ../lib/list.hh ../lib/utility.hh \
+ ../machine/machine.hh ../machine/exception_type.hh ../machine/mmu.hh \
+ ../machine/disk.hh ../machine/translation_entry.hh \
+ ../machine/single_stepper.hh ../userprog/address_space.hh \
+ ../filesys/file_system.hh ../filesys/open_file.hh \
+ ../filesys/directory_entry.hh ../machine/disk.hh \
+ ../machine/translation_entry.hh ../lib/bitmap.hh ../filesys/open_file.hh \
+ ../machine/mmu.hh ../threads/thread.hh ../threads/scheduler.hh \
+ ../machine/interrupt.hh ../machine/statistics.hh ../machine/timer.hh \
+ ../threads/lock.hh ../threads/semaphore.hh ../threads/synch_console.hh \
+ ../machine/console.hh ../filesys/synch_disk.hh ../threads/lock.hh \
+ ../threads/semaphore.hh ../network/post.hh ../machine/network.hh \
+ ../threads/synch_list.hh ../threads/condition.hh \
+ ../threads/thread_test.hh
 condition.o: ../threads/condition.cc ../threads/condition.hh \
- ../threads/lock.hh ../threads/semaphore.hh ../threads/thread.hh \
+ ../threads/lock.hh ../threads/semaphore.hh ../lib/list.hh \
  ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
- ../machine/system_dep.hh ../machine/machine.hh \
- ../machine/exception_type.hh ../machine/mmu.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../machine/single_stepper.hh \
- ../userprog/address_space.hh ../filesys/file_system.hh \
- ../filesys/open_file.hh ../filesys/directory_entry.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../lib/list.hh ../lib/utility.hh
+ ../machine/system_dep.hh
 lock.o: ../threads/lock.cc ../threads/lock.hh ../threads/semaphore.hh \
- ../threads/thread.hh ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh \
- ../lib/debug_opts.hh ../machine/system_dep.hh ../machine/machine.hh \
+ ../lib/list.hh ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh \
+ ../lib/debug_opts.hh ../machine/system_dep.hh ../threads/system.hh \
+ ../threads/thread.hh ../lib/utility.hh ../machine/machine.hh \
  ../machine/exception_type.hh ../machine/mmu.hh ../machine/disk.hh \
  ../machine/translation_entry.hh ../machine/single_stepper.hh \
  ../userprog/address_space.hh ../filesys/file_system.hh \
  ../filesys/open_file.hh ../filesys/directory_entry.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../lib/list.hh ../lib/utility.hh \
- ../threads/system.hh ../threads/scheduler.hh ../machine/interrupt.hh \
- ../machine/statistics.hh ../machine/timer.hh ../filesys/synch_disk.hh \
- ../threads/lock.hh ../threads/semaphore.hh ../network/post.hh \
- ../machine/network.hh ../threads/synch_list.hh ../threads/condition.hh
+ ../machine/translation_entry.hh ../lib/bitmap.hh ../filesys/open_file.hh \
+ ../machine/mmu.hh ../threads/thread.hh ../threads/scheduler.hh \
+ ../machine/interrupt.hh ../machine/statistics.hh ../machine/timer.hh \
+ ../threads/synch_console.hh ../machine/console.hh \
+ ../filesys/synch_disk.hh ../threads/lock.hh ../threads/semaphore.hh \
+ ../network/post.hh ../machine/network.hh ../threads/synch_list.hh \
+ ../threads/condition.hh
 channel.o: ../threads/channel.cc ../threads/channel.hh \
  ../threads/condition.hh ../threads/lock.hh ../threads/semaphore.hh \
- ../threads/thread.hh ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh \
- ../lib/debug_opts.hh ../machine/system_dep.hh ../machine/machine.hh \
- ../machine/exception_type.hh ../machine/mmu.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../machine/single_stepper.hh \
- ../userprog/address_space.hh ../filesys/file_system.hh \
- ../filesys/open_file.hh ../filesys/directory_entry.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../lib/list.hh ../lib/utility.hh \
- ../threads/synch_list.hh
+ ../lib/list.hh ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh \
+ ../lib/debug_opts.hh ../machine/system_dep.hh ../threads/synch_list.hh
 scheduler.o: ../threads/scheduler.cc ../threads/scheduler.hh \
  ../threads/thread.hh ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh \
- ../lib/debug_opts.hh ../machine/system_dep.hh ../machine/machine.hh \
- ../machine/exception_type.hh ../machine/mmu.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../machine/single_stepper.hh \
- ../userprog/address_space.hh ../filesys/file_system.hh \
- ../filesys/open_file.hh ../filesys/directory_entry.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../lib/list.hh ../lib/utility.hh \
- ../threads/system.hh ../machine/interrupt.hh ../machine/statistics.hh \
- ../machine/timer.hh ../filesys/synch_disk.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../threads/semaphore.hh ../network/post.hh \
- ../machine/network.hh ../threads/synch_list.hh ../threads/condition.hh \
- ../threads/lock.hh
+ ../lib/debug_opts.hh ../machine/system_dep.hh ../lib/list.hh \
+ ../lib/utility.hh ../machine/machine.hh ../machine/exception_type.hh \
+ ../machine/mmu.hh ../machine/disk.hh ../machine/translation_entry.hh \
+ ../machine/single_stepper.hh ../userprog/address_space.hh \
+ ../filesys/file_system.hh ../filesys/open_file.hh \
+ ../filesys/directory_entry.hh ../machine/disk.hh \
+ ../machine/translation_entry.hh ../lib/bitmap.hh ../filesys/open_file.hh \
+ ../machine/mmu.hh ../threads/thread.hh ../threads/system.hh \
+ ../machine/interrupt.hh ../machine/statistics.hh ../machine/timer.hh \
+ ../threads/lock.hh ../threads/semaphore.hh ../threads/synch_console.hh \
+ ../machine/console.hh ../filesys/synch_disk.hh ../threads/lock.hh \
+ ../threads/semaphore.hh ../network/post.hh ../machine/network.hh \
+ ../threads/synch_list.hh ../threads/condition.hh
 semaphore.o: ../threads/semaphore.cc ../threads/semaphore.hh \
- ../threads/thread.hh ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh \
- ../lib/debug_opts.hh ../machine/system_dep.hh ../machine/machine.hh \
+ ../lib/list.hh ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh \
+ ../lib/debug_opts.hh ../machine/system_dep.hh ../threads/system.hh \
+ ../threads/thread.hh ../lib/utility.hh ../machine/machine.hh \
  ../machine/exception_type.hh ../machine/mmu.hh ../machine/disk.hh \
  ../machine/translation_entry.hh ../machine/single_stepper.hh \
  ../userprog/address_space.hh ../filesys/file_system.hh \
  ../filesys/open_file.hh ../filesys/directory_entry.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../lib/list.hh ../lib/utility.hh \
- ../threads/system.hh ../threads/scheduler.hh ../machine/interrupt.hh \
- ../machine/statistics.hh ../machine/timer.hh ../filesys/synch_disk.hh \
- ../threads/lock.hh ../threads/semaphore.hh ../network/post.hh \
- ../machine/network.hh ../threads/synch_list.hh ../threads/condition.hh \
- ../threads/lock.hh
+ ../machine/translation_entry.hh ../lib/bitmap.hh ../filesys/open_file.hh \
+ ../machine/mmu.hh ../threads/thread.hh ../threads/scheduler.hh \
+ ../machine/interrupt.hh ../machine/statistics.hh ../machine/timer.hh \
+ ../threads/lock.hh ../threads/synch_console.hh ../machine/console.hh \
+ ../filesys/synch_disk.hh ../threads/lock.hh ../threads/semaphore.hh \
+ ../network/post.hh ../machine/network.hh ../threads/synch_list.hh \
+ ../threads/condition.hh
 sys_info.o: ../threads/sys_info.cc ../threads/sys_info.hh \
  ../threads/copyright.h ../filesys/directory_entry.hh \
  ../filesys/file_system.hh ../filesys/open_file.hh ../lib/utility.hh \
@@ -79,148 +78,165 @@ sys_info.o: ../threads/sys_info.cc ../threads/sys_info.hh \
  ../machine/translation_entry.hh
 system.o: ../threads/system.cc ../threads/system.hh ../threads/thread.hh \
  ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
- ../machine/system_dep.hh ../machine/machine.hh \
- ../machine/exception_type.hh ../machine/mmu.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../machine/single_stepper.hh \
- ../userprog/address_space.hh ../filesys/file_system.hh \
- ../filesys/open_file.hh ../filesys/directory_entry.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../threads/scheduler.hh ../lib/list.hh \
- ../lib/utility.hh ../machine/interrupt.hh ../machine/statistics.hh \
- ../machine/timer.hh ../filesys/synch_disk.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../threads/semaphore.hh ../network/post.hh \
- ../machine/network.hh ../threads/synch_list.hh ../threads/condition.hh \
- ../threads/lock.hh ../threads/preemptive.hh ../userprog/debugger.hh \
- ../userprog/debugger_command_manager.hh ../userprog/exception.hh
+ ../machine/system_dep.hh ../lib/list.hh ../lib/utility.hh \
+ ../machine/machine.hh ../machine/exception_type.hh ../machine/mmu.hh \
+ ../machine/disk.hh ../machine/translation_entry.hh \
+ ../machine/single_stepper.hh ../userprog/address_space.hh \
+ ../filesys/file_system.hh ../filesys/open_file.hh \
+ ../filesys/directory_entry.hh ../machine/disk.hh \
+ ../machine/translation_entry.hh ../lib/bitmap.hh ../filesys/open_file.hh \
+ ../machine/mmu.hh ../threads/thread.hh ../threads/scheduler.hh \
+ ../machine/interrupt.hh ../machine/statistics.hh ../machine/timer.hh \
+ ../threads/lock.hh ../threads/semaphore.hh ../threads/synch_console.hh \
+ ../machine/console.hh ../filesys/synch_disk.hh ../threads/lock.hh \
+ ../threads/semaphore.hh ../network/post.hh ../machine/network.hh \
+ ../threads/synch_list.hh ../threads/condition.hh \
+ ../threads/preemptive.hh ../userprog/debugger.hh \
+ ../userprog/debugger_command_manager.hh ../userprog/exception.hh \
+ ../threads/synch_console.hh
 switch.o: ../threads/switch.S ../threads/switch_x86-64.S \
  ../threads/switch.h ../threads/switch_x86-64.h
 thread.o: ../threads/thread.cc ../threads/thread.hh ../lib/utility.hh \
  ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
- ../machine/system_dep.hh ../machine/machine.hh \
- ../machine/exception_type.hh ../machine/mmu.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../machine/single_stepper.hh \
- ../userprog/address_space.hh ../filesys/file_system.hh \
- ../filesys/open_file.hh ../filesys/directory_entry.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../threads/switch.h \
+ ../machine/system_dep.hh ../lib/list.hh ../lib/utility.hh \
+ ../machine/machine.hh ../machine/exception_type.hh ../machine/mmu.hh \
+ ../machine/disk.hh ../machine/translation_entry.hh \
+ ../machine/single_stepper.hh ../userprog/address_space.hh \
+ ../filesys/file_system.hh ../filesys/open_file.hh \
+ ../filesys/directory_entry.hh ../machine/disk.hh \
+ ../machine/translation_entry.hh ../lib/bitmap.hh ../filesys/open_file.hh \
+ ../machine/mmu.hh ../threads/thread.hh ../threads/switch.h \
  ../threads/switch_x86-64.h ../threads/system.hh ../threads/scheduler.hh \
- ../lib/list.hh ../lib/utility.hh ../machine/interrupt.hh \
- ../machine/statistics.hh ../machine/timer.hh ../filesys/synch_disk.hh \
- ../threads/lock.hh ../threads/semaphore.hh ../threads/semaphore.hh \
- ../network/post.hh ../machine/network.hh ../threads/synch_list.hh \
- ../threads/condition.hh ../threads/lock.hh ../threads/../lib/assert.hh
+ ../machine/interrupt.hh ../machine/statistics.hh ../machine/timer.hh \
+ ../threads/lock.hh ../threads/semaphore.hh ../threads/synch_console.hh \
+ ../machine/console.hh ../filesys/synch_disk.hh ../threads/lock.hh \
+ ../threads/semaphore.hh ../network/post.hh ../machine/network.hh \
+ ../threads/synch_list.hh ../threads/condition.hh \
+ ../threads/../lib/assert.hh ../threads/../lib/list.hh
 thread_test.o: ../threads/thread_test.cc \
  ../threads/thread_test_garden_semaphore.hh \
  ../threads/thread_test_garden.hh ../threads/thread_test_prod_cons.hh \
  ../threads/thread_test_simple.hh ../threads/thread_test_join.hh \
  ../threads/thread_test_lock_garden.hh ../threads/thread_test_channel.hh \
  ../threads/channel.hh ../threads/condition.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../threads/thread.hh ../lib/utility.hh \
+ ../threads/semaphore.hh ../lib/list.hh ../lib/utility.hh \
  ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
- ../machine/system_dep.hh ../machine/machine.hh \
- ../machine/exception_type.hh ../machine/mmu.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../machine/single_stepper.hh \
- ../userprog/address_space.hh ../filesys/file_system.hh \
- ../filesys/open_file.hh ../filesys/directory_entry.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../lib/list.hh ../lib/utility.hh \
- ../threads/synch_list.hh
+ ../machine/system_dep.hh ../threads/synch_list.hh ../lib/utility.hh
 thread_test_garden.o: ../threads/thread_test_garden.cc \
  ../threads/thread_test_garden.hh ../threads/system.hh \
  ../threads/thread.hh ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh \
- ../lib/debug_opts.hh ../machine/system_dep.hh ../machine/machine.hh \
- ../machine/exception_type.hh ../machine/mmu.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../machine/single_stepper.hh \
- ../userprog/address_space.hh ../filesys/file_system.hh \
- ../filesys/open_file.hh ../filesys/directory_entry.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../threads/scheduler.hh ../lib/list.hh \
- ../lib/utility.hh ../machine/interrupt.hh ../machine/statistics.hh \
- ../machine/timer.hh ../filesys/synch_disk.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../threads/semaphore.hh ../network/post.hh \
- ../machine/network.hh ../threads/synch_list.hh ../threads/condition.hh \
- ../threads/lock.hh
+ ../lib/debug_opts.hh ../machine/system_dep.hh ../lib/list.hh \
+ ../lib/utility.hh ../machine/machine.hh ../machine/exception_type.hh \
+ ../machine/mmu.hh ../machine/disk.hh ../machine/translation_entry.hh \
+ ../machine/single_stepper.hh ../userprog/address_space.hh \
+ ../filesys/file_system.hh ../filesys/open_file.hh \
+ ../filesys/directory_entry.hh ../machine/disk.hh \
+ ../machine/translation_entry.hh ../lib/bitmap.hh ../filesys/open_file.hh \
+ ../machine/mmu.hh ../threads/thread.hh ../threads/scheduler.hh \
+ ../machine/interrupt.hh ../machine/statistics.hh ../machine/timer.hh \
+ ../threads/lock.hh ../threads/semaphore.hh ../threads/synch_console.hh \
+ ../machine/console.hh ../filesys/synch_disk.hh ../threads/lock.hh \
+ ../threads/semaphore.hh ../network/post.hh ../machine/network.hh \
+ ../threads/synch_list.hh ../threads/condition.hh
 thread_test_garden_semaphore.o: \
  ../threads/thread_test_garden_semaphore.cc \
  ../threads/thread_test_garden_semaphore.hh ../threads/system.hh \
  ../threads/thread.hh ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh \
- ../lib/debug_opts.hh ../machine/system_dep.hh ../machine/machine.hh \
- ../machine/exception_type.hh ../machine/mmu.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../machine/single_stepper.hh \
- ../userprog/address_space.hh ../filesys/file_system.hh \
- ../filesys/open_file.hh ../filesys/directory_entry.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../threads/scheduler.hh ../lib/list.hh \
- ../lib/utility.hh ../machine/interrupt.hh ../machine/statistics.hh \
- ../machine/timer.hh ../filesys/synch_disk.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../threads/semaphore.hh ../network/post.hh \
- ../machine/network.hh ../threads/synch_list.hh ../threads/condition.hh \
- ../threads/lock.hh
+ ../lib/debug_opts.hh ../machine/system_dep.hh ../lib/list.hh \
+ ../lib/utility.hh ../machine/machine.hh ../machine/exception_type.hh \
+ ../machine/mmu.hh ../machine/disk.hh ../machine/translation_entry.hh \
+ ../machine/single_stepper.hh ../userprog/address_space.hh \
+ ../filesys/file_system.hh ../filesys/open_file.hh \
+ ../filesys/directory_entry.hh ../machine/disk.hh \
+ ../machine/translation_entry.hh ../lib/bitmap.hh ../filesys/open_file.hh \
+ ../machine/mmu.hh ../threads/thread.hh ../threads/scheduler.hh \
+ ../machine/interrupt.hh ../machine/statistics.hh ../machine/timer.hh \
+ ../threads/lock.hh ../threads/semaphore.hh ../threads/synch_console.hh \
+ ../machine/console.hh ../filesys/synch_disk.hh ../threads/lock.hh \
+ ../threads/semaphore.hh ../network/post.hh ../machine/network.hh \
+ ../threads/synch_list.hh ../threads/condition.hh
 thread_test_prod_cons.o: ../threads/thread_test_prod_cons.cc \
  ../threads/thread_test_prod_cons.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../threads/thread.hh ../lib/utility.hh \
+ ../threads/semaphore.hh ../lib/list.hh ../lib/utility.hh \
  ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
- ../machine/system_dep.hh ../machine/machine.hh \
+ ../machine/system_dep.hh ../threads/condition.hh ../threads/system.hh \
+ ../threads/thread.hh ../lib/utility.hh ../machine/machine.hh \
  ../machine/exception_type.hh ../machine/mmu.hh ../machine/disk.hh \
  ../machine/translation_entry.hh ../machine/single_stepper.hh \
  ../userprog/address_space.hh ../filesys/file_system.hh \
  ../filesys/open_file.hh ../filesys/directory_entry.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../lib/list.hh ../lib/utility.hh \
- ../threads/condition.hh ../threads/system.hh ../threads/scheduler.hh \
+ ../machine/translation_entry.hh ../lib/bitmap.hh ../filesys/open_file.hh \
+ ../machine/mmu.hh ../threads/thread.hh ../threads/scheduler.hh \
  ../machine/interrupt.hh ../machine/statistics.hh ../machine/timer.hh \
+ ../threads/synch_console.hh ../machine/console.hh \
  ../filesys/synch_disk.hh ../threads/lock.hh ../threads/semaphore.hh \
  ../network/post.hh ../machine/network.hh ../threads/synch_list.hh \
  ../threads/../lib/debug.hh ../threads/../lib/assert.hh
 thread_test_simple.o: ../threads/thread_test_simple.cc \
  ../threads/thread_test_simple.hh ../threads/system.hh \
  ../threads/thread.hh ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh \
- ../lib/debug_opts.hh ../machine/system_dep.hh ../machine/machine.hh \
- ../machine/exception_type.hh ../machine/mmu.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../machine/single_stepper.hh \
- ../userprog/address_space.hh ../filesys/file_system.hh \
- ../filesys/open_file.hh ../filesys/directory_entry.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../threads/scheduler.hh ../lib/list.hh \
- ../lib/utility.hh ../machine/interrupt.hh ../machine/statistics.hh \
- ../machine/timer.hh ../filesys/synch_disk.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../threads/semaphore.hh ../network/post.hh \
- ../machine/network.hh ../threads/synch_list.hh ../threads/condition.hh \
- ../threads/lock.hh
+ ../lib/debug_opts.hh ../machine/system_dep.hh ../lib/list.hh \
+ ../lib/utility.hh ../machine/machine.hh ../machine/exception_type.hh \
+ ../machine/mmu.hh ../machine/disk.hh ../machine/translation_entry.hh \
+ ../machine/single_stepper.hh ../userprog/address_space.hh \
+ ../filesys/file_system.hh ../filesys/open_file.hh \
+ ../filesys/directory_entry.hh ../machine/disk.hh \
+ ../machine/translation_entry.hh ../lib/bitmap.hh ../filesys/open_file.hh \
+ ../machine/mmu.hh ../threads/thread.hh ../threads/scheduler.hh \
+ ../machine/interrupt.hh ../machine/statistics.hh ../machine/timer.hh \
+ ../threads/lock.hh ../threads/semaphore.hh ../threads/synch_console.hh \
+ ../machine/console.hh ../filesys/synch_disk.hh ../threads/lock.hh \
+ ../threads/semaphore.hh ../network/post.hh ../machine/network.hh \
+ ../threads/synch_list.hh ../threads/condition.hh
 thread_test_join.o: ../threads/thread_test_join.cc \
  ../threads/thread_test_prod_cons.hh ../threads/system.hh \
  ../threads/thread.hh ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh \
- ../lib/debug_opts.hh ../machine/system_dep.hh ../machine/machine.hh \
- ../machine/exception_type.hh ../machine/mmu.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../machine/single_stepper.hh \
- ../userprog/address_space.hh ../filesys/file_system.hh \
- ../filesys/open_file.hh ../filesys/directory_entry.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../threads/scheduler.hh ../lib/list.hh \
- ../lib/utility.hh ../machine/interrupt.hh ../machine/statistics.hh \
- ../machine/timer.hh ../filesys/synch_disk.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../threads/semaphore.hh ../network/post.hh \
- ../machine/network.hh ../threads/synch_list.hh ../threads/condition.hh \
- ../threads/lock.hh ../threads/../lib/debug.hh \
- ../threads/../lib/assert.hh
+ ../lib/debug_opts.hh ../machine/system_dep.hh ../lib/list.hh \
+ ../lib/utility.hh ../machine/machine.hh ../machine/exception_type.hh \
+ ../machine/mmu.hh ../machine/disk.hh ../machine/translation_entry.hh \
+ ../machine/single_stepper.hh ../userprog/address_space.hh \
+ ../filesys/file_system.hh ../filesys/open_file.hh \
+ ../filesys/directory_entry.hh ../machine/disk.hh \
+ ../machine/translation_entry.hh ../lib/bitmap.hh ../filesys/open_file.hh \
+ ../machine/mmu.hh ../threads/thread.hh ../threads/scheduler.hh \
+ ../machine/interrupt.hh ../machine/statistics.hh ../machine/timer.hh \
+ ../threads/lock.hh ../threads/semaphore.hh ../threads/synch_console.hh \
+ ../machine/console.hh ../filesys/synch_disk.hh ../threads/lock.hh \
+ ../threads/semaphore.hh ../network/post.hh ../machine/network.hh \
+ ../threads/synch_list.hh ../threads/condition.hh \
+ ../threads/../lib/debug.hh ../threads/../lib/assert.hh
 thread_test_lock_garden.o: ../threads/thread_test_lock_garden.cc \
  ../threads/thread_test_lock_garden.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../threads/thread.hh ../lib/utility.hh \
+ ../threads/semaphore.hh ../lib/list.hh ../lib/utility.hh \
  ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
- ../machine/system_dep.hh ../machine/machine.hh \
- ../machine/exception_type.hh ../machine/mmu.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../machine/single_stepper.hh \
- ../userprog/address_space.hh ../filesys/file_system.hh \
- ../filesys/open_file.hh ../filesys/directory_entry.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../lib/list.hh ../lib/utility.hh \
- ../threads/system.hh ../threads/scheduler.hh ../machine/interrupt.hh \
- ../machine/statistics.hh ../machine/timer.hh ../filesys/synch_disk.hh \
- ../threads/lock.hh ../threads/semaphore.hh ../network/post.hh \
- ../machine/network.hh ../threads/synch_list.hh ../threads/condition.hh
+ ../machine/system_dep.hh ../threads/system.hh ../threads/thread.hh \
+ ../lib/utility.hh ../machine/machine.hh ../machine/exception_type.hh \
+ ../machine/mmu.hh ../machine/disk.hh ../machine/translation_entry.hh \
+ ../machine/single_stepper.hh ../userprog/address_space.hh \
+ ../filesys/file_system.hh ../filesys/open_file.hh \
+ ../filesys/directory_entry.hh ../machine/disk.hh \
+ ../machine/translation_entry.hh ../lib/bitmap.hh ../filesys/open_file.hh \
+ ../machine/mmu.hh ../threads/thread.hh ../threads/scheduler.hh \
+ ../machine/interrupt.hh ../machine/statistics.hh ../machine/timer.hh \
+ ../threads/synch_console.hh ../machine/console.hh \
+ ../filesys/synch_disk.hh ../threads/lock.hh ../threads/semaphore.hh \
+ ../network/post.hh ../machine/network.hh ../threads/synch_list.hh \
+ ../threads/condition.hh
 thread_test_channel.o: ../threads/thread_test_channel.cc \
  ../threads/thread_test_channel.hh ../threads/channel.hh \
  ../threads/condition.hh ../threads/lock.hh ../threads/semaphore.hh \
- ../threads/thread.hh ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh \
- ../lib/debug_opts.hh ../machine/system_dep.hh ../machine/machine.hh \
- ../machine/exception_type.hh ../machine/mmu.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../machine/single_stepper.hh \
- ../userprog/address_space.hh ../filesys/file_system.hh \
- ../filesys/open_file.hh ../filesys/directory_entry.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../lib/list.hh ../lib/utility.hh \
- ../threads/synch_list.hh ../threads/system.hh ../threads/scheduler.hh \
+ ../lib/list.hh ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh \
+ ../lib/debug_opts.hh ../machine/system_dep.hh ../threads/synch_list.hh \
+ ../threads/system.hh ../threads/thread.hh ../lib/utility.hh \
+ ../machine/machine.hh ../machine/exception_type.hh ../machine/mmu.hh \
+ ../machine/disk.hh ../machine/translation_entry.hh \
+ ../machine/single_stepper.hh ../userprog/address_space.hh \
+ ../filesys/file_system.hh ../filesys/open_file.hh \
+ ../filesys/directory_entry.hh ../machine/disk.hh \
+ ../machine/translation_entry.hh ../lib/bitmap.hh ../filesys/open_file.hh \
+ ../machine/mmu.hh ../threads/thread.hh ../threads/scheduler.hh \
  ../machine/interrupt.hh ../machine/statistics.hh ../machine/timer.hh \
+ ../threads/synch_console.hh ../machine/console.hh \
  ../filesys/synch_disk.hh ../threads/lock.hh ../threads/semaphore.hh \
  ../network/post.hh ../machine/network.hh ../threads/synch_list.hh \
  ../threads/../lib/debug.hh ../threads/../lib/assert.hh
@@ -237,11 +253,13 @@ interrupt.o: ../machine/interrupt.cc ../machine/interrupt.hh \
  ../machine/translation_entry.hh ../machine/single_stepper.hh \
  ../userprog/address_space.hh ../filesys/file_system.hh \
  ../filesys/open_file.hh ../filesys/directory_entry.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../threads/scheduler.hh \
+ ../machine/translation_entry.hh ../lib/bitmap.hh ../filesys/open_file.hh \
+ ../machine/mmu.hh ../threads/thread.hh ../threads/scheduler.hh \
  ../machine/interrupt.hh ../machine/statistics.hh ../machine/timer.hh \
- ../filesys/synch_disk.hh ../threads/lock.hh ../threads/semaphore.hh \
+ ../threads/lock.hh ../threads/semaphore.hh ../threads/synch_console.hh \
+ ../machine/console.hh ../filesys/synch_disk.hh ../threads/lock.hh \
  ../threads/semaphore.hh ../network/post.hh ../machine/network.hh \
- ../threads/synch_list.hh ../threads/condition.hh ../threads/lock.hh
+ ../threads/synch_list.hh ../threads/condition.hh
 system_dep.o: ../machine/system_dep.cc ../machine/interrupt.hh \
  ../lib/list.hh ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh \
  ../lib/debug_opts.hh ../machine/system_dep.hh ../threads/system.hh \
@@ -250,70 +268,79 @@ system_dep.o: ../machine/system_dep.cc ../machine/interrupt.hh \
  ../machine/translation_entry.hh ../machine/single_stepper.hh \
  ../userprog/address_space.hh ../filesys/file_system.hh \
  ../filesys/open_file.hh ../filesys/directory_entry.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../threads/scheduler.hh \
+ ../machine/translation_entry.hh ../lib/bitmap.hh ../filesys/open_file.hh \
+ ../machine/mmu.hh ../threads/thread.hh ../threads/scheduler.hh \
  ../machine/interrupt.hh ../machine/statistics.hh ../machine/timer.hh \
- ../filesys/synch_disk.hh ../threads/lock.hh ../threads/semaphore.hh \
+ ../threads/lock.hh ../threads/semaphore.hh ../threads/synch_console.hh \
+ ../machine/console.hh ../filesys/synch_disk.hh ../threads/lock.hh \
  ../threads/semaphore.hh ../network/post.hh ../machine/network.hh \
- ../threads/synch_list.hh ../threads/condition.hh ../threads/lock.hh
+ ../threads/synch_list.hh ../threads/condition.hh
 statistics.o: ../machine/statistics.cc ../machine/statistics.hh \
  ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
  ../machine/system_dep.hh
 timer.o: ../machine/timer.cc ../machine/timer.hh ../lib/utility.hh \
  ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
  ../machine/system_dep.hh ../threads/system.hh ../threads/thread.hh \
+ ../lib/list.hh ../lib/utility.hh ../machine/machine.hh \
+ ../machine/exception_type.hh ../machine/mmu.hh ../machine/disk.hh \
+ ../machine/translation_entry.hh ../machine/single_stepper.hh \
+ ../userprog/address_space.hh ../filesys/file_system.hh \
+ ../filesys/open_file.hh ../filesys/directory_entry.hh ../machine/disk.hh \
+ ../machine/translation_entry.hh ../lib/bitmap.hh ../filesys/open_file.hh \
+ ../machine/mmu.hh ../threads/thread.hh ../threads/scheduler.hh \
+ ../machine/interrupt.hh ../machine/statistics.hh ../machine/timer.hh \
+ ../threads/lock.hh ../threads/semaphore.hh ../threads/synch_console.hh \
+ ../machine/console.hh ../filesys/synch_disk.hh ../threads/lock.hh \
+ ../threads/semaphore.hh ../network/post.hh ../machine/network.hh \
+ ../threads/synch_list.hh ../threads/condition.hh
+preemptive.o: ../threads/preemptive.cc ../threads/preemptive.hh \
+ ../threads/system.hh ../threads/thread.hh ../lib/utility.hh \
+ ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
+ ../machine/system_dep.hh ../lib/list.hh ../lib/utility.hh \
  ../machine/machine.hh ../machine/exception_type.hh ../machine/mmu.hh \
  ../machine/disk.hh ../machine/translation_entry.hh \
  ../machine/single_stepper.hh ../userprog/address_space.hh \
  ../filesys/file_system.hh ../filesys/open_file.hh \
  ../filesys/directory_entry.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../threads/scheduler.hh ../lib/list.hh \
- ../lib/utility.hh ../machine/interrupt.hh ../machine/statistics.hh \
- ../machine/timer.hh ../filesys/synch_disk.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../threads/semaphore.hh ../network/post.hh \
- ../machine/network.hh ../threads/synch_list.hh ../threads/condition.hh \
- ../threads/lock.hh
-preemptive.o: ../threads/preemptive.cc ../threads/preemptive.hh \
- ../threads/system.hh ../threads/thread.hh ../lib/utility.hh \
- ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
- ../machine/system_dep.hh ../machine/machine.hh \
- ../machine/exception_type.hh ../machine/mmu.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../machine/single_stepper.hh \
- ../userprog/address_space.hh ../filesys/file_system.hh \
- ../filesys/open_file.hh ../filesys/directory_entry.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../threads/scheduler.hh ../lib/list.hh \
- ../lib/utility.hh ../machine/interrupt.hh ../machine/statistics.hh \
- ../machine/timer.hh ../filesys/synch_disk.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../threads/semaphore.hh ../network/post.hh \
- ../machine/network.hh ../threads/synch_list.hh ../threads/condition.hh \
- ../threads/lock.hh
+ ../machine/translation_entry.hh ../lib/bitmap.hh ../filesys/open_file.hh \
+ ../machine/mmu.hh ../threads/thread.hh ../threads/scheduler.hh \
+ ../machine/interrupt.hh ../machine/statistics.hh ../machine/timer.hh \
+ ../threads/lock.hh ../threads/semaphore.hh ../threads/synch_console.hh \
+ ../machine/console.hh ../filesys/synch_disk.hh ../threads/lock.hh \
+ ../threads/semaphore.hh ../network/post.hh ../machine/network.hh \
+ ../threads/synch_list.hh ../threads/condition.hh
 address_space.o: ../userprog/address_space.cc \
  ../userprog/address_space.hh ../filesys/file_system.hh \
  ../filesys/open_file.hh ../lib/utility.hh ../lib/assert.hh \
  ../lib/debug.hh ../lib/debug_opts.hh ../machine/system_dep.hh \
  ../filesys/directory_entry.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../userprog/executable.hh ../bin/noff.h \
- ../filesys/open_file.hh ../threads/system.hh ../threads/thread.hh \
- ../machine/machine.hh ../machine/exception_type.hh ../machine/mmu.hh \
- ../machine/disk.hh ../machine/translation_entry.hh \
- ../machine/single_stepper.hh ../userprog/address_space.hh \
- ../threads/scheduler.hh ../lib/list.hh ../lib/utility.hh \
- ../machine/interrupt.hh ../machine/statistics.hh ../machine/timer.hh \
+ ../machine/translation_entry.hh ../lib/bitmap.hh ../lib/utility.hh \
+ ../filesys/open_file.hh ../machine/mmu.hh ../machine/exception_type.hh \
+ ../machine/disk.hh ../machine/translation_entry.hh ../machine/machine.hh \
+ ../machine/mmu.hh ../machine/single_stepper.hh ../threads/thread.hh \
+ ../lib/list.hh ../userprog/address_space.hh ../userprog/executable.hh \
+ ../bin/noff.h ../threads/system.hh ../threads/thread.hh \
+ ../threads/scheduler.hh ../machine/interrupt.hh ../machine/statistics.hh \
+ ../machine/timer.hh ../threads/lock.hh ../threads/semaphore.hh \
+ ../threads/synch_console.hh ../machine/console.hh \
  ../filesys/synch_disk.hh ../threads/lock.hh ../threads/semaphore.hh \
- ../threads/semaphore.hh ../network/post.hh ../machine/network.hh \
- ../threads/synch_list.hh ../threads/condition.hh ../threads/lock.hh
+ ../network/post.hh ../machine/network.hh ../threads/synch_list.hh \
+ ../threads/condition.hh
 args.o: ../userprog/args.cc ../userprog/transfer.hh ../machine/machine.hh \
  ../machine/exception_type.hh ../machine/mmu.hh ../machine/disk.hh \
  ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
  ../machine/system_dep.hh ../machine/translation_entry.hh \
  ../machine/single_stepper.hh ../threads/system.hh ../threads/thread.hh \
- ../userprog/address_space.hh ../filesys/file_system.hh \
- ../filesys/open_file.hh ../filesys/directory_entry.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../threads/scheduler.hh ../lib/list.hh \
- ../lib/utility.hh ../machine/interrupt.hh ../machine/statistics.hh \
- ../machine/timer.hh ../filesys/synch_disk.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../threads/semaphore.hh ../network/post.hh \
- ../machine/network.hh ../threads/synch_list.hh ../threads/condition.hh \
- ../threads/lock.hh
+ ../lib/list.hh ../lib/utility.hh ../userprog/address_space.hh \
+ ../filesys/file_system.hh ../filesys/open_file.hh \
+ ../filesys/directory_entry.hh ../machine/disk.hh \
+ ../machine/translation_entry.hh ../lib/bitmap.hh ../filesys/open_file.hh \
+ ../machine/mmu.hh ../threads/thread.hh ../threads/scheduler.hh \
+ ../machine/interrupt.hh ../machine/statistics.hh ../machine/timer.hh \
+ ../threads/lock.hh ../threads/semaphore.hh ../threads/synch_console.hh \
+ ../machine/console.hh ../filesys/synch_disk.hh ../threads/lock.hh \
+ ../threads/semaphore.hh ../network/post.hh ../machine/network.hh \
+ ../threads/synch_list.hh ../threads/condition.hh
 debugger.o: ../userprog/debugger.cc ../userprog/debugger.hh \
  ../userprog/debugger_command_manager.hh ../machine/machine.hh \
  ../machine/exception_type.hh ../machine/mmu.hh ../machine/disk.hh \
@@ -324,11 +351,13 @@ debugger.o: ../userprog/debugger.cc ../userprog/debugger.hh \
  ../threads/thread.hh ../userprog/address_space.hh \
  ../filesys/file_system.hh ../filesys/open_file.hh \
  ../filesys/directory_entry.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../threads/scheduler.hh \
- ../machine/timer.hh ../filesys/synch_disk.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../threads/semaphore.hh ../network/post.hh \
- ../machine/network.hh ../threads/synch_list.hh ../threads/condition.hh \
- ../threads/lock.hh
+ ../machine/translation_entry.hh ../lib/bitmap.hh ../filesys/open_file.hh \
+ ../machine/mmu.hh ../threads/thread.hh ../threads/scheduler.hh \
+ ../machine/timer.hh ../threads/lock.hh ../threads/semaphore.hh \
+ ../threads/synch_console.hh ../machine/console.hh \
+ ../filesys/synch_disk.hh ../threads/lock.hh ../threads/semaphore.hh \
+ ../network/post.hh ../machine/network.hh ../threads/synch_list.hh \
+ ../threads/condition.hh
 debugger_command_manager.o: ../userprog/debugger_command_manager.cc \
  ../userprog/debugger_command_manager.hh ../lib/utility.hh \
  ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
@@ -338,64 +367,71 @@ executable.o: ../userprog/executable.cc ../userprog/executable.hh \
  ../lib/debug.hh ../lib/debug_opts.hh ../machine/system_dep.hh \
  ../machine/endianness.hh
 exception.o: ../userprog/exception.cc ../userprog/transfer.hh \
- ../userprog/syscall.h ../filesys/directory_entry.hh ../threads/system.hh \
- ../threads/thread.hh ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh \
- ../lib/debug_opts.hh ../machine/system_dep.hh ../machine/machine.hh \
- ../machine/exception_type.hh ../machine/mmu.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../machine/single_stepper.hh \
- ../userprog/address_space.hh ../filesys/file_system.hh \
- ../filesys/open_file.hh ../filesys/directory_entry.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../threads/scheduler.hh ../lib/list.hh \
- ../lib/utility.hh ../machine/interrupt.hh ../machine/statistics.hh \
- ../machine/timer.hh ../filesys/synch_disk.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../threads/semaphore.hh ../network/post.hh \
- ../machine/network.hh ../threads/synch_list.hh ../threads/condition.hh \
- ../threads/lock.hh
+ ../userprog/syscall.h ../userprog/args.hh ../userprog/address_space.hh \
+ ../filesys/file_system.hh ../filesys/open_file.hh ../lib/utility.hh \
+ ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
+ ../machine/system_dep.hh ../filesys/directory_entry.hh \
+ ../machine/disk.hh ../machine/translation_entry.hh ../lib/bitmap.hh \
+ ../lib/utility.hh ../filesys/open_file.hh ../machine/mmu.hh \
+ ../machine/exception_type.hh ../machine/disk.hh \
+ ../machine/translation_entry.hh ../machine/machine.hh ../machine/mmu.hh \
+ ../machine/single_stepper.hh ../threads/thread.hh ../lib/list.hh \
+ ../userprog/address_space.hh ../filesys/directory_entry.hh \
+ ../threads/system.hh ../threads/thread.hh ../threads/scheduler.hh \
+ ../machine/interrupt.hh ../machine/statistics.hh ../machine/timer.hh \
+ ../threads/lock.hh ../threads/semaphore.hh ../threads/synch_console.hh \
+ ../machine/console.hh ../filesys/synch_disk.hh ../threads/lock.hh \
+ ../threads/semaphore.hh ../network/post.hh ../machine/network.hh \
+ ../threads/synch_list.hh ../threads/condition.hh
 prog_test.o: ../userprog/prog_test.cc ../userprog/address_space.hh \
  ../filesys/file_system.hh ../filesys/open_file.hh ../lib/utility.hh \
  ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
  ../machine/system_dep.hh ../filesys/directory_entry.hh \
- ../machine/disk.hh ../machine/translation_entry.hh ../machine/console.hh \
- ../threads/semaphore.hh ../threads/thread.hh ../machine/machine.hh \
- ../machine/exception_type.hh ../machine/mmu.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../machine/single_stepper.hh \
- ../userprog/address_space.hh ../lib/list.hh ../lib/utility.hh \
- ../threads/system.hh ../threads/scheduler.hh ../machine/interrupt.hh \
- ../machine/statistics.hh ../machine/timer.hh ../filesys/synch_disk.hh \
- ../threads/lock.hh ../threads/semaphore.hh ../network/post.hh \
- ../machine/network.hh ../threads/synch_list.hh ../threads/condition.hh \
- ../threads/lock.hh
+ ../machine/disk.hh ../machine/translation_entry.hh ../lib/bitmap.hh \
+ ../lib/utility.hh ../filesys/open_file.hh ../machine/mmu.hh \
+ ../machine/exception_type.hh ../machine/disk.hh \
+ ../machine/translation_entry.hh ../machine/machine.hh ../machine/mmu.hh \
+ ../machine/single_stepper.hh ../threads/thread.hh ../lib/list.hh \
+ ../userprog/address_space.hh ../machine/console.hh \
+ ../threads/semaphore.hh ../threads/system.hh ../threads/thread.hh \
+ ../threads/scheduler.hh ../machine/interrupt.hh ../machine/statistics.hh \
+ ../machine/timer.hh ../threads/lock.hh ../threads/semaphore.hh \
+ ../threads/synch_console.hh ../filesys/synch_disk.hh ../threads/lock.hh \
+ ../network/post.hh ../machine/network.hh ../threads/synch_list.hh \
+ ../threads/condition.hh
 transfer.o: ../userprog/transfer.cc ../userprog/transfer.hh \
  ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
  ../machine/system_dep.hh ../threads/system.hh ../threads/thread.hh \
- ../machine/machine.hh ../machine/exception_type.hh ../machine/mmu.hh \
- ../machine/disk.hh ../machine/translation_entry.hh \
- ../machine/single_stepper.hh ../userprog/address_space.hh \
- ../filesys/file_system.hh ../filesys/open_file.hh \
- ../filesys/directory_entry.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../threads/scheduler.hh ../lib/list.hh \
- ../lib/utility.hh ../machine/interrupt.hh ../machine/statistics.hh \
- ../machine/timer.hh ../filesys/synch_disk.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../threads/semaphore.hh ../network/post.hh \
- ../machine/network.hh ../threads/synch_list.hh ../threads/condition.hh \
- ../threads/lock.hh
+ ../lib/list.hh ../lib/utility.hh ../machine/machine.hh \
+ ../machine/exception_type.hh ../machine/mmu.hh ../machine/disk.hh \
+ ../machine/translation_entry.hh ../machine/single_stepper.hh \
+ ../userprog/address_space.hh ../filesys/file_system.hh \
+ ../filesys/open_file.hh ../filesys/directory_entry.hh ../machine/disk.hh \
+ ../machine/translation_entry.hh ../lib/bitmap.hh ../filesys/open_file.hh \
+ ../machine/mmu.hh ../threads/thread.hh ../threads/scheduler.hh \
+ ../machine/interrupt.hh ../machine/statistics.hh ../machine/timer.hh \
+ ../threads/lock.hh ../threads/semaphore.hh ../threads/synch_console.hh \
+ ../machine/console.hh ../filesys/synch_disk.hh ../threads/lock.hh \
+ ../threads/semaphore.hh ../network/post.hh ../machine/network.hh \
+ ../threads/synch_list.hh ../threads/condition.hh ../lib/assert.hh
 bitmap.o: ../lib/bitmap.cc ../lib/bitmap.hh ../lib/utility.hh \
  ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
  ../machine/system_dep.hh ../filesys/open_file.hh ../lib/utility.hh
 console.o: ../machine/console.cc ../machine/console.hh ../lib/utility.hh \
  ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
  ../machine/system_dep.hh ../threads/system.hh ../threads/thread.hh \
- ../machine/machine.hh ../machine/exception_type.hh ../machine/mmu.hh \
- ../machine/disk.hh ../machine/translation_entry.hh \
- ../machine/single_stepper.hh ../userprog/address_space.hh \
- ../filesys/file_system.hh ../filesys/open_file.hh \
- ../filesys/directory_entry.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../threads/scheduler.hh ../lib/list.hh \
- ../lib/utility.hh ../machine/interrupt.hh ../machine/statistics.hh \
- ../machine/timer.hh ../filesys/synch_disk.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../threads/semaphore.hh ../network/post.hh \
- ../machine/network.hh ../threads/synch_list.hh ../threads/condition.hh \
- ../threads/lock.hh
+ ../lib/list.hh ../lib/utility.hh ../machine/machine.hh \
+ ../machine/exception_type.hh ../machine/mmu.hh ../machine/disk.hh \
+ ../machine/translation_entry.hh ../machine/single_stepper.hh \
+ ../userprog/address_space.hh ../filesys/file_system.hh \
+ ../filesys/open_file.hh ../filesys/directory_entry.hh ../machine/disk.hh \
+ ../machine/translation_entry.hh ../lib/bitmap.hh ../filesys/open_file.hh \
+ ../machine/mmu.hh ../threads/thread.hh ../threads/scheduler.hh \
+ ../machine/interrupt.hh ../machine/statistics.hh ../machine/timer.hh \
+ ../threads/lock.hh ../threads/semaphore.hh ../threads/synch_console.hh \
+ ../machine/console.hh ../filesys/synch_disk.hh ../threads/lock.hh \
+ ../threads/semaphore.hh ../network/post.hh ../machine/network.hh \
+ ../threads/synch_list.hh ../threads/condition.hh
 encoding.o: ../machine/encoding.cc ../machine/encoding.hh
 endianness.o: ../machine/endianness.cc ../machine/endianness.hh
 exception_type.o: ../machine/exception_type.cc \
@@ -410,30 +446,36 @@ machine.o: ../machine/machine.cc ../machine/machine.hh \
  ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
  ../machine/system_dep.hh ../machine/translation_entry.hh \
  ../machine/single_stepper.hh ../threads/system.hh ../threads/thread.hh \
- ../machine/machine.hh ../userprog/address_space.hh \
- ../filesys/file_system.hh ../filesys/open_file.hh \
- ../filesys/directory_entry.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../threads/scheduler.hh ../lib/list.hh \
- ../lib/utility.hh ../machine/interrupt.hh ../machine/statistics.hh \
- ../machine/timer.hh ../filesys/synch_disk.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../threads/semaphore.hh ../network/post.hh \
- ../machine/network.hh ../threads/synch_list.hh ../threads/condition.hh \
- ../threads/lock.hh
+ ../lib/list.hh ../lib/utility.hh ../machine/machine.hh \
+ ../userprog/address_space.hh ../filesys/file_system.hh \
+ ../filesys/open_file.hh ../filesys/directory_entry.hh ../machine/disk.hh \
+ ../machine/translation_entry.hh ../lib/bitmap.hh ../filesys/open_file.hh \
+ ../machine/mmu.hh ../threads/thread.hh ../threads/scheduler.hh \
+ ../machine/interrupt.hh ../machine/statistics.hh ../machine/timer.hh \
+ ../threads/lock.hh ../threads/semaphore.hh ../threads/synch_console.hh \
+ ../machine/console.hh ../filesys/synch_disk.hh ../threads/lock.hh \
+ ../threads/semaphore.hh ../network/post.hh ../machine/network.hh \
+ ../threads/synch_list.hh ../threads/condition.hh
+synch_console.o: ../threads/synch_console.cc ../threads/synch_console.hh \
+ ../machine/console.hh ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh \
+ ../lib/debug_opts.hh ../machine/system_dep.hh ../threads/lock.hh \
+ ../threads/semaphore.hh ../lib/list.hh ../lib/utility.hh
 mips_sim.o: ../machine/mips_sim.cc ../machine/instruction.hh \
  ../machine/encoding.hh ../machine/machine.hh \
  ../machine/exception_type.hh ../machine/mmu.hh ../machine/disk.hh \
  ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
  ../machine/system_dep.hh ../machine/translation_entry.hh \
  ../machine/single_stepper.hh ../threads/system.hh ../threads/thread.hh \
- ../machine/machine.hh ../userprog/address_space.hh \
- ../filesys/file_system.hh ../filesys/open_file.hh \
- ../filesys/directory_entry.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../threads/scheduler.hh ../lib/list.hh \
- ../lib/utility.hh ../machine/interrupt.hh ../machine/statistics.hh \
- ../machine/timer.hh ../filesys/synch_disk.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../threads/semaphore.hh ../network/post.hh \
- ../machine/network.hh ../threads/synch_list.hh ../threads/condition.hh \
- ../threads/lock.hh
+ ../lib/list.hh ../lib/utility.hh ../machine/machine.hh \
+ ../userprog/address_space.hh ../filesys/file_system.hh \
+ ../filesys/open_file.hh ../filesys/directory_entry.hh ../machine/disk.hh \
+ ../machine/translation_entry.hh ../lib/bitmap.hh ../filesys/open_file.hh \
+ ../machine/mmu.hh ../threads/thread.hh ../threads/scheduler.hh \
+ ../machine/interrupt.hh ../machine/statistics.hh ../machine/timer.hh \
+ ../threads/lock.hh ../threads/semaphore.hh ../threads/synch_console.hh \
+ ../machine/console.hh ../filesys/synch_disk.hh ../threads/lock.hh \
+ ../threads/semaphore.hh ../network/post.hh ../machine/network.hh \
+ ../threads/synch_list.hh ../threads/condition.hh
 mmu.o: ../machine/mmu.cc ../machine/mmu.hh ../machine/exception_type.hh \
  ../machine/disk.hh ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh \
  ../lib/debug_opts.hh ../machine/system_dep.hh \
@@ -450,16 +492,17 @@ file_header.o: ../filesys/file_header.cc ../filesys/file_header.hh \
  ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
  ../machine/system_dep.hh ../lib/bitmap.hh ../lib/utility.hh \
  ../filesys/open_file.hh ../threads/system.hh ../threads/thread.hh \
- ../machine/machine.hh ../machine/exception_type.hh ../machine/mmu.hh \
- ../machine/disk.hh ../machine/translation_entry.hh \
+ ../lib/list.hh ../machine/machine.hh ../machine/exception_type.hh \
+ ../machine/mmu.hh ../machine/disk.hh ../machine/translation_entry.hh \
  ../machine/single_stepper.hh ../userprog/address_space.hh \
  ../filesys/file_system.hh ../filesys/open_file.hh \
  ../filesys/directory_entry.hh ../machine/translation_entry.hh \
- ../threads/scheduler.hh ../lib/list.hh ../machine/interrupt.hh \
- ../machine/statistics.hh ../machine/timer.hh ../filesys/synch_disk.hh \
- ../threads/lock.hh ../threads/semaphore.hh ../threads/semaphore.hh \
- ../network/post.hh ../machine/network.hh ../threads/synch_list.hh \
- ../threads/condition.hh ../threads/lock.hh
+ ../machine/mmu.hh ../threads/thread.hh ../threads/scheduler.hh \
+ ../machine/interrupt.hh ../machine/statistics.hh ../machine/timer.hh \
+ ../threads/lock.hh ../threads/semaphore.hh ../threads/synch_console.hh \
+ ../machine/console.hh ../filesys/synch_disk.hh ../threads/lock.hh \
+ ../threads/semaphore.hh ../network/post.hh ../machine/network.hh \
+ ../threads/synch_list.hh ../threads/condition.hh
 file_system.o: ../filesys/file_system.cc ../filesys/file_system.hh \
  ../filesys/open_file.hh ../lib/utility.hh ../lib/assert.hh \
  ../lib/debug.hh ../lib/debug_opts.hh ../machine/system_dep.hh \
@@ -471,165 +514,144 @@ fs_test.o: ../filesys/fs_test.cc ../filesys/file_system.hh \
  ../filesys/open_file.hh ../lib/utility.hh ../lib/assert.hh \
  ../lib/debug.hh ../lib/debug_opts.hh ../machine/system_dep.hh \
  ../filesys/directory_entry.hh ../machine/disk.hh \
- ../machine/statistics.hh ../threads/thread.hh ../machine/machine.hh \
- ../machine/exception_type.hh ../machine/mmu.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../machine/single_stepper.hh \
- ../userprog/address_space.hh ../filesys/file_system.hh \
- ../machine/translation_entry.hh ../threads/system.hh \
- ../threads/thread.hh ../threads/scheduler.hh ../lib/list.hh \
- ../lib/utility.hh ../machine/interrupt.hh ../machine/timer.hh \
- ../filesys/synch_disk.hh ../threads/lock.hh ../threads/semaphore.hh \
+ ../machine/statistics.hh ../threads/thread.hh ../lib/list.hh \
+ ../lib/utility.hh ../machine/machine.hh ../machine/exception_type.hh \
+ ../machine/mmu.hh ../machine/disk.hh ../machine/translation_entry.hh \
+ ../machine/single_stepper.hh ../userprog/address_space.hh \
+ ../filesys/file_system.hh ../machine/translation_entry.hh \
+ ../lib/bitmap.hh ../filesys/open_file.hh ../machine/mmu.hh \
+ ../threads/system.hh ../threads/thread.hh ../threads/scheduler.hh \
+ ../machine/interrupt.hh ../machine/timer.hh ../threads/lock.hh \
+ ../threads/semaphore.hh ../threads/synch_console.hh \
+ ../machine/console.hh ../filesys/synch_disk.hh ../threads/lock.hh \
  ../threads/semaphore.hh ../network/post.hh ../machine/network.hh \
- ../threads/synch_list.hh ../threads/condition.hh ../threads/lock.hh
+ ../threads/synch_list.hh ../threads/condition.hh
 open_file.o: ../filesys/open_file.cc ../filesys/open_file.hh \
  ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
  ../machine/system_dep.hh ../filesys/file_header.hh \
  ../filesys/raw_file_header.hh ../machine/disk.hh ../lib/bitmap.hh \
  ../lib/utility.hh ../filesys/open_file.hh ../threads/system.hh \
- ../threads/thread.hh ../machine/machine.hh ../machine/exception_type.hh \
- ../machine/mmu.hh ../machine/disk.hh ../machine/translation_entry.hh \
- ../machine/single_stepper.hh ../userprog/address_space.hh \
- ../filesys/file_system.hh ../filesys/directory_entry.hh \
- ../machine/translation_entry.hh ../threads/scheduler.hh ../lib/list.hh \
- ../machine/interrupt.hh ../machine/statistics.hh ../machine/timer.hh \
- ../filesys/synch_disk.hh ../threads/lock.hh ../threads/semaphore.hh \
- ../threads/semaphore.hh ../network/post.hh ../machine/network.hh \
- ../threads/synch_list.hh ../threads/condition.hh ../threads/lock.hh
-synch_disk.o: ../filesys/synch_disk.cc ../filesys/synch_disk.hh \
- ../machine/disk.hh ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh \
- ../lib/debug_opts.hh ../machine/system_dep.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../threads/thread.hh ../machine/machine.hh \
+ ../threads/thread.hh ../lib/list.hh ../machine/machine.hh \
  ../machine/exception_type.hh ../machine/mmu.hh ../machine/disk.hh \
  ../machine/translation_entry.hh ../machine/single_stepper.hh \
  ../userprog/address_space.hh ../filesys/file_system.hh \
- ../filesys/open_file.hh ../filesys/directory_entry.hh \
- ../machine/translation_entry.hh ../lib/list.hh ../lib/utility.hh \
+ ../filesys/directory_entry.hh ../machine/translation_entry.hh \
+ ../machine/mmu.hh ../threads/thread.hh ../threads/scheduler.hh \
+ ../machine/interrupt.hh ../machine/statistics.hh ../machine/timer.hh \
+ ../threads/lock.hh ../threads/semaphore.hh ../threads/synch_console.hh \
+ ../machine/console.hh ../filesys/synch_disk.hh ../threads/lock.hh \
+ ../threads/semaphore.hh ../network/post.hh ../machine/network.hh \
+ ../threads/synch_list.hh ../threads/condition.hh
+synch_disk.o: ../filesys/synch_disk.cc ../filesys/synch_disk.hh \
+ ../machine/disk.hh ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh \
+ ../lib/debug_opts.hh ../machine/system_dep.hh ../threads/lock.hh \
+ ../threads/semaphore.hh ../lib/list.hh ../lib/utility.hh \
  ../threads/semaphore.hh
 disk.o: ../machine/disk.cc ../machine/disk.hh ../lib/utility.hh \
  ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
  ../machine/system_dep.hh ../threads/system.hh ../threads/thread.hh \
- ../machine/machine.hh ../machine/exception_type.hh ../machine/mmu.hh \
+ ../lib/list.hh ../lib/utility.hh ../machine/machine.hh \
+ ../machine/exception_type.hh ../machine/mmu.hh \
  ../machine/translation_entry.hh ../machine/single_stepper.hh \
  ../userprog/address_space.hh ../filesys/file_system.hh \
  ../filesys/open_file.hh ../filesys/directory_entry.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../threads/scheduler.hh ../lib/list.hh \
- ../lib/utility.hh ../machine/interrupt.hh ../machine/statistics.hh \
- ../machine/timer.hh ../filesys/synch_disk.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../threads/semaphore.hh ../network/post.hh \
- ../machine/network.hh ../threads/synch_list.hh ../threads/condition.hh \
- ../threads/lock.hh
+ ../machine/translation_entry.hh ../lib/bitmap.hh ../filesys/open_file.hh \
+ ../machine/mmu.hh ../threads/thread.hh ../threads/scheduler.hh \
+ ../machine/interrupt.hh ../machine/statistics.hh ../machine/timer.hh \
+ ../threads/lock.hh ../threads/semaphore.hh ../threads/synch_console.hh \
+ ../machine/console.hh ../filesys/synch_disk.hh ../threads/lock.hh \
+ ../threads/semaphore.hh ../network/post.hh ../machine/network.hh \
+ ../threads/synch_list.hh ../threads/condition.hh
 net_test.o: ../network/net_test.cc ../machine/network.hh \
  ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
  ../machine/system_dep.hh ../network/post.hh ../threads/semaphore.hh \
- ../threads/thread.hh ../machine/machine.hh ../machine/exception_type.hh \
+ ../lib/list.hh ../lib/utility.hh ../threads/synch_list.hh \
+ ../threads/condition.hh ../threads/lock.hh ../threads/semaphore.hh \
+ ../machine/interrupt.hh ../threads/system.hh ../threads/thread.hh \
+ ../machine/machine.hh ../machine/exception_type.hh ../machine/mmu.hh \
+ ../machine/disk.hh ../machine/translation_entry.hh \
+ ../machine/single_stepper.hh ../userprog/address_space.hh \
+ ../filesys/file_system.hh ../filesys/open_file.hh \
+ ../filesys/directory_entry.hh ../machine/disk.hh \
+ ../machine/translation_entry.hh ../lib/bitmap.hh ../filesys/open_file.hh \
+ ../machine/mmu.hh ../threads/thread.hh ../threads/scheduler.hh \
+ ../machine/statistics.hh ../machine/timer.hh ../threads/synch_console.hh \
+ ../machine/console.hh ../filesys/synch_disk.hh ../threads/lock.hh \
+ ../network/post.hh
+post.o: ../network/post.cc ../network/post.hh ../machine/network.hh \
+ ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
+ ../machine/system_dep.hh ../threads/semaphore.hh ../lib/list.hh \
+ ../lib/utility.hh ../threads/synch_list.hh ../threads/condition.hh \
+ ../threads/lock.hh ../threads/semaphore.hh
+network.o: ../machine/network.cc ../threads/system.hh \
+ ../threads/thread.hh ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh \
+ ../lib/debug_opts.hh ../machine/system_dep.hh ../lib/list.hh \
+ ../lib/utility.hh ../machine/machine.hh ../machine/exception_type.hh \
  ../machine/mmu.hh ../machine/disk.hh ../machine/translation_entry.hh \
  ../machine/single_stepper.hh ../userprog/address_space.hh \
  ../filesys/file_system.hh ../filesys/open_file.hh \
  ../filesys/directory_entry.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../lib/list.hh ../lib/utility.hh \
- ../threads/synch_list.hh ../threads/condition.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../machine/interrupt.hh ../threads/system.hh \
- ../threads/scheduler.hh ../machine/statistics.hh ../machine/timer.hh \
- ../filesys/synch_disk.hh ../threads/lock.hh ../network/post.hh
-post.o: ../network/post.cc ../network/post.hh ../machine/network.hh \
+ ../machine/translation_entry.hh ../lib/bitmap.hh ../filesys/open_file.hh \
+ ../machine/mmu.hh ../threads/thread.hh ../threads/scheduler.hh \
+ ../machine/interrupt.hh ../machine/statistics.hh ../machine/timer.hh \
+ ../threads/lock.hh ../threads/semaphore.hh ../threads/synch_console.hh \
+ ../machine/console.hh ../filesys/synch_disk.hh ../threads/lock.hh \
+ ../threads/semaphore.hh ../network/post.hh ../machine/network.hh \
+ ../threads/synch_list.hh ../threads/condition.hh
+condition.o: ../threads/condition.hh ../threads/lock.hh \
+ ../threads/semaphore.hh ../lib/list.hh ../lib/utility.hh \
+ ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
+ ../machine/system_dep.hh
+copyright.o: ../threads/copyright.h
+lock.o: ../threads/lock.hh ../threads/semaphore.hh ../lib/list.hh \
  ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
- ../machine/system_dep.hh ../threads/semaphore.hh ../threads/thread.hh \
+ ../machine/system_dep.hh
+channel.o: ../threads/channel.hh ../threads/condition.hh \
+ ../threads/lock.hh ../threads/semaphore.hh ../lib/list.hh \
+ ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
+ ../machine/system_dep.hh ../threads/synch_list.hh
+scheduler.o: ../threads/scheduler.hh ../threads/thread.hh \
+ ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
+ ../machine/system_dep.hh ../lib/list.hh ../lib/utility.hh \
  ../machine/machine.hh ../machine/exception_type.hh ../machine/mmu.hh \
  ../machine/disk.hh ../machine/translation_entry.hh \
  ../machine/single_stepper.hh ../userprog/address_space.hh \
  ../filesys/file_system.hh ../filesys/open_file.hh \
  ../filesys/directory_entry.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../lib/list.hh ../lib/utility.hh \
- ../threads/synch_list.hh ../threads/condition.hh ../threads/lock.hh \
- ../threads/semaphore.hh
-network.o: ../machine/network.cc ../threads/system.hh \
- ../threads/thread.hh ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh \
- ../lib/debug_opts.hh ../machine/system_dep.hh ../machine/machine.hh \
- ../machine/exception_type.hh ../machine/mmu.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../machine/single_stepper.hh \
- ../userprog/address_space.hh ../filesys/file_system.hh \
- ../filesys/open_file.hh ../filesys/directory_entry.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../threads/scheduler.hh ../lib/list.hh \
- ../lib/utility.hh ../machine/interrupt.hh ../machine/statistics.hh \
- ../machine/timer.hh ../filesys/synch_disk.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../threads/semaphore.hh ../network/post.hh \
- ../machine/network.hh ../threads/synch_list.hh ../threads/condition.hh \
- ../threads/lock.hh
-condition.o: ../threads/condition.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../threads/thread.hh ../lib/utility.hh \
+ ../machine/translation_entry.hh ../lib/bitmap.hh ../filesys/open_file.hh \
+ ../machine/mmu.hh ../threads/thread.hh
+semaphore.o: ../threads/semaphore.hh ../lib/list.hh ../lib/utility.hh \
  ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
- ../machine/system_dep.hh ../machine/machine.hh \
- ../machine/exception_type.hh ../machine/mmu.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../machine/single_stepper.hh \
- ../userprog/address_space.hh ../filesys/file_system.hh \
- ../filesys/open_file.hh ../filesys/directory_entry.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../lib/list.hh ../lib/utility.hh
-copyright.o: ../threads/copyright.h
-lock.o: ../threads/lock.hh ../threads/semaphore.hh ../threads/thread.hh \
- ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
- ../machine/system_dep.hh ../machine/machine.hh \
- ../machine/exception_type.hh ../machine/mmu.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../machine/single_stepper.hh \
- ../userprog/address_space.hh ../filesys/file_system.hh \
- ../filesys/open_file.hh ../filesys/directory_entry.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../lib/list.hh ../lib/utility.hh
-channel.o: ../threads/channel.hh ../threads/condition.hh \
- ../threads/lock.hh ../threads/semaphore.hh ../threads/thread.hh \
- ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
- ../machine/system_dep.hh ../machine/machine.hh \
- ../machine/exception_type.hh ../machine/mmu.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../machine/single_stepper.hh \
- ../userprog/address_space.hh ../filesys/file_system.hh \
- ../filesys/open_file.hh ../filesys/directory_entry.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../lib/list.hh ../lib/utility.hh \
- ../threads/synch_list.hh
-scheduler.o: ../threads/scheduler.hh ../threads/thread.hh \
- ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
- ../machine/system_dep.hh ../machine/machine.hh \
- ../machine/exception_type.hh ../machine/mmu.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../machine/single_stepper.hh \
- ../userprog/address_space.hh ../filesys/file_system.hh \
- ../filesys/open_file.hh ../filesys/directory_entry.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../lib/list.hh ../lib/utility.hh
-semaphore.o: ../threads/semaphore.hh ../threads/thread.hh \
- ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
- ../machine/system_dep.hh ../machine/machine.hh \
- ../machine/exception_type.hh ../machine/mmu.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../machine/single_stepper.hh \
- ../userprog/address_space.hh ../filesys/file_system.hh \
- ../filesys/open_file.hh ../filesys/directory_entry.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../lib/list.hh ../lib/utility.hh
+ ../machine/system_dep.hh
 synch_list.o: ../threads/synch_list.hh ../threads/condition.hh \
- ../threads/lock.hh ../threads/semaphore.hh ../threads/thread.hh \
+ ../threads/lock.hh ../threads/semaphore.hh ../lib/list.hh \
  ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
- ../machine/system_dep.hh ../machine/machine.hh \
- ../machine/exception_type.hh ../machine/mmu.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../machine/single_stepper.hh \
- ../userprog/address_space.hh ../filesys/file_system.hh \
- ../filesys/open_file.hh ../filesys/directory_entry.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../lib/list.hh ../lib/utility.hh
+ ../machine/system_dep.hh
 sys_info.o: ../threads/sys_info.hh
 system.o: ../threads/system.hh ../threads/thread.hh ../lib/utility.hh \
  ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
- ../machine/system_dep.hh ../machine/machine.hh \
- ../machine/exception_type.hh ../machine/mmu.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../machine/single_stepper.hh \
- ../userprog/address_space.hh ../filesys/file_system.hh \
- ../filesys/open_file.hh ../filesys/directory_entry.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../threads/scheduler.hh ../lib/list.hh \
- ../lib/utility.hh ../machine/interrupt.hh ../machine/statistics.hh \
- ../machine/timer.hh ../filesys/synch_disk.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../threads/semaphore.hh ../network/post.hh \
- ../machine/network.hh ../threads/synch_list.hh ../threads/condition.hh \
- ../threads/lock.hh
-thread.o: ../threads/thread.hh ../lib/utility.hh ../lib/assert.hh \
- ../lib/debug.hh ../lib/debug_opts.hh ../machine/system_dep.hh \
+ ../machine/system_dep.hh ../lib/list.hh ../lib/utility.hh \
  ../machine/machine.hh ../machine/exception_type.hh ../machine/mmu.hh \
  ../machine/disk.hh ../machine/translation_entry.hh \
  ../machine/single_stepper.hh ../userprog/address_space.hh \
  ../filesys/file_system.hh ../filesys/open_file.hh \
  ../filesys/directory_entry.hh ../machine/disk.hh \
- ../machine/translation_entry.hh
+ ../machine/translation_entry.hh ../lib/bitmap.hh ../filesys/open_file.hh \
+ ../machine/mmu.hh ../threads/thread.hh ../threads/scheduler.hh \
+ ../machine/interrupt.hh ../machine/statistics.hh ../machine/timer.hh \
+ ../threads/lock.hh ../threads/semaphore.hh ../threads/synch_console.hh \
+ ../machine/console.hh ../filesys/synch_disk.hh ../threads/lock.hh \
+ ../threads/semaphore.hh ../network/post.hh ../machine/network.hh \
+ ../threads/synch_list.hh ../threads/condition.hh
+thread.o: ../threads/thread.hh ../lib/utility.hh ../lib/assert.hh \
+ ../lib/debug.hh ../lib/debug_opts.hh ../machine/system_dep.hh \
+ ../lib/list.hh ../lib/utility.hh ../machine/machine.hh \
+ ../machine/exception_type.hh ../machine/mmu.hh ../machine/disk.hh \
+ ../machine/translation_entry.hh ../machine/single_stepper.hh \
+ ../userprog/address_space.hh ../filesys/file_system.hh \
+ ../filesys/open_file.hh ../filesys/directory_entry.hh ../machine/disk.hh \
+ ../machine/translation_entry.hh ../lib/bitmap.hh ../filesys/open_file.hh \
+ ../machine/mmu.hh ../threads/thread.hh
 thread_test.o: ../threads/thread_test.hh
 thread_test_garden.o: ../threads/thread_test_garden.hh
 thread_test_garden_semaphore.o: \
@@ -640,15 +662,9 @@ thread_test_join.o: ../threads/thread_test_join.hh
 thread_test_lock_garden.o: ../threads/thread_test_lock_garden.hh
 thread_test_channel.o: ../threads/thread_test_channel.hh \
  ../threads/channel.hh ../threads/condition.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../threads/thread.hh ../lib/utility.hh \
+ ../threads/semaphore.hh ../lib/list.hh ../lib/utility.hh \
  ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
- ../machine/system_dep.hh ../machine/machine.hh \
- ../machine/exception_type.hh ../machine/mmu.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../machine/single_stepper.hh \
- ../userprog/address_space.hh ../filesys/file_system.hh \
- ../filesys/open_file.hh ../filesys/directory_entry.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../lib/list.hh ../lib/utility.hh \
- ../threads/synch_list.hh
+ ../machine/system_dep.hh ../threads/synch_list.hh
 assert.o: ../lib/assert.hh
 debug.o: ../lib/debug.hh ../lib/debug_opts.hh
 debug_opts.o: ../lib/debug_opts.hh
@@ -668,7 +684,11 @@ address_space.o: ../userprog/address_space.hh ../filesys/file_system.hh \
  ../filesys/open_file.hh ../lib/utility.hh ../lib/assert.hh \
  ../lib/debug.hh ../lib/debug_opts.hh ../machine/system_dep.hh \
  ../filesys/directory_entry.hh ../machine/disk.hh \
- ../machine/translation_entry.hh
+ ../machine/translation_entry.hh ../lib/bitmap.hh ../lib/utility.hh \
+ ../filesys/open_file.hh ../machine/mmu.hh ../machine/exception_type.hh \
+ ../machine/disk.hh ../machine/translation_entry.hh ../machine/machine.hh \
+ ../machine/mmu.hh ../machine/single_stepper.hh ../threads/thread.hh \
+ ../lib/list.hh ../userprog/address_space.hh
 args.o: ../userprog/args.hh
 debugger.o: ../userprog/debugger.hh \
  ../userprog/debugger_command_manager.hh ../machine/machine.hh \
@@ -703,6 +723,10 @@ machine.o: ../machine/machine.hh ../machine/exception_type.hh \
 mmu.o: ../machine/mmu.hh ../machine/exception_type.hh ../machine/disk.hh \
  ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
  ../machine/system_dep.hh ../machine/translation_entry.hh
+synch_console.o: ../threads/synch_console.hh ../machine/console.hh \
+ ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
+ ../machine/system_dep.hh ../threads/lock.hh ../threads/semaphore.hh \
+ ../lib/list.hh ../lib/utility.hh
 translation_entry.o: ../machine/translation_entry.hh ../lib/utility.hh \
  ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
  ../machine/system_dep.hh
@@ -721,24 +745,13 @@ raw_file_header.o: ../filesys/raw_file_header.hh ../machine/disk.hh \
 synch_disk.o: ../filesys/synch_disk.hh ../machine/disk.hh \
  ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
  ../machine/system_dep.hh ../threads/lock.hh ../threads/semaphore.hh \
- ../threads/thread.hh ../machine/machine.hh ../machine/exception_type.hh \
- ../machine/mmu.hh ../machine/disk.hh ../machine/translation_entry.hh \
- ../machine/single_stepper.hh ../userprog/address_space.hh \
- ../filesys/file_system.hh ../filesys/open_file.hh \
- ../filesys/directory_entry.hh ../machine/translation_entry.hh \
  ../lib/list.hh ../lib/utility.hh ../threads/semaphore.hh
 disk.o: ../machine/disk.hh ../lib/utility.hh ../lib/assert.hh \
  ../lib/debug.hh ../lib/debug_opts.hh ../machine/system_dep.hh
 post.o: ../network/post.hh ../machine/network.hh ../lib/utility.hh \
  ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
- ../machine/system_dep.hh ../threads/semaphore.hh ../threads/thread.hh \
- ../machine/machine.hh ../machine/exception_type.hh ../machine/mmu.hh \
- ../machine/disk.hh ../machine/translation_entry.hh \
- ../machine/single_stepper.hh ../userprog/address_space.hh \
- ../filesys/file_system.hh ../filesys/open_file.hh \
- ../filesys/directory_entry.hh ../machine/disk.hh \
- ../machine/translation_entry.hh ../lib/list.hh ../lib/utility.hh \
- ../threads/synch_list.hh ../threads/condition.hh ../threads/lock.hh \
- ../threads/semaphore.hh
+ ../machine/system_dep.hh ../threads/semaphore.hh ../lib/list.hh \
+ ../lib/utility.hh ../threads/synch_list.hh ../threads/condition.hh \
+ ../threads/lock.hh ../threads/semaphore.hh
 network.o: ../machine/network.hh ../lib/utility.hh ../lib/assert.hh \
  ../lib/debug.hh ../lib/debug_opts.hh ../machine/system_dep.hh

@@ -20,7 +20,6 @@
 #define NACHOS_THREADS_SEMAPHORE__HH
 
 
-#include "thread.hh"
 #include "lib/list.hh"
 
 
@@ -36,6 +35,7 @@
 /// directly -- even if you were able to read it, it would serve for nothing,
 /// because meanwhile another thread could have modified the semaphore, in
 /// case you have lost the CPU for some time.
+class Thread;
 class Semaphore {
 public:
 

@@ -192,19 +192,17 @@ SyscallHandler(ExceptionType _et)
                 DEBUG('e', "Error: file couldn't be opened.\n");
             }
             else {
-                currentThread->Open(fileAddr);
-                machine->WriteRegister(2, (int) fileAddr);
+                int key = currentThread->Open(fileAddr);
+                machine->WriteRegister(2, key);
                 DEBUG('e', "Success: file opened.\n");
             }
             break;
         }
 
         case SC_CLOSE: {
-            int fid = machine->ReadRegister(4);
-            DEBUG('e', "`Close` requested for id %u.\n", fid);
-            OpenFile * fileAddr = (OpenFile *)fid;
-            currentThread->Close(fileAddr);
-            delete fileAddr;
+            int key = machine->ReadRegister(4);
+            DEBUG('e', "`Close` requested for id %u.\n", key);
+            currentThread->Close(key);
             DEBUG('e', "`Close` requested success.\n");
             break;
         }
@@ -220,6 +218,7 @@ SyscallHandler(ExceptionType _et)
                 synchConsole->Write(buffWrite);
             }
             else {
+
                 OpenFile *openFile = (OpenFile *) fid;
                 int result = openFile->Write(buffWrite, size);
                 if(result == size) {
@@ -283,12 +282,13 @@ SyscallHandler(ExceptionType _et)
 
             DEBUG('e', "`Exec` requested for file `%s`.\n", filename);
             OpenFile *fileAddr = fileSystem->Open(filename);
-            Thread *son = new Thread(filename);
+            Thread *son = new Thread(filename, true);
             AddressSpace *addressSpace = new AddressSpace(fileAddr, son, args);
             delete fileAddr;
+            int key = currentThread->AddSon(son);
             son->Fork(StartProcess, (void *) addressSpace);
 
-            machine->WriteRegister(2, (int) addressSpace);
+            machine->WriteRegister(2, key);
             DEBUG('e', "Exec success.\n");
 
             break;

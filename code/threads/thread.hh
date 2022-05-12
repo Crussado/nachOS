@@ -84,6 +84,7 @@ enum ThreadStatus {
 ///  Some threads also belong to a user address space; threads that only run
 ///  in the kernel have a null address space.
 class Semaphore;
+class AddressSpace;
 class Thread {
 private:
 
@@ -169,12 +170,15 @@ private:
     /// registers -- one for its state while executing user code, one for its
     /// state while executing kernel code.
     List<OpenFile *> *openedFiles;
+    List<Thread *> *sons;
     int userRegisters[NUM_TOTAL_REGS];
 
 public:
-    void Open(OpenFile *fid);
+    int Open(OpenFile *fid);
 
-    void Close(OpenFile *fid);
+    int AddSon(Thread *son);
+
+    void Close(int key);
     // Save user-level register state.
     void SaveUserState();
 
