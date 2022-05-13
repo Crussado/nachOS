@@ -1,4 +1,4 @@
-#include "userprog/syscall.h"
+#include "../userprog/syscall.h"
 #include "lib.h"
 
 int

@@ -139,8 +139,8 @@ List<Item>::Append(Item item)
 {
     int key;
     if (IsEmpty()) {
-        key = 0;
-        ListNode *element = new ListNode(item, 0);
+        key = 3;
+        ListNode *element = new ListNode(item, key);
         first = element;
         last = element;
     } else {  // Put it after last.
@@ -179,6 +179,7 @@ List<Item>::RemoveKey(int key)
         elimNode = first;
         first = first->next;
         delete elimNode;
+        return;
     }
     ListNode* next = first;
     bool b = false;

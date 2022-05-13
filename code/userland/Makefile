@@ -60,7 +60,7 @@ start.o: start.s ../userprog/syscall.h
 	@$(CC) $(CFLAGS) -c $^
 
 lib.o: lib.c lib.h
-	l: gcc -std=c99 -c lib.c
+	@$(CC) $(CFLAGS) -c lib.c
 
 $(PROGRAMS): %: %.o start.o lib.o
 	@echo ":: Linking and converting $$(tput bold)$@$$(tput sgr0)"

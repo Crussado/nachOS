@@ -24,7 +24,7 @@ void
 StartProcess(const char *filename)
 {
     ASSERT(filename != nullptr);
-
+    
     OpenFile *executable = fileSystem->Open(filename);
     if (executable == nullptr) {
         printf("Unable to open file %s\n", filename);

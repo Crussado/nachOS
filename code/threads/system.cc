@@ -235,8 +235,8 @@ Initialize(int argc, char **argv)
 #ifdef USER_PROGRAM
     Debugger *d = debugUserProg ? new Debugger : nullptr;
     machine = new Machine(d);  // This must come first.
-    Bitmap *usedPages = new Bitmap(NUM_PHYS_PAGES);
-    Lock *lockBitmap = new Lock("Bit map pages lock"); 
+    usedPages = new Bitmap(NUM_PHYS_PAGES);
+    lockBitmap = new Lock("Bit map pages lock"); 
     synchConsole = new SynchConsole("Console");
     SetExceptionHandlers();
 #endif
@@ -269,6 +269,9 @@ Cleanup()
 
 #ifdef USER_PROGRAM
     delete machine;
+    delete usedPages;
+    delete synchConsole;
+    delete lockBitmap;
 #endif
 
 #ifdef FILESYS_NEEDED

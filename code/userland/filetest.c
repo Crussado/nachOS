@@ -9,7 +9,7 @@
 /// enough stack to hold the automatics!
 
 
-#include "syscall.h"
+#include "../userprog/syscall.h"
 
 
 int

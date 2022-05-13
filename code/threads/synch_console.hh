@@ -22,8 +22,8 @@ public:
 
     ~SynchConsole();
 
-    void Read(char* buffer, int size);
-    void Write(char* buffer);
+    void Read(char* c);
+    void Write(char c);
 
     void fReadAvail();
     void fWriteDone();

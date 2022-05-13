@@ -44,32 +44,20 @@ SynchConsole::~SynchConsole()
 }
 
 void
-SynchConsole::Read(char *buffer, int size)
+SynchConsole::Read(char *c)
 {
-    ASSERT(buffer != nullptr);
-    char ch;
+    ASSERT(c != nullptr);
     lockRead->Acquire();
-    for(int i = 0; i < size; i++) {
-        readAvail->P();
-        ch = console->GetChar();
-        buffer[i] = ch;
-        if(ch == '\0') {
-            break;
-        }
-    }
+    readAvail->P();
+    *c = console->GetChar();
     lockRead->Release();
 }
 
 void
-SynchConsole::Write(char *buffer)
+SynchConsole::Write(char c)
 {
-    ASSERT(buffer != nullptr);
     lockWrite->Acquire();
-    for(int i = 0; buffer[i] != '\0'; i++) {
-        console->PutChar(buffer[i]);
-        writeDone->P();
-    }
-    console->PutChar('\0');
+    console->PutChar(c);
     writeDone->P();
     lockWrite->Release();
 }

@@ -68,8 +68,8 @@ DefaultHandler(ExceptionType et)
 void
 StartProcess(void *addressSpace)
 {
-    AddressSpace *space = (AddressSpace *) addressSpace;
     ASSERT(addressSpace != nullptr);
+    AddressSpace *space = (AddressSpace *) addressSpace;
     currentThread->space = space;
 
     space->InitRegisters();  // Set the initial register values.
@@ -212,15 +212,22 @@ SyscallHandler(ExceptionType _et)
             int size = machine->ReadRegister(5);
             int fid = machine->ReadRegister(6);
             DEBUG('e', "`Write` requested for id %u.\n", fid);
-            char *buffWrite =  (char *)buff;
+            char content[size + 1];
+            if (!ReadStringFromUser(buff,
+                                    content, size)) {
+            }
 
-            if(fid == CONSOLE_INPUT) {
-                synchConsole->Write(buffWrite);
+            if(fid == CONSOLE_OUTPUT) {
+                for(int i = 0; i < size; i++) {
+                    synchConsole->Write(content[i]);
+                }
+                machine->WriteRegister(2, size);
+                DEBUG('e', "`Write` Success.\n");
             }
             else {
                 
                 OpenFile *openFile = currentThread->GetFile(fid);
-                int result = openFile->Write(buffWrite, size);
+                int result = openFile->Write(content, size);
                 if(result == size) {
                     DEBUG('e', "`Write` Success.\n");
                 }
@@ -238,15 +245,20 @@ SyscallHandler(ExceptionType _et)
             int size = machine->ReadRegister(5);
             int fid = machine->ReadRegister(6);
             DEBUG('e', "`Read` requested for id %u.\n", fid);
-            char *buffRead =  (char *)buff;
+            char buffRead[size];
 
-            if(fid == CONSOLE_OUTPUT) {
-                synchConsole->Read(buffRead, size);
+            if(fid == CONSOLE_INPUT) {
+                for(int i = 0; i < size; i++) {
+                    synchConsole->Read(&buffRead[i]);
+                }
+                WriteStringToUser(buffRead, buff);
+                machine->WriteRegister(2, size);
             }
             else {
                 OpenFile *openFile = currentThread->GetFile(fid);
                 int result = openFile->Read(buffRead, size);
                 if(result == size) {
+                    WriteStringToUser(buffRead, buff);
                     DEBUG('e', "`Read` Success.\n");
                 }
                 else {
@@ -273,7 +285,7 @@ SyscallHandler(ExceptionType _et)
                 args = SaveArgs(addressArgs);
             }
 
-            char filename[FILE_NAME_MAX_LEN + 1];
+            char filename[50 + 1];
             if (!ReadStringFromUser(filenameAddr,
                                     filename, sizeof filename)) {
                 DEBUG('e', "Error: filename string too long (maximum is %u bytes).\n",
@@ -283,9 +295,9 @@ SyscallHandler(ExceptionType _et)
             DEBUG('e', "`Exec` requested for file `%s`.\n", filename);
             OpenFile *fileAddr = fileSystem->Open(filename);
             Thread *son = new Thread(filename, true);
+            int key = currentThread->AddSon(son);
             AddressSpace *addressSpace = new AddressSpace(fileAddr, son, args);
             delete fileAddr;
-            int key = currentThread->AddSon(son);
             son->Fork(StartProcess, (void *) addressSpace);
 
             machine->WriteRegister(2, key);
