@@ -28,7 +28,7 @@ AddressSpace::AddressSpace(OpenFile *executable_file, Thread *hilo, char **args)
     unsigned size = exe.GetSize() + USER_STACK_SIZE;
       // We need to increase the size to leave room for the stack.
     numPages = DivRoundUp(size, PAGE_SIZE);
-    size = numPages * PAGE_SIZE;
+    unsigned int size = numPages * PAGE_SIZE;
 
     ASSERT(numPages <= NUM_PHYS_PAGES);
       // Check we are not trying to run anything too big -- at least until we
@@ -60,22 +60,57 @@ AddressSpace::AddressSpace(OpenFile *executable_file, Thread *hilo, char **args)
 
     // Zero out the entire address space, to zero the unitialized data
     // segment and the stack segment.
-    memset(mainMemory, 0, size);
+    for(int i = 0; i < numPages; i++)
+        memset(mainMemory + pageTable[i].physicalPage * PAGE_SIZE, 0, PAGE_SIZE);
 
     // Then, copy in the code and data segments into memory.
+    uint32_t physicalAddr;
+    uint32_t virtualAddr;
+    unsigned int cantRead;
+    unsigned int offset;
     uint32_t codeSize = exe.GetCodeSize();
     uint32_t initDataSize = exe.GetInitDataSize();
     if (codeSize > 0) {
-        uint32_t virtualAddr = exe.GetCodeAddr();
-        DEBUG('a', "Initializing code segment, at 0x%X, size %u\n",
-              virtualAddr, codeSize);
-        exe.ReadCodeBlock(&mainMemory[virtualAddr], codeSize, 0);
+        virtualAddr = exe.GetCodeSize();
+        cantRead = 0;
+        offset = 0;
+        for(;codeSize != 0;) {
+            physicalAddr = TranslateAddr(virtualAddr);
+            if(codeSize / PAGE_SIZE >= 1) {
+                codeSize -= PAGE_SIZE;
+                cantRead = PAGE_SIZE;
+            } else {
+                cantRead = codeSize;
+                codeSize = 0;
+            }
+            DEBUG('a', "Initializing code segment, at 0x%X, size %u\n",
+                  physicalAddr, cantRead);
+            exe.ReadCodeBlock(&mainMemory[physicalAddr], cantRead, offset);
+            offset += cantRead;
+            virtualAddr += cantRead;
+        }
     }
     if (initDataSize > 0) {
-        uint32_t virtualAddr = exe.GetInitDataAddr();
-        DEBUG('a', "Initializing data segment, at 0x%X, size %u\n",
-              virtualAddr, initDataSize);
-        exe.ReadDataBlock(&mainMemory[virtualAddr], initDataSize, 0);
+        if(virtualAddr == initDataSize) {
+            DEBUG('a', "Code seting\n");
+        }
+        cantRead = 0;
+        offset = 0;
+        uint32_t nextPage;
+        for(; initDataSize > 0;) {
+            physicalAddr = TranslateAddr(virtualAddr);
+            nextPage = GetPhyPage(virtualAddr) + PAGE_SIZE;
+            if(initDataSize / PAGE_SIZE >= 1) {
+                initDataSize -= PAGE_SIZE;
+                cantRead = PAGE_SIZE;
+            } else {
+                cantRead = initDataSize;
+            }
+            DEBUG('a', "Initializing data segment, at 0x%X, size %u\n",
+                  physicalAddr, cantRead);
+            exe.ReadDataBlock(&mainMemory[physicalAddr], cantRead, offset);
+            offset += cantRead;
+        }
     }
     thread = hilo;
     initsArgs = args;
@@ -116,7 +151,7 @@ AddressSpace::InitRegisters()
     // Set the stack register to the end of the address space, where we
     // allocated the stack; but subtract off a bit, to make sure we do not
     // accidentally reference off the end!
-    machine->WriteRegister(STACK_REG, numPages * PAGE_SIZE - 16);
+    machine->WriteRegister(STACK_REG, (numPages - 1) * PAGE_SIZE - 16);
     DEBUG('a', "Initializing stack register to %u\n",
           numPages * PAGE_SIZE - 16);
 }
@@ -148,4 +183,21 @@ AddressSpace::GetThread() {
 char **
 AddressSpace::GetInitsArgs() {
   return initsArgs;
+}
+
+uint32_t
+AddressSpace::TranslateAddr(uint32_t virtualPage) {
+    uint32_t page = pageTable[virtualPage % PAGE_SIZE].physicalPage;
+    uint32_t offset = virtualPage / PAGE_SIZE;
+    return page + offset;
+}
+
+uint32_t
+AddressSpace::GetPhyPage(uint32_t virtualAddr) {
+    return pageTable[virtualAddr % PAGE_SIZE].physicalPage;
+}
+
+uint32_t
+AddressSpace::GetOffset(uint32_t virtualAddr) {
+    return virtualAddr / PAGE_SIZE;
 }
