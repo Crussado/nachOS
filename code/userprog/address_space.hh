@@ -52,9 +52,9 @@ public:
 
     Thread *GetThread();
     char **GetInitsArgs();
-    uint32_t TranslateAddr(uint32_t virtualPage);
-    uint32_t GetPhyPage(uint32_t virtualAddr);
-    uint32_t GetOffset(uint32_t virtualAddr);
+    unsigned int TranslateAddr(unsigned int virtualAddr);
+    unsigned int GetPhyPage(unsigned int virtualAddr);
+    unsigned int GetOffset(unsigned int virtualAddr);
 private:
 
     /// Assume linear page table translation for now!
