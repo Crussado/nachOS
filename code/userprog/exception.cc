@@ -32,7 +32,7 @@
 #include "threads/system.hh"
 
 #include <stdio.h>
-
+#include<cstdlib>
 
 static void
 IncrementPC()
@@ -321,12 +321,31 @@ SyscallHandler(ExceptionType _et)
         default:
             fprintf(stderr, "Unexpected system call: id %d.\n", scid);
             ASSERT(false);
-
     }
 
     IncrementPC();
 }
 
+unsigned int
+GetVirtualPage(int virtualAddr) {
+    return virtualAddr / PAGE_SIZE;
+}
+
+static void
+PageFaultHandler(ExceptionType _et) {
+    int badAddr = machine->ReadRegister(BAD_VADDR_REG);
+    TranslationEntry *tlb = machine->GetMMU()->tlb;
+    unsigned int deleteEntry = rand() % TLB_SIZE;
+    unsigned int virtualPage = GetVirtualPage(badAddr);
+    TranslationEntry row = currentThread->space->GetTranslate(virtualPage);
+    DEBUG('e', "Entrada a remplazar: %d, vpn: %d, fpn: %d\n", deleteEntry, virtualPage, row.physicalPage);
+    tlb[deleteEntry].valid = row.valid;
+    tlb[deleteEntry].use = row.use;
+    tlb[deleteEntry].dirty = row.dirty;
+    tlb[deleteEntry].readOnly = row.readOnly;
+    tlb[deleteEntry].physicalPage = row.physicalPage;
+    tlb[deleteEntry].virtualPage = row.virtualPage;
+}
 
 /// By default, only system calls have their own handler.  All other
 /// exception types are assigned the default handler.
@@ -335,7 +354,7 @@ SetExceptionHandlers()
 {
     machine->SetHandler(NO_EXCEPTION,            &DefaultHandler);
     machine->SetHandler(SYSCALL_EXCEPTION,       &SyscallHandler);
-    machine->SetHandler(PAGE_FAULT_EXCEPTION,    &DefaultHandler);
+    machine->SetHandler(PAGE_FAULT_EXCEPTION,    &PageFaultHandler);
     machine->SetHandler(READ_ONLY_EXCEPTION,     &DefaultHandler);
     machine->SetHandler(BUS_ERROR_EXCEPTION,     &DefaultHandler);
     machine->SetHandler(ADDRESS_ERROR_EXCEPTION, &DefaultHandler);

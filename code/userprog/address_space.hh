@@ -55,6 +55,7 @@ public:
     unsigned int TranslateAddr(unsigned int virtualAddr);
     unsigned int GetPhyPage(unsigned int virtualAddr);
     unsigned int GetOffset(unsigned int virtualAddr);
+    TranslationEntry GetTranslate(unsigned int vpn);
 private:
 
     /// Assume linear page table translation for now!

@@ -174,8 +174,19 @@ AddressSpace::SaveState()
 void
 AddressSpace::RestoreState()
 {
-    machine->GetMMU()->pageTable     = pageTable;
-    machine->GetMMU()->pageTableSize = numPages;
+    // machine->GetMMU()->pageTable     = pageTable;
+    // machine->GetMMU()->pageTableSize = numPages;
+    TranslationEntry *tlb = machine->GetMMU()->tlb;
+    // for(unsigned int i = 0; i < TLB_SIZE; i++) {
+    //     tlb[i].virtualPage = pageTable[i].virtualPage;
+    //     tlb[i].physicalPage = pageTable[i].physicalPage;
+    //     tlb[i].use = pageTable[i].use;
+    //     tlb[i].dirty = pageTable[i].dirty;
+    //     tlb[i].valid = pageTable[i].valid;
+    //     tlb[i].readOnly = pageTable[i].readOnly;
+    // }
+    for(unsigned int i = 0; i < TLB_SIZE; i++)
+        tlb[i].valid = false;
 }
 
 Thread *
@@ -205,4 +216,9 @@ AddressSpace::GetPhyPage(uint32_t virtualAddr) {
 uint32_t
 AddressSpace::GetOffset(uint32_t virtualAddr) {
     return virtualAddr % PAGE_SIZE;
+}
+
+TranslationEntry
+AddressSpace::GetTranslate(unsigned int vpn) {
+    return pageTable[vpn];
 }

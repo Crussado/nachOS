@@ -20,9 +20,16 @@ void ReadBufferFromUser(int userAddress, char *outBuffer,
     do {
         int temp;
         count++;
-        ASSERT(machine->ReadMem(userAddress++, 1, &temp));
+        bool success = false;
+        for(unsigned i = 0; i < TRIES && !success; i++)
+            success = machine->ReadMem(userAddress, 1, &temp);
+        if(!success) {
+            DEBUG('a', "Direccion de memoria invalida\n");
+            ASSERT(false);
+        }
         *outBuffer = (unsigned char) temp;
         outBuffer++;
+        userAddress++;
     } while (count < byteCount);
 }
 
@@ -37,8 +44,17 @@ bool ReadStringFromUser(int userAddress, char *outString,
     do {
         int temp;
         count++;
-        ASSERT(machine->ReadMem(userAddress++, 1, &temp));
+        bool success = false;
+        for(unsigned int i = 0; i < TRIES && !success; i++){
+            success = machine->ReadMem(userAddress, 1, &temp);
+            DEBUG('a', "ENTRADA NRO: %u\n", i);
+        }
+        if(!success) {
+            DEBUG('a', "Direccion de memoria invalida\n");
+            ASSERT(false);
+        }
         *outString = (unsigned char) temp;
+        userAddress++;
     } while (*outString++ != '\0' && count < maxByteCount);
 
     return *(outString - 1) == '\0';
@@ -55,8 +71,15 @@ void WriteBufferToUser(const char *buffer, int userAddress,
     do {
         int temp;
         count++;
-        ASSERT(machine->WriteMem(userAddress++, 4, (int) *buffer));
+        bool success = false;
+        for(unsigned i = 0; i < TRIES && !success; i++)
+            success = machine->WriteMem(userAddress, 4, (int) *buffer);
+        if(!success) {
+            DEBUG('a', "Direccion de memoria invalida\n");
+            ASSERT(false);
+        }
         buffer ++;
+        userAddress++;
     } while (count < byteCount);
 }
 
@@ -69,7 +92,14 @@ void WriteStringToUser(const char *string, int userAddress)
     do {
         int temp;
         count++;
-        ASSERT(machine->WriteMem(userAddress++, 1, (int) *string));
+        bool success = false;
+        for(unsigned i = 0; i < TRIES && !success; i++)
+            success = machine->WriteMem(userAddress, 1, (int) *string);
+        if(!success) {
+            DEBUG('a', "Direccion de memoria invalida\n");
+            ASSERT(false);
+        }
         string ++;
+        userAddress++;
     } while (*(string - 1) != '\0');
 }
