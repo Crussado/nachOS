@@ -99,6 +99,8 @@ Machine::ReadMem(unsigned addr, unsigned size, int *value)
         RaiseException(e, addr);
         return false;
     }
+    stats->numAccessMemory++;
+    stats->numHits++;
     return true;
 }
 
@@ -110,6 +112,8 @@ Machine::WriteMem(unsigned addr, unsigned size, int value)
         RaiseException(e, addr);
         return false;
     }
+    stats->numAccessMemory++;
+    stats->numHits++;
     return true;
 }
 

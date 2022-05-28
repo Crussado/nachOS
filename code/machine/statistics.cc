@@ -46,4 +46,6 @@ Statistics::Print()
     printf("Paging: faults %lu\n", numPageFaults);
     printf("Network I/O: packets received %lu, sent %lu\n",
            numPacketsRecvd, numPacketsSent);
+    printf("Hit ratio: access memory %lu, hits %lu, failures %lu\n",
+           numAccessMemory, numHits, numFailures);
 }

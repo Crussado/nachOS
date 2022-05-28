@@ -333,6 +333,8 @@ GetVirtualPage(int virtualAddr) {
 
 static void
 PageFaultHandler(ExceptionType _et) {
+    stats->numFailures++;
+    stats->numHits--;
     int badAddr = machine->ReadRegister(BAD_VADDR_REG);
     TranslationEntry *tlb = machine->GetMMU()->tlb;
     unsigned int deleteEntry = rand() % TLB_SIZE;
