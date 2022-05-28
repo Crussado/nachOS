@@ -79,6 +79,7 @@ StartProcess(void *addressSpace)
         unsigned argv = WriteArgs(space->GetInitsArgs());
         machine->WriteRegister(4, (int) argv);
         machine->WriteRegister(5, machine->ReadRegister(STACK_REG));
+        machine->WriteRegister(STACK_REG, machine->ReadRegister(STACK_REG) - 24);
     }
 
     machine->Run();  // Jump to the user progam.
@@ -225,7 +226,6 @@ SyscallHandler(ExceptionType _et)
                 DEBUG('e', "`Write` Success.\n");
             }
             else {
-                
                 OpenFile *openFile = currentThread->GetFile(fid);
                 int result = openFile->Write(content, size);
                 if(result == size) {

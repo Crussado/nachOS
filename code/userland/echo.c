@@ -18,7 +18,7 @@ PrintString(const char *s)
 {
     // What if `s` is null?
 
-    unsigned len = StringLength(s);
+    unsigned len = StringLength(s)+1;
     return Write(s, len, CONSOLE_OUTPUT);
 }
 
@@ -37,5 +37,5 @@ main(int argc, char *argv[])
         }
         PrintString(argv[i]);
     }
-    PrintChar('\n');
+    PrintString("\nAdios.\n");
 }
