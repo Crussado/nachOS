@@ -30,7 +30,7 @@ AddressSpace::AddressSpace(OpenFile *executable_file, Thread *hilo, char **args)
     pageTable = new TranslationEntry[numPages];
 
     #ifndef DEMAND_LOADING
-        lockBitmap->Acquire();
+        lockCoremap->Acquire();
         if(usedPages->CountClear() < numPages){
           DEBUG('a', "No hay suficientes paginas fisicas disponibles.\n");
         }
@@ -52,7 +52,7 @@ AddressSpace::AddressSpace(OpenFile *executable_file, Thread *hilo, char **args)
           // set its pages to be read-only.
     }
     #ifndef DEMAND_LOADING
-        lockBitmap->Release();
+        lockCoremap->Release();
         char *mainMemory = machine->GetMMU()->mainMemory;
 
         // Zero out the entire address space, to zero the unitialized data
@@ -218,13 +218,13 @@ AddressSpace::GetTranslate(unsigned int vpn) {
 
 bool
 AddressSpace::AllocatePage(unsigned int vpn) {
-    lockBitmap->Acquire();
+    lockCoremap->Acquire();
     if(!(usedPages->CountClear() >= 1)) {
         DEBUG('a', "No hay paginas fisicas disponibles\n");
         return false;
     }
     pageTable[vpn].physicalPage = usedPages->Find(vpn, currentThread);
-    lockBitmap->Release();
+    lockCoremap->Release();
     unsigned int toAllocate = PAGE_SIZE;
     unsigned int cantRead;
     unsigned int virtualAddr = vpn * PAGE_SIZE;
