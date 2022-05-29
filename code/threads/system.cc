@@ -15,7 +15,7 @@
 #include "machine/mmu.hh"
 #include "threads/synch_console.hh"
 #include "threads/lock.hh"
-#include "lib/bitmap.hh"
+#include "lib/coremap.hh"
 #endif
 
 #include <stdlib.h>
@@ -49,8 +49,8 @@ SynchDisk *synchDisk;
 #ifdef USER_PROGRAM  // Requires either *FILESYS* or *FILESYS_STUB*.
 Machine *machine;  ///< User program memory and registers.
 SynchConsole *synchConsole;
-Bitmap *usedPages;
-Lock *lockBitmap;
+Coremap *usedPages;
+Lock *lockCoremap;
 #endif
 
 #ifdef NETWORK
@@ -235,8 +235,8 @@ Initialize(int argc, char **argv)
 #ifdef USER_PROGRAM
     Debugger *d = debugUserProg ? new Debugger : nullptr;
     machine = new Machine(d);  // This must come first.
-    usedPages = new Bitmap(NUM_PHYS_PAGES);
-    lockBitmap = new Lock("Bit map pages lock"); 
+    usedPages = new Coremap(NUM_PHYS_PAGES);
+    lockCoremap = new Lock("Bit map pages lock"); 
     synchConsole = new SynchConsole("Console");
     SetExceptionHandlers();
 #endif
@@ -271,7 +271,7 @@ Cleanup()
     delete machine;
     delete usedPages;
     delete synchConsole;
-    delete lockBitmap;
+    delete lockCoremap;
 #endif
 
 #ifdef FILESYS_NEEDED
