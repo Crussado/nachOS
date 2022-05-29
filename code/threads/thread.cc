@@ -197,11 +197,11 @@ Thread::Print() const
 /// NOTE: we disable interrupts, so that we do not get a time slice between
 /// setting `threadToBeDestroyed`, and going to sleep.
 void
-Thread::Finish(int status)
+Thread::Finish(int finishStatus)
 {
     int fin;
     if(channel){
-        channel->Send(status);
+        channel->Send(finishStatus);
         channel->Receive(&fin);
     }
     interrupt->SetLevel(INT_OFF);
@@ -218,13 +218,13 @@ int
 Thread::Join()
 {
     ASSERT(channel != nullptr);
-    int status;
-    channel->Receive(&status);
+    int finishStatus;
+    channel->Receive(&finishStatus);
     #ifdef USER_PROGRAM
     currentThread->DeleteSon(this);
     #endif
     channel->Send(1);
-    return status;
+    return finishStatus;
 }
 
 /// Relinquish the CPU if any other thread is ready to run.
@@ -389,12 +389,12 @@ Thread::Close(int key) {
 
 OpenFile *
 Thread::GetFile(int fid) {
-    openedFiles->GetKey(fid);
+    return openedFiles->GetKey(fid);
 }
 
 Thread *
 Thread::GetSon(int tid) {
-    sons->GetKey(tid);
+    return sons->GetKey(tid);
 }
 
 void

@@ -120,7 +120,7 @@ public:
     void Sleep();
 
     /// The thread is done executing.
-    void Finish(int status = 0);
+    void Finish(int finishStatus = 0);
 
     int Join();
     /// Check if thread has overflowed its stack.

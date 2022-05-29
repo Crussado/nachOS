@@ -20,6 +20,7 @@
 #include "machine/mmu.hh"
 #include "machine/machine.hh"
 #include "threads/thread.hh"
+#include "executable.hh"
 
 const unsigned USER_STACK_SIZE = 1024;  ///< Increase this as necessary!
 
@@ -55,7 +56,8 @@ public:
     unsigned int TranslateAddr(unsigned int virtualAddr);
     unsigned int GetPhyPage(unsigned int virtualAddr);
     unsigned int GetOffset(unsigned int virtualAddr);
-    TranslationEntry GetTranslate(unsigned int vpn);
+    TranslationEntry *GetTranslate(unsigned int vpn);
+    bool AllocatePage(unsigned int vpn);
 private:
 
     /// Assume linear page table translation for now!
@@ -64,6 +66,7 @@ private:
     /// Number of pages in the virtual address space.
     unsigned numPages;
     char **initsArgs;
+    Executable *exe;
 
 };
 

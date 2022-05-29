@@ -12,43 +12,37 @@
 
 #include <string.h>
 
-
 /// First, set up the translation from program memory to physical memory.
 /// For now, this is really simple (1:1), since we are only uniprogramming,
 /// and we have a single unsegmented page table.
 AddressSpace::AddressSpace(OpenFile *executable_file, Thread *hilo, char **args)
 {
     ASSERT(executable_file != nullptr);
-
-    Executable exe (executable_file);
-    ASSERT(exe.CheckMagic());
+    exe = new Executable (executable_file);
+    ASSERT(exe->CheckMagic());
 
     // How big is address space?
-
-    unsigned int size = exe.GetSize() + USER_STACK_SIZE;
+    unsigned int size = exe->GetSize() + USER_STACK_SIZE;
       // We need to increase the size to leave room for the stack.
     numPages = DivRoundUp(size, PAGE_SIZE);
-    size = numPages * PAGE_SIZE;
-
-    ASSERT(numPages <= NUM_PHYS_PAGES);
-      // Check we are not trying to run anything too big -- at least until we
-      // have virtual memory.
-
-    DEBUG('a', "Initializing address space, num pages %u, size %u\n",
-          numPages, size);
 
     // First, set up the translation.
-    int fpIndex;
     pageTable = new TranslationEntry[numPages];
-    if(usedPages->CountClear() < numPages){
-      DEBUG('a', "No hay suficientes paginas fisicas disponibles.\n");
-    }
-    
+
+    #ifndef DEMAND_LOADING
+        if(usedPages->CountClear() < numPages){
+          DEBUG('a', "No hay suficientes paginas fisicas disponibles.\n");
+        }
+    #endif
     for (unsigned i = 0; i < numPages; i++) {
+        #ifndef DEMAND_LOADING
+            pageTable[i].physicalPage = usedPages->Find();
+        #endif
+        #ifdef DEMAND_LOADING
+            pageTable[i].physicalPage = -1;
+        #endif
         pageTable[i].virtualPage  = i;
           // For now, virtual page number = physical page number.
-        fpIndex = usedPages->Find();
-        pageTable[i].physicalPage = fpIndex;
         pageTable[i].valid        = true;
         pageTable[i].use          = false;
         pageTable[i].dirty        = false;
@@ -56,65 +50,69 @@ AddressSpace::AddressSpace(OpenFile *executable_file, Thread *hilo, char **args)
           // If the code segment was entirely on a separate page, we could
           // set its pages to be read-only.
     }
-    char *mainMemory = machine->GetMMU()->mainMemory;
+    #ifndef DEMAND_LOADING
+        char *mainMemory = machine->GetMMU()->mainMemory;
 
-    // Zero out the entire address space, to zero the unitialized data
-    // segment and the stack segment.
-    for(unsigned int i = 0; i < numPages; i++)
-        memset(mainMemory + pageTable[i].physicalPage * PAGE_SIZE, 0, PAGE_SIZE);
+        // Zero out the entire address space, to zero the unitialized data
+        // segment and the stack segment.
+        for(unsigned int i = 0; i < numPages; i++)
+            memset(mainMemory + pageTable[i].physicalPage * PAGE_SIZE, 0, PAGE_SIZE);
 
-    // Then, copy in the code and data segments into memory.
-    uint32_t physicalAddr;
-    uint32_t virtualAddr;
-    unsigned int cantRead;
-    unsigned int offset;
-    uint32_t codeSize = exe.GetCodeSize();
-    uint32_t initDataSize = exe.GetInitDataSize();
-    if (codeSize > 0) {
-        virtualAddr = exe.GetCodeAddr();
-        cantRead = 0;
-        offset = 0;
-        for(;codeSize != 0;) {
-            physicalAddr = TranslateAddr(virtualAddr);
-            if(codeSize / PAGE_SIZE >= 1) {
-                cantRead = PAGE_SIZE;
-            } else {
-                cantRead = codeSize;
-            }
-            DEBUG('a', "Initializing code segment, at 0x%X, size %u\n",
-                  physicalAddr, cantRead);
-            exe.ReadCodeBlock(&mainMemory[physicalAddr], cantRead, offset);
-            codeSize -= cantRead;
-            offset += cantRead;
-            virtualAddr += cantRead;
-        }
-    }
-    if (initDataSize > 0) {
-        cantRead = 0;
-        offset = 0;
-        uint32_t nextPage;
-        uint32_t space;
-        for(; initDataSize != 0;) {
-            physicalAddr = TranslateAddr(virtualAddr);
-            nextPage = (GetPhyPage(virtualAddr) + 1) * PAGE_SIZE;
-            space = nextPage - physicalAddr;
-            if(space == PAGE_SIZE) {
-                if(initDataSize / PAGE_SIZE >= 1) {
+        // Then, copy in the code and data segments into memory.
+        uint32_t physicalAddr;
+        uint32_t virtualAddr;
+        unsigned int cantRead;
+        unsigned int offset;
+        uint32_t codeSize = exe->GetCodeSize();
+        uint32_t initDataSize = exe->GetInitDataSize();
+        if (codeSize > 0) {
+            virtualAddr = exe->GetCodeAddr();
+            cantRead = 0;
+            offset = 0;
+            for(;codeSize != 0;) {
+                physicalAddr = TranslateAddr(virtualAddr);
+                if(codeSize / PAGE_SIZE >= 1) {
                     cantRead = PAGE_SIZE;
                 } else {
-                    cantRead = initDataSize;
+                    cantRead = codeSize;
                 }
-            } else {
-                cantRead = space > initDataSize ? initDataSize : space; 
+                DEBUG('a', "Initializing code segment, at 0x%X, size %u\n",
+                      physicalAddr, cantRead);
+                exe->ReadCodeBlock(&mainMemory[physicalAddr], cantRead, offset);
+                codeSize -= cantRead;
+                offset += cantRead;
+                virtualAddr += cantRead;
             }
-            DEBUG('a', "Initializing data segment, at 0x%u, size %u\n",
-                  physicalAddr, cantRead);
-            exe.ReadDataBlock(&mainMemory[physicalAddr], cantRead, offset);
-            initDataSize -= cantRead;
-            offset += cantRead;
-            virtualAddr += cantRead;
         }
-    }
+        if (initDataSize > 0) {
+            cantRead = 0;
+            offset = 0;
+            uint32_t nextPage;
+            uint32_t space;
+            for(; initDataSize != 0;) {
+                physicalAddr = TranslateAddr(virtualAddr);
+                nextPage = (GetPhyPage(virtualAddr) + 1) * PAGE_SIZE;
+                space = nextPage - physicalAddr;
+                if(space == PAGE_SIZE) {
+                    if(initDataSize / PAGE_SIZE >= 1) {
+                        cantRead = PAGE_SIZE;
+                    } else {
+                        cantRead = initDataSize;
+                    }
+                } else {
+                    cantRead = space > initDataSize ? initDataSize : space; 
+                cantRead = space > initDataSize ? initDataSize : space; 
+                    cantRead = space > initDataSize ? initDataSize : space; 
+                }
+                DEBUG('a', "Initializing data segment, at 0x%u, size %u\n",
+                      physicalAddr, cantRead);
+                exe->ReadDataBlock(&mainMemory[physicalAddr], cantRead, offset);
+                initDataSize -= cantRead;
+                offset += cantRead;
+                virtualAddr += cantRead;
+            }
+        }
+    #endif
     thread = hilo;
     initsArgs = args;
 }
@@ -218,7 +216,58 @@ AddressSpace::GetOffset(uint32_t virtualAddr) {
     return virtualAddr % PAGE_SIZE;
 }
 
-TranslationEntry
+TranslationEntry *
 AddressSpace::GetTranslate(unsigned int vpn) {
-    return pageTable[vpn];
+    return &pageTable[vpn];
+}
+
+bool
+AddressSpace::AllocatePage(unsigned int vpn) {
+    lockBitmap->Acquire();
+    if(!(usedPages->CountClear() >= 1)) {
+        DEBUG('a', "No hay paginas fisicas disponibles\n");
+        return false;
+    }
+    pageTable[vpn].physicalPage = usedPages->Find();
+    lockBitmap->Release();
+    unsigned int toAllocate = PAGE_SIZE;
+    unsigned int cantRead;
+    unsigned int virtualAddr = vpn * PAGE_SIZE;
+    unsigned int phyAddr = TranslateAddr(virtualAddr);
+    char *mainMemory = machine->GetMMU()->mainMemory;
+    uint32_t codeSize = exe->GetCodeSize();
+    uint32_t dataSize = exe->GetInitDataSize();
+    uint32_t dataAddr = exe->GetInitDataAddr();
+
+    memset(&mainMemory[phyAddr], 0, PAGE_SIZE);
+
+    if (virtualAddr < codeSize) {
+        unsigned int space = codeSize - virtualAddr;
+        cantRead = space < PAGE_SIZE ? space : PAGE_SIZE;
+        DEBUG('a', "Initializing code segment, at 0x%X, size %u\n",
+                phyAddr, cantRead);
+        DEBUG('a', "codesize %u, virtualaddr %u\n", codeSize, virtualAddr);
+        exe->ReadCodeBlock(&mainMemory[phyAddr], cantRead, virtualAddr);
+        toAllocate -= cantRead;
+        virtualAddr += cantRead;
+    }
+    unsigned int endData = codeSize + dataSize;
+    if (toAllocate > 0 && dataSize > 0 && virtualAddr < endData) {
+        phyAddr = TranslateAddr(virtualAddr);
+        unsigned int nextPage = (pageTable[vpn].physicalPage + 1) * PAGE_SIZE;
+        unsigned int space = nextPage - phyAddr;
+        if(space == PAGE_SIZE) {
+            if(toAllocate == PAGE_SIZE) {
+                cantRead = PAGE_SIZE;
+            } else {
+                cantRead = toAllocate;
+            }
+        } else {
+            cantRead = space > toAllocate ? toAllocate : space; 
+        }
+        DEBUG('a', "Initializing data segment, at 0x%u, size %u\n",
+                phyAddr, cantRead);
+        exe->ReadDataBlock(&mainMemory[phyAddr], cantRead, virtualAddr - dataAddr);
+    }
+    return true;
 }

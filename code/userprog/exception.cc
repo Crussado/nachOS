@@ -297,7 +297,7 @@ SyscallHandler(ExceptionType _et)
             Thread *son = new Thread(filename, true);
             int key = currentThread->AddSon(son);
             AddressSpace *addressSpace = new AddressSpace(fileAddr, son, args);
-            delete fileAddr;
+
             son->Fork(StartProcess, (void *) addressSpace);
 
             machine->WriteRegister(2, key);
@@ -339,14 +339,17 @@ PageFaultHandler(ExceptionType _et) {
     TranslationEntry *tlb = machine->GetMMU()->tlb;
     unsigned int deleteEntry = rand() % TLB_SIZE;
     unsigned int virtualPage = GetVirtualPage(badAddr);
-    TranslationEntry row = currentThread->space->GetTranslate(virtualPage);
-    DEBUG('e', "Entrada a remplazar: %d, vpn: %d, fpn: %d\n", deleteEntry, virtualPage, row.physicalPage);
-    tlb[deleteEntry].valid = row.valid;
-    tlb[deleteEntry].use = row.use;
-    tlb[deleteEntry].dirty = row.dirty;
-    tlb[deleteEntry].readOnly = row.readOnly;
-    tlb[deleteEntry].physicalPage = row.physicalPage;
-    tlb[deleteEntry].virtualPage = row.virtualPage;
+    TranslationEntry* row = currentThread->space->GetTranslate(virtualPage);
+    if (row->physicalPage == -1) {
+        ASSERT(currentThread->space->AllocatePage(virtualPage));
+    }
+    DEBUG('e', "Entrada a remplazar: %d, vpn: %d, fpn: %d\n", deleteEntry, virtualPage, row->physicalPage);
+    tlb[deleteEntry].valid = row->valid;
+    tlb[deleteEntry].use = row->use;
+    tlb[deleteEntry].dirty = row->dirty;
+    tlb[deleteEntry].readOnly = row->readOnly;
+    tlb[deleteEntry].physicalPage = row->physicalPage;
+    tlb[deleteEntry].virtualPage = row->virtualPage;
 }
 
 /// By default, only system calls have their own handler.  All other

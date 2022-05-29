@@ -69,7 +69,6 @@ void WriteBufferToUser(const char *buffer, int userAddress,
 
     unsigned count = 0;
     do {
-        int temp;
         count++;
         bool success = false;
         for(unsigned i = 0; i < TRIES && !success; i++)
@@ -90,7 +89,6 @@ void WriteStringToUser(const char *string, int userAddress)
 
     unsigned count = 0;
     do {
-        int temp;
         count++;
         bool success = false;
         for(unsigned i = 0; i < TRIES && !success; i++)
