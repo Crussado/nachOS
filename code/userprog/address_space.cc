@@ -125,6 +125,7 @@ AddressSpace::~AddressSpace()
     for (unsigned i = 0; i < numPages; i++) {
         usedPages->Clear(pageTable[i].physicalPage);
     }
+    delete exe;
     delete initsArgs;
     delete [] pageTable;
 }
@@ -175,14 +176,6 @@ AddressSpace::RestoreState()
     // machine->GetMMU()->pageTable     = pageTable;
     // machine->GetMMU()->pageTableSize = numPages;
     TranslationEntry *tlb = machine->GetMMU()->tlb;
-    // for(unsigned int i = 0; i < TLB_SIZE; i++) {
-    //     tlb[i].virtualPage = pageTable[i].virtualPage;
-    //     tlb[i].physicalPage = pageTable[i].physicalPage;
-    //     tlb[i].use = pageTable[i].use;
-    //     tlb[i].dirty = pageTable[i].dirty;
-    //     tlb[i].valid = pageTable[i].valid;
-    //     tlb[i].readOnly = pageTable[i].readOnly;
-    // }
     for(unsigned int i = 0; i < TLB_SIZE; i++)
         tlb[i].valid = false;
 }

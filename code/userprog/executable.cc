@@ -36,6 +36,10 @@ Executable::Executable(OpenFile *new_file)
     file->ReadAt((char *) &header, sizeof header, 0);
 }
 
+Executable::~Executable() {
+    delete file;
+}
+
 bool
 Executable::CheckMagic()
 {

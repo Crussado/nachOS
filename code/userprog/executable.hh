@@ -24,6 +24,7 @@
 class Executable {
 public:
     Executable(OpenFile *new_file);
+    ~Executable();
 
     /// Check if the executable is valid and fix endianness if necessary.
     ///
