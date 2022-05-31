@@ -43,6 +43,9 @@ public:
     /// Print contents of Coremap.
     void Print() const;
 
+    Thread *GetThread(unsigned which);
+    int GetVPN(unsigned which);
+
 private:
 
     /// Number of bits in the Coremap.

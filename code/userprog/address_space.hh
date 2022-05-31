@@ -23,6 +23,8 @@
 #include "executable.hh"
 
 const unsigned USER_STACK_SIZE = 1024;  ///< Increase this as necessary!
+const int SWAP_VALUE = -1;
+const int NOT_ALLOCATE_VALUE = -2;
 
 class Thread;
 class AddressSpace {
@@ -57,7 +59,12 @@ public:
     unsigned int GetPhyPage(unsigned int virtualAddr);
     unsigned int GetOffset(unsigned int virtualAddr);
     TranslationEntry *GetTranslate(unsigned int vpn);
-    bool AllocatePage(unsigned int vpn);
+    void AllocatePage(unsigned int vpn);
+
+    void MarkSwap(unsigned int vpn);
+    void ApplySwap();
+    void ReturnSwap(unsigned int vpn);
+    OpenFile *swap;
 private:
 
     /// Assume linear page table translation for now!

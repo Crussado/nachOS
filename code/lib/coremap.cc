@@ -114,3 +114,13 @@ Coremap::Print() const
     }
     printf("\n");
 }
+
+Thread *
+Coremap::GetThread(unsigned which) {
+    return map[which].thread;
+}
+
+int
+Coremap::GetVPN(unsigned which) {
+    return map[which].vpn;
+}

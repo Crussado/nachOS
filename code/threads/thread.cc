@@ -28,7 +28,6 @@
 #include <inttypes.h>
 #include <stdio.h>
 
-
 /// This is put at the top of the execution stack, for detecting stack
 /// overflows.
 const unsigned STACK_FENCEPOST = 0xDEADBEEF;
@@ -77,7 +76,6 @@ Thread::Thread(const char *threadName, bool joineable, int priorityArg)
 Thread::~Thread()
 {
     DEBUG('t', "Deleting thread \"%s\"\n", name);
-
     ASSERT(this != currentThread);
     if (stack != nullptr) {
         SystemDep::DeallocBoundedArray((char *) stack,

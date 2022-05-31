@@ -340,8 +340,18 @@ PageFaultHandler(ExceptionType _et) {
     unsigned int deleteEntry = rand() % TLB_SIZE;
     unsigned int virtualPage = GetVirtualPage(badAddr);
     TranslationEntry* row = currentThread->space->GetTranslate(virtualPage);
-    if (row->physicalPage == -1) {
-        ASSERT(currentThread->space->AllocatePage(virtualPage));
+    if(tlb[deleteEntry].valid) {
+        unsigned int vpn = tlb[deleteEntry].virtualPage;
+        TranslationEntry* oldEntry = currentThread->space->GetTranslate(vpn);
+        oldEntry->use = tlb[deleteEntry].use;
+        oldEntry->readOnly = tlb[deleteEntry].readOnly;
+        oldEntry->dirty = tlb[deleteEntry].dirty;
+    }
+    if (row->physicalPage == SWAP_VALUE) {
+        currentThread->space->ReturnSwap(virtualPage);
+    }
+    if (row->physicalPage == NOT_ALLOCATE_VALUE) {
+        currentThread->space->AllocatePage(virtualPage);
     }
     DEBUG('e', "Entrada a remplazar: %d, vpn: %d, fpn: %d\n", deleteEntry, virtualPage, row->physicalPage);
     tlb[deleteEntry].valid = row->valid;
