@@ -269,7 +269,7 @@ AddressSpace::ResetUse(unsigned int vpn) {
 }
 
 void
-AddressSpace::ApplySwap() {
+AddressSpace::GetSpace() {
     currentThread->space->SaveState();
     int victim = usedPages->PickVictim();
     Thread *t = usedPages->GetThread(victim);
@@ -298,7 +298,7 @@ AddressSpace::ReturnSwap(unsigned int vpn) {
     lockCoremap->Acquire();
     if(!(usedPages->CountClear() >= 1)) {
         DEBUG('z', "No hay paginas fisicas disponibles\n");
-        ApplySwap();
+        GetSpace();
     }
     pageTable[vpn].physicalPage = usedPages->Find(vpn, currentThread);
     lockCoremap->Release();
@@ -313,7 +313,7 @@ AddressSpace::AllocatePage(unsigned int vpn) {
     if(usedPages->CountClear() == 0) {
         DEBUG('z', "No hay paginas fisicas disponibles\n");
         #ifdef SWAP
-            ApplySwap();
+            GetSpace();
         #else
             ASSERT(false);
         #endif

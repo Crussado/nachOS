@@ -63,7 +63,7 @@ public:
 
     void MarkSwap(unsigned int vpn);
     void MarkNotAllocate(unsigned int vpn);
-    void ApplySwap();
+    void GetSpace();
     void ReturnSwap(unsigned int vpn);
     OpenFile *swap;
 
