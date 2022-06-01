@@ -10,6 +10,7 @@
 #include "coremap.hh"
 
 #include <stdio.h>
+#include<cstdlib>
 
 
 /// Initialize a Coremap with `nitems` bits, so that every bit is clear.  It
@@ -21,6 +22,12 @@ Coremap::Coremap(unsigned nitems)
     ASSERT(nitems > 0);
 
     numEntrys  = nitems;
+    #ifdef FIFO
+        fifo = new std::list<unsigned int>;
+    #endif
+    #ifdef PRPOLICY_CLOCK
+        needle = 0;
+    #endif
     // numEntrys = DivRoundUp(numEntrys, BITS_IN_WORD);
     map = new InfoCore [numEntrys];
     for (unsigned i = 0; i < numEntrys; i++) {
@@ -31,6 +38,9 @@ Coremap::Coremap(unsigned nitems)
 /// De-allocate a Coremap.
 Coremap::~Coremap()
 {
+    #ifdef FIFO
+        delete fifo;
+    #endif
     delete [] map;
 }
 
@@ -40,6 +50,9 @@ Coremap::~Coremap()
 void
 Coremap::Mark(unsigned which, int vpn, Thread *thread)
 {
+    #ifdef FIFO
+        fifo->push_front(which);
+    #endif
     ASSERT(which < numEntrys);
     map[which].busy = true;
     map[which].vpn = vpn;
@@ -52,6 +65,9 @@ Coremap::Mark(unsigned which, int vpn, Thread *thread)
 void
 Coremap::Clear(unsigned which)
 {
+    #ifdef FIFO
+        fifo->remove(which);
+    #endif
     ASSERT(which < numEntrys);
     map[which].busy = false;
     map[which].thread = nullptr;
@@ -123,4 +139,49 @@ Coremap::GetThread(unsigned which) {
 int
 Coremap::GetVPN(unsigned which) {
     return map[which].vpn;
+}
+
+int
+Coremap::PickVictim() {
+    #ifdef FIFO
+        return fifo->back();
+    #endif
+    #ifdef PRPOLICY_CLOCK
+        // Find (0,0)
+        int index;
+        Thread *thread;
+        int vpn;
+        for(int i = 0; i < numEntrys; i++) {
+            index = (needle + i) % numEntrys;
+            thread = map[index].thread;
+            vpn = map[index].vpn;
+            if(!thread->space->GetUse(vpn) && !thread->space->GetDirty(vpn)) {
+                needle = index;
+                return index;
+            }
+        }
+        // Find (0,1)
+        for(int i = 0; i < numEntrys; i++) {
+            index = (needle + i) % numEntrys;
+            thread = map[index].thread;
+            vpn = map[index].vpn;
+            if(!thread->space->GetUse(vpn)) {
+                needle = index;
+                return index;
+            } else {
+                thread->space->ResetUse(vpn);
+            }
+        }
+        // Find (0,0)
+        for(int i = 0; i < numEntrys; i++) {
+            index = (needle + i) % numEntrys;
+            thread = map[index].thread;
+            vpn = map[index].vpn;
+            if(!thread->space->GetUse(vpn) && !thread->space->GetDirty(vpn)) {
+                needle = index;
+                return index;
+            }
+        }
+    #endif
+    return rand() % numEntrys;
 }

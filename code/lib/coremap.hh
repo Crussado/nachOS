@@ -3,6 +3,7 @@
 
 
 #include "utility.hh"
+#include <list>
 
 class Thread;
 class InfoCore {
@@ -46,13 +47,19 @@ public:
     Thread *GetThread(unsigned which);
     int GetVPN(unsigned which);
 
+    int PickVictim();
 private:
 
     /// Number of bits in the Coremap.
     unsigned numEntrys;
     /// Bit storage.
     InfoCore *map;
-
+    #ifdef FIFO
+        std::list<unsigned int> *fifo;
+    #endif
+    #ifdef PRPOLICY_CLOCK
+        int needle;
+    #endif
 };
 
 #endif

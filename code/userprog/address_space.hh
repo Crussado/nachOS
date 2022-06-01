@@ -62,9 +62,15 @@ public:
     void AllocatePage(unsigned int vpn);
 
     void MarkSwap(unsigned int vpn);
+    void MarkNotAllocate(unsigned int vpn);
     void ApplySwap();
     void ReturnSwap(unsigned int vpn);
     OpenFile *swap;
+
+    void ResetUse(unsigned int vpn);
+    bool GetDirty(unsigned int vpn);
+    bool GetUse(unsigned int vpn);
+
 private:
 
     /// Assume linear page table translation for now!
