@@ -42,6 +42,8 @@ extern Machine *machine;  // User program memory and registers.
 extern SynchConsole *synchConsole;
 extern Coremap *usedPages;
 extern Lock *lockCoremap;
+extern Lock *lockTLB;
+extern Lock *lockRAM;
 #endif
 
 #ifdef FILESYS_NEEDED  // *FILESYS* or *FILESYS_STUB*.

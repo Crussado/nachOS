@@ -336,6 +336,7 @@ PageFaultHandler(ExceptionType _et) {
     stats->numFailures++;
     stats->numHits--;
     int badAddr = machine->ReadRegister(BAD_VADDR_REG);
+    lockTLB->Acquire();
     TranslationEntry *tlb = machine->GetMMU()->tlb;
     unsigned int deleteEntry = rand() % TLB_SIZE;
     unsigned int virtualPage = GetVirtualPage(badAddr);
@@ -360,6 +361,7 @@ PageFaultHandler(ExceptionType _et) {
     tlb[deleteEntry].readOnly = row->readOnly;
     tlb[deleteEntry].physicalPage = row->physicalPage;
     tlb[deleteEntry].virtualPage = row->virtualPage;
+    lockTLB->Release();
 }
 
 /// By default, only system calls have their own handler.  All other
