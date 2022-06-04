@@ -276,6 +276,7 @@ AddressSpace::GetSpace() {
     int vpn = usedPages->GetVPN(victim);
     usedPages->Clear(victim);
     if(t->space->GetDirty(vpn)) {
+        stats->numSwaps++;
         t->space->MarkSwap(vpn);
         OpenFile *swapFile = t->space->swap;
         char *mainMemory = machine->GetMMU()->mainMemory;
@@ -295,6 +296,7 @@ AddressSpace::GetSpace() {
 
 void
 AddressSpace::ReturnSwap(unsigned int vpn) {
+    stats->numRestoreSwaps++;
     lockCoremap->Acquire();
     if(!(usedPages->CountClear() >= 1)) {
         DEBUG('z', "No hay paginas fisicas disponibles\n");

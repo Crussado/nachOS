@@ -11,9 +11,10 @@ main.o: ../threads/main.cc ../threads/copyright.h ../threads/sys_info.hh \
  ../machine/mmu.hh ../threads/thread.hh ../userprog/executable.hh \
  ../bin/noff.h ../threads/scheduler.hh ../machine/interrupt.hh \
  ../machine/statistics.hh ../machine/timer.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../lib/coremap.hh ../threads/synch_console.hh \
- ../machine/console.hh ../filesys/synch_disk.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../threads/thread_test.hh
+ ../threads/semaphore.hh ../lib/coremap.hh ../threads/thread.hh \
+ ../threads/synch_console.hh ../machine/console.hh \
+ ../filesys/synch_disk.hh ../threads/lock.hh ../threads/semaphore.hh \
+ ../threads/thread_test.hh
 condition.o: ../threads/condition.cc ../threads/condition.hh \
  ../threads/lock.hh ../threads/semaphore.hh ../lib/list.hh \
  ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
@@ -30,7 +31,7 @@ lock.o: ../threads/lock.cc ../threads/lock.hh ../threads/semaphore.hh \
  ../machine/mmu.hh ../threads/thread.hh ../userprog/executable.hh \
  ../bin/noff.h ../threads/scheduler.hh ../machine/interrupt.hh \
  ../machine/statistics.hh ../machine/timer.hh ../lib/coremap.hh \
- ../threads/synch_console.hh ../machine/console.hh \
+ ../threads/thread.hh ../threads/synch_console.hh ../machine/console.hh \
  ../filesys/synch_disk.hh ../threads/lock.hh ../threads/semaphore.hh
 channel.o: ../threads/channel.cc ../threads/channel.hh \
  ../threads/condition.hh ../threads/lock.hh ../threads/semaphore.hh \
@@ -48,9 +49,9 @@ scheduler.o: ../threads/scheduler.cc ../threads/scheduler.hh \
  ../machine/mmu.hh ../threads/thread.hh ../userprog/executable.hh \
  ../bin/noff.h ../threads/system.hh ../machine/interrupt.hh \
  ../machine/statistics.hh ../machine/timer.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../lib/coremap.hh ../threads/synch_console.hh \
- ../machine/console.hh ../filesys/synch_disk.hh ../threads/lock.hh \
- ../threads/semaphore.hh
+ ../threads/semaphore.hh ../lib/coremap.hh ../threads/thread.hh \
+ ../threads/synch_console.hh ../machine/console.hh \
+ ../filesys/synch_disk.hh ../threads/lock.hh ../threads/semaphore.hh
 semaphore.o: ../threads/semaphore.cc ../threads/semaphore.hh \
  ../lib/list.hh ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh \
  ../lib/debug_opts.hh ../machine/system_dep.hh ../threads/system.hh \
@@ -63,8 +64,9 @@ semaphore.o: ../threads/semaphore.cc ../threads/semaphore.hh \
  ../machine/mmu.hh ../threads/thread.hh ../userprog/executable.hh \
  ../bin/noff.h ../threads/scheduler.hh ../machine/interrupt.hh \
  ../machine/statistics.hh ../machine/timer.hh ../threads/lock.hh \
- ../lib/coremap.hh ../threads/synch_console.hh ../machine/console.hh \
- ../filesys/synch_disk.hh ../threads/lock.hh ../threads/semaphore.hh
+ ../lib/coremap.hh ../threads/thread.hh ../threads/synch_console.hh \
+ ../machine/console.hh ../filesys/synch_disk.hh ../threads/lock.hh \
+ ../threads/semaphore.hh
 sys_info.o: ../threads/sys_info.cc ../threads/sys_info.hh \
  ../threads/copyright.h ../filesys/directory_entry.hh \
  ../filesys/file_system.hh ../filesys/open_file.hh ../lib/utility.hh \
@@ -85,9 +87,10 @@ system.o: ../threads/system.cc ../threads/system.hh ../threads/thread.hh \
  ../machine/mmu.hh ../threads/thread.hh ../userprog/executable.hh \
  ../bin/noff.h ../threads/scheduler.hh ../machine/interrupt.hh \
  ../machine/statistics.hh ../machine/timer.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../lib/coremap.hh ../threads/synch_console.hh \
- ../machine/console.hh ../filesys/synch_disk.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../threads/preemptive.hh ../userprog/debugger.hh \
+ ../threads/semaphore.hh ../lib/coremap.hh ../threads/thread.hh \
+ ../threads/synch_console.hh ../machine/console.hh \
+ ../filesys/synch_disk.hh ../threads/lock.hh ../threads/semaphore.hh \
+ ../threads/preemptive.hh ../userprog/debugger.hh \
  ../userprog/debugger_command_manager.hh ../userprog/exception.hh \
  ../threads/synch_console.hh
 switch.o: ../threads/switch.S ../threads/switch_x86-64.S \
@@ -105,11 +108,11 @@ thread.o: ../threads/thread.cc ../threads/thread.hh ../lib/utility.hh \
  ../bin/noff.h ../threads/switch.h ../threads/switch_x86-64.h \
  ../threads/system.hh ../threads/scheduler.hh ../machine/interrupt.hh \
  ../machine/statistics.hh ../machine/timer.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../lib/coremap.hh ../threads/synch_console.hh \
- ../machine/console.hh ../filesys/synch_disk.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../threads/channel.hh ../threads/condition.hh \
- ../threads/synch_list.hh ../threads/../lib/assert.hh \
- ../threads/../lib/list.hh
+ ../threads/semaphore.hh ../lib/coremap.hh ../threads/thread.hh \
+ ../threads/synch_console.hh ../machine/console.hh \
+ ../filesys/synch_disk.hh ../threads/lock.hh ../threads/semaphore.hh \
+ ../threads/channel.hh ../threads/condition.hh ../threads/synch_list.hh \
+ ../threads/../lib/assert.hh ../threads/../lib/list.hh
 thread_test.o: ../threads/thread_test.cc \
  ../threads/thread_test_garden_semaphore.hh \
  ../threads/thread_test_garden.hh ../threads/thread_test_prod_cons.hh \
@@ -132,9 +135,9 @@ thread_test_garden.o: ../threads/thread_test_garden.cc \
  ../machine/mmu.hh ../threads/thread.hh ../userprog/executable.hh \
  ../bin/noff.h ../threads/scheduler.hh ../machine/interrupt.hh \
  ../machine/statistics.hh ../machine/timer.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../lib/coremap.hh ../threads/synch_console.hh \
- ../machine/console.hh ../filesys/synch_disk.hh ../threads/lock.hh \
- ../threads/semaphore.hh
+ ../threads/semaphore.hh ../lib/coremap.hh ../threads/thread.hh \
+ ../threads/synch_console.hh ../machine/console.hh \
+ ../filesys/synch_disk.hh ../threads/lock.hh ../threads/semaphore.hh
 thread_test_garden_semaphore.o: \
  ../threads/thread_test_garden_semaphore.cc \
  ../threads/thread_test_garden_semaphore.hh ../threads/system.hh \
@@ -149,9 +152,9 @@ thread_test_garden_semaphore.o: \
  ../machine/mmu.hh ../threads/thread.hh ../userprog/executable.hh \
  ../bin/noff.h ../threads/scheduler.hh ../machine/interrupt.hh \
  ../machine/statistics.hh ../machine/timer.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../lib/coremap.hh ../threads/synch_console.hh \
- ../machine/console.hh ../filesys/synch_disk.hh ../threads/lock.hh \
- ../threads/semaphore.hh
+ ../threads/semaphore.hh ../lib/coremap.hh ../threads/thread.hh \
+ ../threads/synch_console.hh ../machine/console.hh \
+ ../filesys/synch_disk.hh ../threads/lock.hh ../threads/semaphore.hh
 thread_test_prod_cons.o: ../threads/thread_test_prod_cons.cc \
  ../threads/thread_test_prod_cons.hh ../threads/lock.hh \
  ../threads/semaphore.hh ../lib/list.hh ../lib/utility.hh \
@@ -166,7 +169,7 @@ thread_test_prod_cons.o: ../threads/thread_test_prod_cons.cc \
  ../machine/mmu.hh ../threads/thread.hh ../userprog/executable.hh \
  ../bin/noff.h ../threads/scheduler.hh ../machine/interrupt.hh \
  ../machine/statistics.hh ../machine/timer.hh ../lib/coremap.hh \
- ../threads/synch_console.hh ../machine/console.hh \
+ ../threads/thread.hh ../threads/synch_console.hh ../machine/console.hh \
  ../filesys/synch_disk.hh ../threads/lock.hh ../threads/semaphore.hh \
  ../threads/../lib/debug.hh ../threads/../lib/assert.hh
 thread_test_simple.o: ../threads/thread_test_simple.cc \
@@ -182,9 +185,9 @@ thread_test_simple.o: ../threads/thread_test_simple.cc \
  ../machine/mmu.hh ../threads/thread.hh ../userprog/executable.hh \
  ../bin/noff.h ../threads/scheduler.hh ../machine/interrupt.hh \
  ../machine/statistics.hh ../machine/timer.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../lib/coremap.hh ../threads/synch_console.hh \
- ../machine/console.hh ../filesys/synch_disk.hh ../threads/lock.hh \
- ../threads/semaphore.hh
+ ../threads/semaphore.hh ../lib/coremap.hh ../threads/thread.hh \
+ ../threads/synch_console.hh ../machine/console.hh \
+ ../filesys/synch_disk.hh ../threads/lock.hh ../threads/semaphore.hh
 thread_test_join.o: ../threads/thread_test_join.cc \
  ../threads/thread_test_prod_cons.hh ../threads/system.hh \
  ../threads/thread.hh ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh \
@@ -198,10 +201,10 @@ thread_test_join.o: ../threads/thread_test_join.cc \
  ../machine/mmu.hh ../threads/thread.hh ../userprog/executable.hh \
  ../bin/noff.h ../threads/scheduler.hh ../machine/interrupt.hh \
  ../machine/statistics.hh ../machine/timer.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../lib/coremap.hh ../threads/synch_console.hh \
- ../machine/console.hh ../filesys/synch_disk.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../threads/../lib/debug.hh \
- ../threads/../lib/assert.hh
+ ../threads/semaphore.hh ../lib/coremap.hh ../threads/thread.hh \
+ ../threads/synch_console.hh ../machine/console.hh \
+ ../filesys/synch_disk.hh ../threads/lock.hh ../threads/semaphore.hh \
+ ../threads/../lib/debug.hh ../threads/../lib/assert.hh
 thread_test_lock_garden.o: ../threads/thread_test_lock_garden.cc \
  ../threads/thread_test_lock_garden.hh ../threads/lock.hh \
  ../threads/semaphore.hh ../lib/list.hh ../lib/utility.hh \
@@ -216,7 +219,7 @@ thread_test_lock_garden.o: ../threads/thread_test_lock_garden.cc \
  ../machine/mmu.hh ../threads/thread.hh ../userprog/executable.hh \
  ../bin/noff.h ../threads/scheduler.hh ../machine/interrupt.hh \
  ../machine/statistics.hh ../machine/timer.hh ../lib/coremap.hh \
- ../threads/synch_console.hh ../machine/console.hh \
+ ../threads/thread.hh ../threads/synch_console.hh ../machine/console.hh \
  ../filesys/synch_disk.hh ../threads/lock.hh ../threads/semaphore.hh
 thread_test_channel.o: ../threads/thread_test_channel.cc \
  ../threads/thread_test_channel.hh ../threads/channel.hh \
@@ -233,7 +236,7 @@ thread_test_channel.o: ../threads/thread_test_channel.cc \
  ../machine/mmu.hh ../threads/thread.hh ../userprog/executable.hh \
  ../bin/noff.h ../threads/scheduler.hh ../machine/interrupt.hh \
  ../machine/statistics.hh ../machine/timer.hh ../lib/coremap.hh \
- ../threads/synch_console.hh ../machine/console.hh \
+ ../threads/thread.hh ../threads/synch_console.hh ../machine/console.hh \
  ../filesys/synch_disk.hh ../threads/lock.hh ../threads/semaphore.hh \
  ../threads/../lib/debug.hh ../threads/../lib/assert.hh
 assert.o: ../lib/assert.cc ../lib/assert.hh
@@ -253,9 +256,9 @@ interrupt.o: ../machine/interrupt.cc ../machine/interrupt.hh \
  ../machine/mmu.hh ../threads/thread.hh ../userprog/executable.hh \
  ../bin/noff.h ../threads/scheduler.hh ../machine/interrupt.hh \
  ../machine/statistics.hh ../machine/timer.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../lib/coremap.hh ../threads/synch_console.hh \
- ../machine/console.hh ../filesys/synch_disk.hh ../threads/lock.hh \
- ../threads/semaphore.hh
+ ../threads/semaphore.hh ../lib/coremap.hh ../threads/thread.hh \
+ ../threads/synch_console.hh ../machine/console.hh \
+ ../filesys/synch_disk.hh ../threads/lock.hh ../threads/semaphore.hh
 system_dep.o: ../machine/system_dep.cc ../machine/interrupt.hh \
  ../lib/list.hh ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh \
  ../lib/debug_opts.hh ../machine/system_dep.hh ../threads/system.hh \
@@ -268,9 +271,9 @@ system_dep.o: ../machine/system_dep.cc ../machine/interrupt.hh \
  ../machine/mmu.hh ../threads/thread.hh ../userprog/executable.hh \
  ../bin/noff.h ../threads/scheduler.hh ../machine/interrupt.hh \
  ../machine/statistics.hh ../machine/timer.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../lib/coremap.hh ../threads/synch_console.hh \
- ../machine/console.hh ../filesys/synch_disk.hh ../threads/lock.hh \
- ../threads/semaphore.hh
+ ../threads/semaphore.hh ../lib/coremap.hh ../threads/thread.hh \
+ ../threads/synch_console.hh ../machine/console.hh \
+ ../filesys/synch_disk.hh ../threads/lock.hh ../threads/semaphore.hh
 statistics.o: ../machine/statistics.cc ../machine/statistics.hh \
  ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
  ../machine/system_dep.hh
@@ -286,9 +289,9 @@ timer.o: ../machine/timer.cc ../machine/timer.hh ../lib/utility.hh \
  ../machine/mmu.hh ../threads/thread.hh ../userprog/executable.hh \
  ../bin/noff.h ../threads/scheduler.hh ../machine/interrupt.hh \
  ../machine/statistics.hh ../machine/timer.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../lib/coremap.hh ../threads/synch_console.hh \
- ../machine/console.hh ../filesys/synch_disk.hh ../threads/lock.hh \
- ../threads/semaphore.hh
+ ../threads/semaphore.hh ../lib/coremap.hh ../threads/thread.hh \
+ ../threads/synch_console.hh ../machine/console.hh \
+ ../filesys/synch_disk.hh ../threads/lock.hh ../threads/semaphore.hh
 preemptive.o: ../threads/preemptive.cc ../threads/preemptive.hh \
  ../threads/system.hh ../threads/thread.hh ../lib/utility.hh \
  ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
@@ -302,9 +305,9 @@ preemptive.o: ../threads/preemptive.cc ../threads/preemptive.hh \
  ../machine/mmu.hh ../threads/thread.hh ../userprog/executable.hh \
  ../bin/noff.h ../threads/scheduler.hh ../machine/interrupt.hh \
  ../machine/statistics.hh ../machine/timer.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../lib/coremap.hh ../threads/synch_console.hh \
- ../machine/console.hh ../filesys/synch_disk.hh ../threads/lock.hh \
- ../threads/semaphore.hh
+ ../threads/semaphore.hh ../lib/coremap.hh ../threads/thread.hh \
+ ../threads/synch_console.hh ../machine/console.hh \
+ ../filesys/synch_disk.hh ../threads/lock.hh ../threads/semaphore.hh
 address_space.o: ../userprog/address_space.cc \
  ../userprog/address_space.hh ../filesys/file_system.hh \
  ../filesys/open_file.hh ../lib/utility.hh ../lib/assert.hh \
@@ -318,9 +321,9 @@ address_space.o: ../userprog/address_space.cc \
  ../bin/noff.h ../userprog/transfer.hh ../threads/system.hh \
  ../threads/thread.hh ../threads/scheduler.hh ../machine/interrupt.hh \
  ../machine/statistics.hh ../machine/timer.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../lib/coremap.hh ../threads/synch_console.hh \
- ../machine/console.hh ../filesys/synch_disk.hh ../threads/lock.hh \
- ../threads/semaphore.hh
+ ../threads/semaphore.hh ../lib/coremap.hh ../threads/thread.hh \
+ ../threads/synch_console.hh ../machine/console.hh \
+ ../filesys/synch_disk.hh ../threads/lock.hh ../threads/semaphore.hh
 args.o: ../userprog/args.cc ../userprog/transfer.hh ../machine/machine.hh \
  ../machine/exception_type.hh ../machine/mmu.hh ../machine/disk.hh \
  ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
@@ -333,9 +336,9 @@ args.o: ../userprog/args.cc ../userprog/transfer.hh ../machine/machine.hh \
  ../machine/mmu.hh ../threads/thread.hh ../userprog/executable.hh \
  ../bin/noff.h ../threads/scheduler.hh ../machine/interrupt.hh \
  ../machine/statistics.hh ../machine/timer.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../lib/coremap.hh ../threads/synch_console.hh \
- ../machine/console.hh ../filesys/synch_disk.hh ../threads/lock.hh \
- ../threads/semaphore.hh
+ ../threads/semaphore.hh ../lib/coremap.hh ../threads/thread.hh \
+ ../threads/synch_console.hh ../machine/console.hh \
+ ../filesys/synch_disk.hh ../threads/lock.hh ../threads/semaphore.hh
 debugger.o: ../userprog/debugger.cc ../userprog/debugger.hh \
  ../userprog/debugger_command_manager.hh ../machine/machine.hh \
  ../machine/exception_type.hh ../machine/mmu.hh ../machine/disk.hh \
@@ -350,7 +353,7 @@ debugger.o: ../userprog/debugger.cc ../userprog/debugger.hh \
  ../machine/mmu.hh ../threads/thread.hh ../userprog/executable.hh \
  ../bin/noff.h ../threads/scheduler.hh ../machine/timer.hh \
  ../threads/lock.hh ../threads/semaphore.hh ../lib/coremap.hh \
- ../threads/synch_console.hh ../machine/console.hh \
+ ../threads/thread.hh ../threads/synch_console.hh ../machine/console.hh \
  ../filesys/synch_disk.hh ../threads/lock.hh ../threads/semaphore.hh
 debugger_command_manager.o: ../userprog/debugger_command_manager.cc \
  ../userprog/debugger_command_manager.hh ../lib/utility.hh \
@@ -374,8 +377,9 @@ exception.o: ../userprog/exception.cc ../userprog/transfer.hh \
  ../filesys/directory_entry.hh ../threads/system.hh ../threads/thread.hh \
  ../threads/scheduler.hh ../machine/interrupt.hh ../machine/statistics.hh \
  ../machine/timer.hh ../threads/lock.hh ../threads/semaphore.hh \
- ../lib/coremap.hh ../threads/synch_console.hh ../machine/console.hh \
- ../filesys/synch_disk.hh ../threads/lock.hh ../threads/semaphore.hh
+ ../lib/coremap.hh ../threads/thread.hh ../threads/synch_console.hh \
+ ../machine/console.hh ../filesys/synch_disk.hh ../threads/lock.hh \
+ ../threads/semaphore.hh
 prog_test.o: ../userprog/prog_test.cc ../userprog/address_space.hh \
  ../filesys/file_system.hh ../filesys/open_file.hh ../lib/utility.hh \
  ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
@@ -389,8 +393,8 @@ prog_test.o: ../userprog/prog_test.cc ../userprog/address_space.hh \
  ../machine/console.hh ../threads/semaphore.hh ../threads/system.hh \
  ../threads/thread.hh ../threads/scheduler.hh ../machine/interrupt.hh \
  ../machine/statistics.hh ../machine/timer.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../lib/coremap.hh ../threads/synch_console.hh \
- ../filesys/synch_disk.hh ../threads/lock.hh
+ ../threads/semaphore.hh ../lib/coremap.hh ../threads/thread.hh \
+ ../threads/synch_console.hh ../filesys/synch_disk.hh ../threads/lock.hh
 transfer.o: ../userprog/transfer.cc ../userprog/transfer.hh \
  ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
  ../machine/system_dep.hh ../threads/system.hh ../threads/thread.hh \
@@ -403,15 +407,24 @@ transfer.o: ../userprog/transfer.cc ../userprog/transfer.hh \
  ../machine/mmu.hh ../threads/thread.hh ../userprog/executable.hh \
  ../bin/noff.h ../threads/scheduler.hh ../machine/interrupt.hh \
  ../machine/statistics.hh ../machine/timer.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../lib/coremap.hh ../threads/synch_console.hh \
- ../machine/console.hh ../filesys/synch_disk.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../lib/assert.hh
+ ../threads/semaphore.hh ../lib/coremap.hh ../threads/thread.hh \
+ ../threads/synch_console.hh ../machine/console.hh \
+ ../filesys/synch_disk.hh ../threads/lock.hh ../threads/semaphore.hh \
+ ../lib/assert.hh
 bitmap.o: ../lib/bitmap.cc ../lib/bitmap.hh ../lib/utility.hh \
  ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
  ../machine/system_dep.hh ../filesys/open_file.hh ../lib/utility.hh
 coremap.o: ../lib/coremap.cc ../lib/coremap.hh ../lib/utility.hh \
  ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
- ../machine/system_dep.hh
+ ../machine/system_dep.hh ../threads/thread.hh ../lib/utility.hh \
+ ../lib/list.hh ../machine/machine.hh ../machine/exception_type.hh \
+ ../machine/mmu.hh ../machine/disk.hh ../machine/translation_entry.hh \
+ ../machine/single_stepper.hh ../userprog/address_space.hh \
+ ../filesys/file_system.hh ../filesys/open_file.hh \
+ ../filesys/directory_entry.hh ../machine/disk.hh \
+ ../machine/translation_entry.hh ../lib/bitmap.hh ../filesys/open_file.hh \
+ ../machine/mmu.hh ../threads/thread.hh ../userprog/executable.hh \
+ ../bin/noff.h
 console.o: ../machine/console.cc ../machine/console.hh ../lib/utility.hh \
  ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
  ../machine/system_dep.hh ../threads/system.hh ../threads/thread.hh \
@@ -424,9 +437,9 @@ console.o: ../machine/console.cc ../machine/console.hh ../lib/utility.hh \
  ../machine/mmu.hh ../threads/thread.hh ../userprog/executable.hh \
  ../bin/noff.h ../threads/scheduler.hh ../machine/interrupt.hh \
  ../machine/statistics.hh ../machine/timer.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../lib/coremap.hh ../threads/synch_console.hh \
- ../machine/console.hh ../filesys/synch_disk.hh ../threads/lock.hh \
- ../threads/semaphore.hh
+ ../threads/semaphore.hh ../lib/coremap.hh ../threads/thread.hh \
+ ../threads/synch_console.hh ../machine/console.hh \
+ ../filesys/synch_disk.hh ../threads/lock.hh ../threads/semaphore.hh
 encoding.o: ../machine/encoding.cc ../machine/encoding.hh
 endianness.o: ../machine/endianness.cc ../machine/endianness.hh
 exception_type.o: ../machine/exception_type.cc \
@@ -448,9 +461,9 @@ machine.o: ../machine/machine.cc ../machine/machine.hh \
  ../machine/mmu.hh ../threads/thread.hh ../userprog/executable.hh \
  ../bin/noff.h ../threads/scheduler.hh ../machine/interrupt.hh \
  ../machine/statistics.hh ../machine/timer.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../lib/coremap.hh ../threads/synch_console.hh \
- ../machine/console.hh ../filesys/synch_disk.hh ../threads/lock.hh \
- ../threads/semaphore.hh
+ ../threads/semaphore.hh ../lib/coremap.hh ../threads/thread.hh \
+ ../threads/synch_console.hh ../machine/console.hh \
+ ../filesys/synch_disk.hh ../threads/lock.hh ../threads/semaphore.hh
 synch_console.o: ../threads/synch_console.cc ../threads/synch_console.hh \
  ../machine/console.hh ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh \
  ../lib/debug_opts.hh ../machine/system_dep.hh ../threads/lock.hh \
@@ -468,9 +481,9 @@ mips_sim.o: ../machine/mips_sim.cc ../machine/instruction.hh \
  ../machine/mmu.hh ../threads/thread.hh ../userprog/executable.hh \
  ../bin/noff.h ../threads/scheduler.hh ../machine/interrupt.hh \
  ../machine/statistics.hh ../machine/timer.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../lib/coremap.hh ../threads/synch_console.hh \
- ../machine/console.hh ../filesys/synch_disk.hh ../threads/lock.hh \
- ../threads/semaphore.hh
+ ../threads/semaphore.hh ../lib/coremap.hh ../threads/thread.hh \
+ ../threads/synch_console.hh ../machine/console.hh \
+ ../filesys/synch_disk.hh ../threads/lock.hh ../threads/semaphore.hh
 mmu.o: ../machine/mmu.cc ../machine/mmu.hh ../machine/exception_type.hh \
  ../machine/disk.hh ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh \
  ../lib/debug_opts.hh ../machine/system_dep.hh \
@@ -495,9 +508,9 @@ file_header.o: ../filesys/file_header.cc ../filesys/file_header.hh \
  ../machine/mmu.hh ../threads/thread.hh ../userprog/executable.hh \
  ../bin/noff.h ../threads/scheduler.hh ../machine/interrupt.hh \
  ../machine/statistics.hh ../machine/timer.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../lib/coremap.hh ../threads/synch_console.hh \
- ../machine/console.hh ../filesys/synch_disk.hh ../threads/lock.hh \
- ../threads/semaphore.hh
+ ../threads/semaphore.hh ../lib/coremap.hh ../threads/thread.hh \
+ ../threads/synch_console.hh ../machine/console.hh \
+ ../filesys/synch_disk.hh ../threads/lock.hh ../threads/semaphore.hh
 file_system.o: ../filesys/file_system.cc ../filesys/file_system.hh \
  ../filesys/open_file.hh ../lib/utility.hh ../lib/assert.hh \
  ../lib/debug.hh ../lib/debug_opts.hh ../machine/system_dep.hh \
@@ -518,8 +531,9 @@ fs_test.o: ../filesys/fs_test.cc ../filesys/file_system.hh \
  ../userprog/executable.hh ../bin/noff.h ../threads/system.hh \
  ../threads/thread.hh ../threads/scheduler.hh ../machine/interrupt.hh \
  ../machine/timer.hh ../threads/lock.hh ../threads/semaphore.hh \
- ../lib/coremap.hh ../threads/synch_console.hh ../machine/console.hh \
- ../filesys/synch_disk.hh ../threads/lock.hh ../threads/semaphore.hh
+ ../lib/coremap.hh ../threads/thread.hh ../threads/synch_console.hh \
+ ../machine/console.hh ../filesys/synch_disk.hh ../threads/lock.hh \
+ ../threads/semaphore.hh
 open_file.o: ../filesys/open_file.cc ../filesys/open_file.hh \
  ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
  ../machine/system_dep.hh ../filesys/file_header.hh \
@@ -533,9 +547,9 @@ open_file.o: ../filesys/open_file.cc ../filesys/open_file.hh \
  ../machine/mmu.hh ../threads/thread.hh ../userprog/executable.hh \
  ../bin/noff.h ../threads/scheduler.hh ../machine/interrupt.hh \
  ../machine/statistics.hh ../machine/timer.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../lib/coremap.hh ../threads/synch_console.hh \
- ../machine/console.hh ../filesys/synch_disk.hh ../threads/lock.hh \
- ../threads/semaphore.hh
+ ../threads/semaphore.hh ../lib/coremap.hh ../threads/thread.hh \
+ ../threads/synch_console.hh ../machine/console.hh \
+ ../filesys/synch_disk.hh ../threads/lock.hh ../threads/semaphore.hh
 synch_disk.o: ../filesys/synch_disk.cc ../filesys/synch_disk.hh \
  ../machine/disk.hh ../lib/utility.hh ../lib/assert.hh ../lib/debug.hh \
  ../lib/debug_opts.hh ../machine/system_dep.hh ../threads/lock.hh \
@@ -553,9 +567,9 @@ disk.o: ../machine/disk.cc ../machine/disk.hh ../lib/utility.hh \
  ../machine/mmu.hh ../threads/thread.hh ../userprog/executable.hh \
  ../bin/noff.h ../threads/scheduler.hh ../machine/interrupt.hh \
  ../machine/statistics.hh ../machine/timer.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../lib/coremap.hh ../threads/synch_console.hh \
- ../machine/console.hh ../filesys/synch_disk.hh ../threads/lock.hh \
- ../threads/semaphore.hh
+ ../threads/semaphore.hh ../lib/coremap.hh ../threads/thread.hh \
+ ../threads/synch_console.hh ../machine/console.hh \
+ ../filesys/synch_disk.hh ../threads/lock.hh ../threads/semaphore.hh
 condition.o: ../threads/condition.hh ../threads/lock.hh \
  ../threads/semaphore.hh ../lib/list.hh ../lib/utility.hh \
  ../lib/assert.hh ../lib/debug.hh ../lib/debug_opts.hh \
@@ -599,9 +613,9 @@ system.o: ../threads/system.hh ../threads/thread.hh ../lib/utility.hh \
  ../machine/mmu.hh ../threads/thread.hh ../userprog/executable.hh \
  ../bin/noff.h ../threads/scheduler.hh ../machine/interrupt.hh \
  ../machine/statistics.hh ../machine/timer.hh ../threads/lock.hh \
- ../threads/semaphore.hh ../lib/coremap.hh ../threads/synch_console.hh \
- ../machine/console.hh ../filesys/synch_disk.hh ../threads/lock.hh \
- ../threads/semaphore.hh
+ ../threads/semaphore.hh ../lib/coremap.hh ../threads/thread.hh \
+ ../threads/synch_console.hh ../machine/console.hh \
+ ../filesys/synch_disk.hh ../threads/lock.hh ../threads/semaphore.hh
 thread.o: ../threads/thread.hh ../lib/utility.hh ../lib/assert.hh \
  ../lib/debug.hh ../lib/debug_opts.hh ../machine/system_dep.hh \
  ../lib/list.hh ../lib/utility.hh ../machine/machine.hh \
@@ -672,7 +686,16 @@ bitmap.o: ../lib/bitmap.hh ../lib/utility.hh ../lib/assert.hh \
  ../lib/debug.hh ../lib/debug_opts.hh ../machine/system_dep.hh \
  ../filesys/open_file.hh ../lib/utility.hh
 coremap.o: ../lib/coremap.hh ../lib/utility.hh ../lib/assert.hh \
- ../lib/debug.hh ../lib/debug_opts.hh ../machine/system_dep.hh
+ ../lib/debug.hh ../lib/debug_opts.hh ../machine/system_dep.hh \
+ ../threads/thread.hh ../lib/utility.hh ../lib/list.hh \
+ ../machine/machine.hh ../machine/exception_type.hh ../machine/mmu.hh \
+ ../machine/disk.hh ../machine/translation_entry.hh \
+ ../machine/single_stepper.hh ../userprog/address_space.hh \
+ ../filesys/file_system.hh ../filesys/open_file.hh \
+ ../filesys/directory_entry.hh ../machine/disk.hh \
+ ../machine/translation_entry.hh ../lib/bitmap.hh ../filesys/open_file.hh \
+ ../machine/mmu.hh ../threads/thread.hh ../userprog/executable.hh \
+ ../bin/noff.h
 console.o: ../machine/console.hh ../lib/utility.hh ../lib/assert.hh \
  ../lib/debug.hh ../lib/debug_opts.hh ../machine/system_dep.hh
 encoding.o: ../machine/encoding.hh

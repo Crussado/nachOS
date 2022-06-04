@@ -51,6 +51,8 @@ Machine *machine;  ///< User program memory and registers.
 SynchConsole *synchConsole;
 Coremap *usedPages;
 Lock *lockCoremap;
+Lock *lockTLB;
+Lock *lockRAM;
 #endif
 
 #ifdef NETWORK
@@ -236,7 +238,9 @@ Initialize(int argc, char **argv)
     Debugger *d = debugUserProg ? new Debugger : nullptr;
     machine = new Machine(d);  // This must come first.
     usedPages = new Coremap(NUM_PHYS_PAGES);
-    lockCoremap = new Lock("Bit map pages lock"); 
+    lockCoremap = new Lock("Bit map pages lock");
+    lockTLB = new Lock("TLB Lock");
+    lockRAM = new Lock("main memory lock");
     synchConsole = new SynchConsole("Console");
     SetExceptionHandlers();
 #endif
@@ -272,6 +276,8 @@ Cleanup()
     delete usedPages;
     delete synchConsole;
     delete lockCoremap;
+    delete lockTLB;
+    delete lockRAM;
 #endif
 
 #ifdef FILESYS_NEEDED

@@ -4,8 +4,8 @@
 
 #include "utility.hh"
 #include <list>
+#include "thread.hh"
 
-class Thread;
 class InfoCore {
     public:
         bool busy;
